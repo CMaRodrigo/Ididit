@@ -2,6 +2,12 @@ import type { ActivityEvent, Commitment } from "./types";
 import toninhathonWinners from "@/assets/proof-toninhathon-winners.png";
 import toninhathonCall from "@/assets/proof-toninhathon-call.png";
 import toninhathonPitch from "@/assets/proof-toninhathon-saveton.pdf";
+import rondonDeparture from "@/assets/proof-rondon-departure.png";
+import rondonWorkPlan from "@/assets/proof-rondon-work-plan.pdf";
+import rondonClassroom from "@/assets/proof-rondon-classroom.jpg";
+import rondonGathering from "@/assets/proof-rondon-gathering.jpg";
+import rondonWorkshop from "@/assets/proof-rondon-workshop.jpg";
+import rondonChildren from "@/assets/proof-rondon-children.jpg";
 
 export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Data Engineer · Problem Solver", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
@@ -23,7 +29,18 @@ function challenge(id: string, title: string, goal: string, rules: string[], evi
 
 // Dates illustrate a personal timeline; real historical dates and documents were not supplied.
 export const demoCommitments: Commitment[] = [
-  challenge("projeto-rondon", "Projeto Rondon", "Create and conduct workshops for young people focused on culture, citizenship and technology.", ["Create workshops that address culture, citizenship and technology for the participating young people.", "Conduct at least one workshop with more than 120 young participants."], ["Workshop plan", "Event attendance record", "Activity documentation", "Photos / event material"], "Third-party / Event Evidence", "2024-07-20", { reflection: "Seeing more than 120 young people participate made the work feel real." }),
+  challenge("projeto-rondon", "Projeto Rondon", "Create and conduct workshops for young people focused on culture, citizenship and technology.", ["Create workshops that address culture, citizenship and technology for the participating young people.", "Conduct at least one workshop with more than 120 young participants."], ["Workshop plan", "Event attendance record", "Activity documentation", "Photos / event material"], "Third-party / Event Evidence", "2024-07-20", {
+    reflection: "Seeing more than 120 young people participate made the work feel real.",
+    meaning: "Projeto Rondon is a Brazilian federal university-extension program, coordinated by the Ministry of Defence, that sends students to underserved municipalities. I was one of eight PUCRS students who, with two professors, spent 15 days in Vitória do Jari, Amapá, for Operação \"Amapá Mais Forte\" (July 2022). Our team designed and ran workshops on culture, human rights, education and health. I co-led most of them, including story-telling, a short film preserving local memories, design-thinking sessions for the community, teacher training and a programme preparing teenagers for life after school.",
+    documents: [
+      { id: "projeto-rondon-doc-departure", name: "pucrs-instagram-departure.png", mimeType: "image/png", caption: "PUCRS announcement of the team's departure to Vitória do Jari", src: rondonDeparture, addedAt: "2022-07-09T12:00:00Z" },
+      { id: "projeto-rondon-doc-plan", name: "rondon-work-plan.pdf", mimeType: "application/pdf", caption: "Work plan and workshop schedule for Operação Amapá Mais Forte", src: rondonWorkPlan, addedAt: "2022-07-09T12:00:00Z" },
+      { id: "projeto-rondon-doc-classroom", name: "rondon-classroom.jpg", mimeType: "image/jpeg", caption: "Workshop with young people from the community", src: rondonClassroom, addedAt: "2022-07-22T12:00:00Z" },
+      { id: "projeto-rondon-doc-gathering", name: "rondon-gathering.jpg", mimeType: "image/jpeg", caption: "Evening activity with the community", src: rondonGathering, addedAt: "2022-07-22T12:00:00Z" },
+      { id: "projeto-rondon-doc-workshop", name: "rondon-workshop.jpg", mimeType: "image/jpeg", caption: "Leading a workshop session", src: rondonWorkshop, addedAt: "2022-07-22T12:00:00Z" },
+      { id: "projeto-rondon-doc-children", name: "rondon-children.jpg", mimeType: "image/jpeg", caption: "With children from Vitória do Jari", src: rondonChildren, addedAt: "2022-07-22T12:00:00Z" },
+    ],
+  }),
   challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2024-11-30"),
   challenge("toninhathon", "ToninhaThon", "Create a viable project, compete successfully and advance it beyond the competition.", ["Create a viable project.", "Win the competition.", "Have the project selected for incubation by SEBRAE."], ["Project artifact", "Competition result", "SEBRAE incubation evidence"], "Competition result + incubation evidence", "2025-03-22", {
     meaning: "SalvaTon is the project I built for ToninhaThon, a hackathon to protect the toninha (franciscana dolphin), one of the most threatened dolphins in the South Atlantic: about 1,500 of the roughly 20,000 left die in fishing nets every year. SalvaTon is a nationally produced acoustic pinger that clips onto the net and emits frequencies the toninhas hear and avoid, with a self-recharging battery powered by the sea instead of the imported, expensive pingers whose batteries must be replaced every few months.",
