@@ -1,9 +1,9 @@
-import rondon from "@/assets/trophy-rondon.png";
-import finance from "@/assets/trophy-finance.png";
-import toninhathon from "@/assets/trophy-toninhathon.png";
-import data from "@/assets/trophy-data.png";
-import sql from "@/assets/trophy-sql.png";
-import health from "@/assets/trophy-health.png";
+import rondon from "@/assets/pin-rondon.png";
+import finance from "@/assets/pin-finance.png";
+import toninhathon from "@/assets/pin-toninhathon.png";
+import data from "@/assets/pin-data.png";
+import sql from "@/assets/pin-sql.png";
+import health from "@/assets/pin-health.png";
 import type { BadgeGeneratorOutput } from "./badges";
 
 export const demoTrophies: Record<string, BadgeGeneratorOutput & { image: string }> = {

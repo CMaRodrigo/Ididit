@@ -89,6 +89,8 @@
   --border-strong: oklch(0.84 0.006 85);
   --input: oklch(0.89 0.005 85);
   --ring: oklch(0.17 0.006 80);
+  --badge-shadow: 0 5px 4px oklch(0.17 0.006 80 / 0.12);
+  --badge-shadow-hover: 0 12px 9px oklch(0.17 0.006 80 / 0.2);
 }
 
 .dark {
@@ -177,4 +179,19 @@
 @keyframes stamp {
   from { opacity: 0; transform: scale(1.4) rotate(-6deg); }
   to { opacity: 1; transform: scale(1) rotate(-3deg); }
+}
+
+.collectible-art {
+  filter: drop-shadow(var(--badge-shadow));
+  transition: transform 250ms ease, filter 250ms ease;
+}
+.group:hover .collectible-art,
+.group:focus-visible .collectible-art {
+  transform: translateY(-4px);
+  filter: drop-shadow(var(--badge-shadow-hover));
+}
+@media (prefers-reduced-motion: reduce) {
+  .collectible-art { transition: none; }
+  .group:hover .collectible-art,
+  .group:focus-visible .collectible-art { transform: none; }
 }
