@@ -22,7 +22,7 @@ A maioria dos portfólios lista o que alguém *diz* ter feito. O **I Did It** tr
 3. **Anexe a prova.** Fotos, PDFs, posts, repositórios e sites no ar ficam ao lado do registro.
 4. **Conquiste o troféu.** Um pin esmaltado único é concedido só quando todos os objetivos são cumpridos. Tentativas que falharam continuam no registro, sem troféu.
 
-Este repositório é o perfil em uso de Rodrigo da Rosa, com nove compromissos reais de 2021 até hoje, incluindo este próprio projeto.
+Este repositório é o perfil em uso de Rodrigo da Rosa, com dez compromissos reais de 2021 até hoje, incluindo este próprio projeto.
 
 <table>
   <tr>
@@ -45,7 +45,8 @@ Este repositório é o perfil em uso de Rodrigo da Rosa, com nove compromissos r
 | **Data for Millions** | Pratham Books: plataforma de analytics Airflow → PostgreSQL para a StoryWeaver (Develop For Good) | mai – ago 2023 | 3 / 3 | R$ 500 |
 | **Case Closed** | detectiveSQL: um jogo de mistério em SQL para o navegador, no ar em [detectivesql.com](https://detectivesql.com/) | 2026 | 2 / 2 | R$ 300 |
 | **From Problem to Product** | Meu Mundo Azul: um app para o diagnóstico precoce do autismo, construído com a AGES | ago 2021 – nov 2022 | 5 / 5 | R$ 500 |
-| — | TechFellow: inscrição feita e candidatura preparada, não aceito | 2026 | 2 / 3 | R$ 500 (R$ 300 perdidos) |
+| — | Tech Fellow · Fundação Estudar: inscrição feita e candidatura preparada, não aceito | 2022 | 2 / 3 | R$ 500 (R$ 300 perdidos) |
+| — | ELAP 2022: pré-selecionado como suplente para a Concordia University, sem vaga | 2022 | 2 / 3 | R$ 500 (R$ 250 perdidos) |
 | — | Behring Founders: em andamento | 2026 | 3 / 6 | R$ 500 |
 | — | I Did It: este projeto, em andamento ([código-fonte](https://github.com/CMaRodrigo/pixel-perfect-capture-7666)) | out 2026 – | 3 / 6 | R$ 500 |
 
@@ -111,7 +112,7 @@ src/
 │   ├── TrophyRoom.tsx         Grade de troféus compartilhada pelo perfil e pela Sala de Troféus
 │   └── Badge.tsx              Arte dos troféus
 ├── lib/proof/
-│   ├── demo-data.ts           Os nove registros: objetivos, valores em jogo, datas, provas
+│   ├── demo-data.ts           Os dez registros: objetivos, valores em jogo, datas, provas
 │   ├── demo-trophies.ts       Nomes, subtítulos e arte dos troféus
 │   ├── store.tsx              Estado do app, persistido no navegador
 │   ├── ai.ts                  Contratos do Goal Architect e do AI Judge

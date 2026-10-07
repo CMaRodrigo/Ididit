@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Lock } from "lucide-react";
 import { Page } from "@/components/proof/Page";
+import { PastAttempts } from "@/components/proof/PastAttempts";
 import { TrophyRoom } from "@/components/proof/TrophyRoom";
 import { btn, ProgressBar } from "@/components/proof/primitives";
 import { useProof } from "@/lib/proof/store";
@@ -31,6 +32,6 @@ function Profile() {
       <div className="hidden text-center sm:block"><div className="mx-auto grid size-20 place-items-center text-muted-foreground"><Lock className="size-8" strokeWidth={1.25} /></div><span className="mt-3 flex items-center justify-center gap-1 text-xs text-muted-foreground"><Lock className="size-3" />Troféu bloqueado</span></div>
     </section>; })}
     <TrophyRoom />
-    <section className="mt-12 border-t border-border pt-8"><h2 className="eyebrow">Tentativas anteriores</h2><p className="mt-2 text-sm text-muted-foreground">Nem todo compromisso termina em troféu. O registro permanece.</p><div className="mt-4 divide-y divide-border">{failed.map((c) => <Link key={c.id} to="/app/commitments/$id" params={{ id: c.id }} className="flex items-center justify-between gap-4 py-5"><div><h3 className="text-lg font-semibold">{c.title}</h3><p className="mt-1 text-sm text-muted-foreground">{c.criteria.filter((cr) => cr.status === "met").length} / {c.criteria.length} objetivos concluídos · Nenhum troféu conquistado</p></div><div className="flex shrink-0 items-center gap-3 text-xs text-muted-foreground"><span>Não concluído</span><ArrowRight className="size-4" /></div></Link>)}</div></section>
+    <PastAttempts />
   </Page>;
 }

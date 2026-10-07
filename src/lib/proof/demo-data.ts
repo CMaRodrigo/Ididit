@@ -22,6 +22,9 @@ import mmaPitch from "@/assets/proof-mma-pitch.jpg";
 import mmaAges from "@/assets/proof-mma-ages.jpg";
 import mmaTeam from "@/assets/proof-mma-team.jpg";
 import ididitGithub from "@/assets/proof-ididit-github.jpg";
+import techfellowEmail from "@/assets/proof-techfellow-email.png";
+import elapList from "@/assets/proof-elap-list.pdf";
+import elapListPreview from "@/assets/proof-elap-list-preview.jpg";
 
 export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Engenheiro de Dados · Solucionador de Problemas", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
@@ -117,7 +120,22 @@ export const demoCommitments: Commitment[] = [
       { id: "torneio-empreendedor-doc-team", name: "meu-mundo-azul-team.jpg", mimeType: "image/jpeg", caption: "A equipe do Meu Mundo Azul", src: mmaTeam, addedAt: "2026-10-07T12:00:00Z" },
     ],
   }),
-  challenge("techfellow", "TechFellow", "Concluir com sucesso o processo seletivo do TechFellow e ser aceito.", ["Inscrever-me.", "Preparar a candidatura.", "Ser aceito."], ["Envio da inscrição", "Candidatura preparada", "Resultado da candidatura"], "Evidências do processo seletivo", "2026-08-31", { stakes: [50, 150, 300], status: "failed", criteria: [{ id: "techfellow-1", description: "Inscrever-me.", status: "met" }, { id: "techfellow-2", description: "Preparar a candidatura.", status: "met" }, { id: "techfellow-3", description: "Ser aceito.", status: "failed" }], reflection: "Concluí a candidatura, mas não cheguei ao resultado final." }),
+  challenge("elap-2022", "ELAP 2022 · Intercâmbio no Canadá", "Conquistar uma vaga de intercâmbio no Canadá pelo ELAP 2022, por meio do edital de mobilidade acadêmica da PUCRS.", ["Inscrever-me no edital ELAP 2022 de mobilidade acadêmica da PUCRS.", "Ser pré-selecionado para a Concordia University.", "Conquistar a vaga como titular e fazer o intercâmbio."], ["Inscrição no edital", "Lista oficial de pré-selecionados", "Confirmação da vaga"], "Lista oficial de pré-selecionados (PUCRS)", "2022-03-04", {
+    start: "2022-02-01",
+    meaning: "O ELAP (Emerging Leaders in the Americas Program) é um programa de bolsas do governo do Canadá para intercâmbios curtos de estudantes da América Latina e do Caribe. Concorri pelo edital de mobilidade acadêmica da PUCRS em 2022 e fui pré-selecionado para a Concordia University, em Montreal, mas como suplente: as vagas ficaram com os titulares e o intercâmbio não aconteceu.",
+    documents: [
+      { id: "elap-2022-doc-list", name: "lista-pre-selecionados-elap-2022.pdf", mimeType: "application/pdf", caption: "Lista oficial de pré-selecionados do ELAP 2022 (PUCRS), com meu nome entre os suplentes da Concordia University", src: elapList, preview: elapListPreview, addedAt: "2022-03-04T12:00:00Z" },
+    ],
+    stakes: [100, 150, 250],
+    status: "failed",
+    criteria: ["Inscrever-me no edital ELAP 2022 de mobilidade acadêmica da PUCRS.", "Ser pré-selecionado para a Concordia University.", "Conquistar a vaga como titular e fazer o intercâmbio."].map((description, i) => ({ id: `elap-2022-${i + 1}`, description, status: i < 2 ? ("met" as const) : ("failed" as const) })),
+  }),
+  challenge("techfellow", "Tech Fellow · Fundação Estudar", "Concluir com sucesso o processo seletivo do Tech Fellow 2022, da Fundação Estudar, e ser aceito.", ["Inscrever-me.", "Preparar a candidatura.", "Ser aceito."], ["Envio da inscrição", "Candidatura preparada", "Resultado da candidatura"], "Evidências do processo seletivo", "2022-08-31", {
+    meaning: "Me candidatei ao Programa Tech Fellow 2022, da Fundação Estudar. A seleção foi bastante rigorosa, com uma demanda muito alta de inscritos, e não fiquei entre os selecionados. Guardei a orientação da própria Fundação: nas avaliações online e nas entrevistas, trazer exemplos concretos e conectar melhor a minha história.",
+    documents: [
+      { id: "techfellow-doc-email", name: "fundacao-estudar-tech-fellow-2022.png", mimeType: "image/png", caption: "E-mail da Fundação Estudar com o resultado do Tech Fellow 2022", src: techfellowEmail, addedAt: "2022-08-31T12:00:00Z" },
+    ],
+    stakes: [50, 150, 300], status: "failed", criteria: [{ id: "techfellow-1", description: "Inscrever-me.", status: "met" }, { id: "techfellow-2", description: "Preparar a candidatura.", status: "met" }, { id: "techfellow-3", description: "Ser aceito.", status: "failed" }], reflection: "Concluí a candidatura, mas não cheguei ao resultado final." }),
   challenge("behring-founders", "Behring Founders", "Tornar-me um Behring Founder levando o processo a sério o bastante para entender a organização a fundo e devolver valor a futuros candidatos e founders.", [], ["Envio da inscrição", "Anotações de estudo sobre a organização", "Conversa com a Bibi"], "Inscrição + evidências do processo pessoal", "2026-10-01", { meaning: "Para mim, a Behring significa ter minha voz amplificada, ganhar acesso a uma rede forte e ter a oportunidade de continuar construindo aquilo em que acredito, em escala.", stakes: [25, 50, 25, 100, 200, 100], status: "active", completedAt: undefined, deadline: "2026-12-31T23:59:00Z", criteria: ["Enviar a inscrição.", "Estudar a fundo a organização, sua filosofia, suas pessoas e seu programa.", "Conversar com a Bibi.", "Avançar para a etapa presencial.", "Tornar-me um Behring Founder.", "Criar algo que devolva valor às próximas pessoas que trilharem o mesmo caminho."].map((description, i) => ({ id: `behring-founders-${i + 1}`, description, status: i < 3 ? "met" : "pending" })) }),
   challenge("i-did-it", "I Did It", "Construir e lançar o I Did It, um portfólio em que cada conquista é sustentada por objetivos travados, um valor em jogo e provas reais.", [], ["Repositório no GitHub", "Perfil no ar", "Feedback externo"], "Repositório no GitHub + perfil no ar", "2026-12-31", {
     start: "2026-10-05",
