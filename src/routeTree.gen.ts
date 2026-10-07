@@ -13,7 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppActivityRouteImport } from './routes/app.activity'
 import { Route as AppNewRouteImport } from './routes/app.new'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as RefereeTokenRouteImport } from './routes/referee.$token'
+import { Route as AppCommitmentsIndexRouteImport } from './routes/app.commitments.index'
+import { Route as AppCommitmentsIdIndexRouteImport } from './routes/app.commitments.$id.index'
+import { Route as AppCommitmentsIdProofRouteImport } from './routes/app.commitments.$id.proof'
+import { Route as AppCommitmentsIdResultRouteImport } from './routes/app.commitments.$id.result'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,9 +42,44 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppActivityRoute = AppActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppNewRoute = AppNewRouteImport.update({
   id: '/new',
   path: '/new',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const RefereeTokenRoute = RefereeTokenRouteImport.update({
+  id: '/referee/$token',
+  path: '/referee/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppCommitmentsIndexRoute = AppCommitmentsIndexRouteImport.update({
+  id: '/commitments/',
+  path: '/commitments/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCommitmentsIdIndexRoute = AppCommitmentsIdIndexRouteImport.update({
+  id: '/commitments/$id/',
+  path: '/commitments/$id/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCommitmentsIdProofRoute = AppCommitmentsIdProofRouteImport.update({
+  id: '/commitments/$id/proof',
+  path: '/commitments/$id/proof',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCommitmentsIdResultRoute = AppCommitmentsIdResultRouteImport.update({
+  id: '/commitments/$id/result',
+  path: '/commitments/$id/result',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -45,35 +87,93 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/activity': typeof AppActivityRoute
   '/app/new': typeof AppNewRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/referee/$token': typeof RefereeTokenRoute
   '/app/': typeof AppIndexRoute
+  '/app/commitments/': typeof AppCommitmentsIndexRoute
+  '/app/commitments/$id/proof': typeof AppCommitmentsIdProofRoute
+  '/app/commitments/$id/result': typeof AppCommitmentsIdResultRoute
+  '/app/commitments/$id/': typeof AppCommitmentsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/app/activity': typeof AppActivityRoute
   '/app/new': typeof AppNewRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/referee/$token': typeof RefereeTokenRoute
   '/app': typeof AppIndexRoute
+  '/app/commitments': typeof AppCommitmentsIndexRoute
+  '/app/commitments/$id/proof': typeof AppCommitmentsIdProofRoute
+  '/app/commitments/$id/result': typeof AppCommitmentsIdResultRoute
+  '/app/commitments/$id': typeof AppCommitmentsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/activity': typeof AppActivityRoute
   '/app/new': typeof AppNewRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/referee/$token': typeof RefereeTokenRoute
   '/app/': typeof AppIndexRoute
+  '/app/commitments/': typeof AppCommitmentsIndexRoute
+  '/app/commitments/$id/proof': typeof AppCommitmentsIdProofRoute
+  '/app/commitments/$id/result': typeof AppCommitmentsIdResultRoute
+  '/app/commitments/$id/': typeof AppCommitmentsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/auth' | '/app/new' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/activity'
+    | '/app/new'
+    | '/app/settings'
+    | '/referee/$token'
+    | '/app/'
+    | '/app/commitments/'
+    | '/app/commitments/$id/proof'
+    | '/app/commitments/$id/result'
+    | '/app/commitments/$id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/app/new' | '/app'
-  id: '__root__' | '/' | '/app' | '/auth' | '/app/new' | '/app/'
+  to:
+    | '/'
+    | '/auth'
+    | '/app/activity'
+    | '/app/new'
+    | '/app/settings'
+    | '/referee/$token'
+    | '/app'
+    | '/app/commitments'
+    | '/app/commitments/$id/proof'
+    | '/app/commitments/$id/result'
+    | '/app/commitments/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/activity'
+    | '/app/new'
+    | '/app/settings'
+    | '/referee/$token'
+    | '/app/'
+    | '/app/commitments/'
+    | '/app/commitments/$id/proof'
+    | '/app/commitments/$id/result'
+    | '/app/commitments/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
+  RefereeTokenRoute: typeof RefereeTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -106,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/activity': {
+      id: '/app/activity'
+      path: '/activity'
+      fullPath: '/app/activity'
+      preLoaderRoute: typeof AppActivityRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/new': {
       id: '/app/new'
       path: '/new'
@@ -113,17 +220,71 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppNewRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/referee/$token': {
+      id: '/referee/$token'
+      path: '/referee/$token'
+      fullPath: '/referee/$token'
+      preLoaderRoute: typeof RefereeTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/commitments/': {
+      id: '/app/commitments/'
+      path: '/commitments'
+      fullPath: '/app/commitments/'
+      preLoaderRoute: typeof AppCommitmentsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/commitments/$id/': {
+      id: '/app/commitments/$id/'
+      path: '/commitments/$id'
+      fullPath: '/app/commitments/$id/'
+      preLoaderRoute: typeof AppCommitmentsIdIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/commitments/$id/proof': {
+      id: '/app/commitments/$id/proof'
+      path: '/commitments/$id/proof'
+      fullPath: '/app/commitments/$id/proof'
+      preLoaderRoute: typeof AppCommitmentsIdProofRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/commitments/$id/result': {
+      id: '/app/commitments/$id/result'
+      path: '/commitments/$id/result'
+      fullPath: '/app/commitments/$id/result'
+      preLoaderRoute: typeof AppCommitmentsIdResultRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppActivityRoute: typeof AppActivityRoute
   AppNewRoute: typeof AppNewRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppCommitmentsIndexRoute: typeof AppCommitmentsIndexRoute
+  AppCommitmentsIdProofRoute: typeof AppCommitmentsIdProofRoute
+  AppCommitmentsIdResultRoute: typeof AppCommitmentsIdResultRoute
+  AppCommitmentsIdIndexRoute: typeof AppCommitmentsIdIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppActivityRoute: AppActivityRoute,
   AppNewRoute: AppNewRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
+  AppCommitmentsIndexRoute: AppCommitmentsIndexRoute,
+  AppCommitmentsIdProofRoute: AppCommitmentsIdProofRoute,
+  AppCommitmentsIdResultRoute: AppCommitmentsIdResultRoute,
+  AppCommitmentsIdIndexRoute: AppCommitmentsIdIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -132,6 +293,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
+  RefereeTokenRoute: RefereeTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
