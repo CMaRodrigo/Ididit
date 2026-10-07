@@ -50,7 +50,7 @@ Este repositório é o perfil em uso de Rodrigo da Rosa, com dez compromissos re
 | — | Behring Founders: em andamento | 2026 | 3 / 6 | R$ 500 |
 | — | I Did It: este projeto, em andamento ([código-fonte](https://github.com/CMaRodrigo/pixel-perfect-capture-7666)) | out 2026 – | 3 / 6 | R$ 500 |
 
-Quando um registro mostra *"Datas tiradas dos documentos anexados"*, as datas vêm da própria prova: planos de trabalho, posts no Instagram e no LinkedIn, metadados do Canva e do GitLab. Registros sem essa linha usam datas ilustrativas.
+Quando um registro mostra *"Datas tiradas dos documentos anexados"*, as datas vêm da própria prova: planos de trabalho, posts no Instagram e no LinkedIn, metadados do Canva e do GitLab.
 
 ## O que é real e o que é simulado
 
