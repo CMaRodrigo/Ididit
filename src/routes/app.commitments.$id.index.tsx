@@ -15,9 +15,9 @@ export const Route = createFileRoute("/app/commitments/$id/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { title: "Commitment — Proof." },
-      { name: "description", content: "Locked rules, live progress and proof for this commitment." },
+      { name: "description", content: "Locked objectives, live progress and proof for this commitment." },
       { property: "og:title", content: "Commitment — Proof." },
-      { property: "og:description", content: "Locked rules, live progress and proof for this commitment." },
+      { property: "og:description", content: "Locked objectives, live progress and proof for this commitment." },
     ],
   }),
   component: Detail,
@@ -47,7 +47,7 @@ function Detail() {
       </Link>
       <div className="flex flex-wrap items-center gap-3">
         {c.demo && c.status === "failed" ? <span className="text-sm text-muted-foreground">Not completed</span> : <StatusBadge status={c.status} />}
-        <span className="flex items-center gap-1 text-xs text-muted-foreground"><Lock className="size-3" /> Rules locked</span>
+        <span className="flex items-center gap-1 text-xs text-muted-foreground"><Lock className="size-3" /> Objectives locked</span>
       </div>
       <h1 className="display mt-4 text-4xl uppercase sm:text-5xl">{c.title}</h1>
       <p className="mt-3 text-muted-foreground">{c.measurableGoal}</p>
@@ -119,7 +119,7 @@ function Detail() {
           <Field label="Deadline">{longDate(c.deadline)}</Field>
           <Field label="Stake">{`$${c.stake}`}</Field>
           <Field label="If you fail">{c.failureDestination}</Field>
-          <Field label="Rules">Locked · cannot be edited</Field>
+          <Field label="Objectives">Locked · cannot be edited</Field>
         </dl>
       </div>
 
