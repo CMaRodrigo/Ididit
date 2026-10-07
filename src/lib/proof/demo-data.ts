@@ -8,6 +8,9 @@ import rondonClassroom from "@/assets/proof-rondon-classroom.jpg";
 import rondonGathering from "@/assets/proof-rondon-gathering.jpg";
 import rondonWorkshop from "@/assets/proof-rondon-workshop.jpg";
 import rondonChildren from "@/assets/proof-rondon-children.jpg";
+import ligaTrendFollowing from "@/assets/proof-liga-trend-following.png";
+import ligaTaylorRule from "@/assets/proof-liga-taylor-rule.png";
+import ligaFinanceWeek from "@/assets/proof-liga-finance-week.png";
 
 export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Data Engineer · Problem Solver", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
@@ -41,7 +44,14 @@ export const demoCommitments: Commitment[] = [
       { id: "projeto-rondon-doc-children", name: "rondon-children.jpg", mimeType: "image/jpeg", caption: "With children from Vitória do Jari", src: rondonChildren, addedAt: "2022-07-22T12:00:00Z" },
     ],
   }),
-  challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2024-11-30"),
+  challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2024-11-30", {
+    meaning: "PUCRS Finance is the financial market league at PUCRS, a student group that studies markets together and shares what it learns with the wider university. As a member, I wrote educational posts for the league's Instagram, explaining concepts such as the Trend Following strategy and the Taylor rule in plain language, and took part in the league's activities, including the 2023 Financial Market Week.",
+    documents: [
+      { id: "liga-financeira-doc-trend", name: "pucrs-finance-trend-following.png", mimeType: "image/png", caption: "\"What is Trend Following?\" — PUCRS Finance post written by me", src: ligaTrendFollowing, addedAt: "2023-02-15T12:00:00Z" },
+      { id: "liga-financeira-doc-taylor", name: "pucrs-finance-taylor-rule.png", mimeType: "image/png", caption: "\"What is the Taylor rule?\" — PUCRS Finance post written by me", src: ligaTaylorRule, addedAt: "2023-03-01T12:00:00Z" },
+      { id: "liga-financeira-doc-week", name: "pucrs-finance-market-week-2023.png", mimeType: "image/png", caption: "Programme of the PUCRS Finance Financial Market Week 2023", src: ligaFinanceWeek, addedAt: "2023-08-07T12:00:00Z" },
+    ],
+  }),
   challenge("toninhathon", "ToninhaThon", "Create a viable project, compete successfully and advance it beyond the competition.", ["Create a viable project.", "Win the competition.", "Have the project selected for incubation by SEBRAE."], ["Project artifact", "Competition result", "SEBRAE incubation evidence"], "Competition result + incubation evidence", "2025-03-22", {
     meaning: "SalvaTon is the project I built for ToninhaThon, a hackathon to protect the toninha (franciscana dolphin), one of the most threatened dolphins in the South Atlantic: about 1,500 of the roughly 20,000 left die in fishing nets every year. SalvaTon is a nationally produced acoustic pinger that clips onto the net and emits frequencies the toninhas hear and avoid, with a self-recharging battery powered by the sea instead of the imported, expensive pingers whose batteries must be replaced every few months.",
     documents: [
