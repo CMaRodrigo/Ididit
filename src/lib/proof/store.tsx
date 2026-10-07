@@ -43,14 +43,14 @@ interface Ctx extends State {
   removeDocument: (id: string, documentId: string) => void;
 }
 
-// Supplied records refresh their bundled meaning and documents while keeping the owner's edits and uploads.
+// Supplied records refresh their bundled title, meaning and documents while keeping the owner's edits and uploads.
 function refreshDemo(c: Commitment): Commitment {
   const seed = c.demo ? demoCommitments.find((d) => d.id === c.id) : undefined;
   if (!seed) return c;
   const bundled = seed.documents ?? [];
   const uploaded = (c.documents ?? []).filter((d) => !bundled.some((b) => b.id === d.id));
   const meaning = c.meaningEdited ? c.meaning : seed.meaning;
-  return { ...c, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
+  return { ...c, title: seed.title, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
 }
 
 const StoreCtx = createContext<Ctx | null>(null);
