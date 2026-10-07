@@ -14,7 +14,10 @@ describe("Rodrigo demo portfolio", () => {
     expect(new Set(trophies.map((a) => a.badgeImageUrl)).size).toBe(6);
     expect(trophies.some((a) => a.badgeName === "CASE CLOSED")).toBe(true);
     for (const c of demoCommitments.filter((c) => c.status !== "passed")) expect(() => badgeGenerator(c)).toThrow();
-    expect(() => badgeGenerator({ ...demoCommitments[0], criteria: [] })).toThrow();
+    const first = demoCommitments[0];
+    expect(first).toBeDefined();
+    if (!first) return;
+    expect(() => badgeGenerator({ ...first, criteria: [] })).toThrow();
   });
   it("preserves partial success and labels all evidence as illustrative", () => {
     const failed = demoCommitments.find((c) => c.id === "techfellow");
