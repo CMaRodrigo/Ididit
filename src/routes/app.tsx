@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { Activity, Home, Layers, Plus, Settings, User } from "lucide-react";
+import { Activity, Home, Layers, Plus, Settings, Trophy, User } from "lucide-react";
 import { btn, Logo } from "@/components/proof/primitives";
 import { cn } from "@/lib/utils";
 import { useProof } from "@/lib/proof/store";
@@ -12,6 +12,7 @@ const main = [
   { to: "/app", label: "Home", icon: Home, exact: true },
   { to: "/app/commitments", label: "Commitments", icon: Layers, exact: false },
   { to: "/app/activity", label: "Activity", icon: Activity, exact: false },
+  { to: "/app/trophies", label: "Trophy Room", icon: Trophy, exact: false },
 ] as const;
 
 function NavItem({ to, label, icon: Icon, exact }: { to: string; label: string; icon: typeof Home; exact?: boolean }) {
@@ -70,7 +71,7 @@ function AppShell() {
         <Outlet />
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-border bg-background/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t border-border bg-background/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
         {main.map(({ to, label, icon: Icon, exact }) => (
           <Link key={to} to={to} activeOptions={{ exact: !!exact }} className="flex flex-col items-center gap-1 py-2.5 text-[11px] text-muted-foreground" activeProps={{ className: "!text-foreground" }}>
             <Icon className="size-5" strokeWidth={1.75} />
