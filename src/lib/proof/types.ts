@@ -26,7 +26,7 @@ export interface Evidence {
   submittedAt: string;
 }
 
-/** Owner-supplied proof file. Bundled records carry `src`; uploads keep their bytes in browser storage under `id`. */
+/** Owner-supplied proof file. Bundled records carry `src`; uploads keep their bytes in browser storage under `id`. `href` points to an external page and `src` is then its preview image. */
 export interface ProofDocument {
   id: string;
   name: string;
@@ -34,6 +34,7 @@ export interface ProofDocument {
   size?: number;
   caption?: string;
   src?: string;
+  href?: string;
   addedAt: string;
 }
 

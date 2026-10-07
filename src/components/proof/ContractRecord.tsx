@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, Check, Circle, FileText, Lock, Pencil, Trash2, Upload, X } from "lucide-react";
+import { ArrowDown, Check, Circle, ExternalLink, FileText, Lock, Pencil, Trash2, Upload, X } from "lucide-react";
 import { BadgeArt } from "./Badge";
 import { btn, Button, Field, inputCls } from "./primitives";
 import type { Achievement, Commitment, ProofDocument } from "@/lib/proof/types";
@@ -95,6 +95,7 @@ function DocumentItem({ d, onRemove }: { d: ProofDocument; onRemove: () => void 
     return () => { live = false; if (objectUrl) URL.revokeObjectURL(objectUrl); };
   }, [d.id, d.src]);
   const label = d.caption ?? d.name;
+  const link = d.href ?? url;
   const preview = d.mimeType.startsWith("image/") && url ? <img src={url} alt={label} className="aspect-[4/3] w-full object-cover object-top" /> : <div className="grid aspect-[4/3] place-items-center bg-secondary text-muted-foreground"><FileText className="size-8" /></div>;
-  return <li className="overflow-hidden rounded-lg border border-border bg-surface">{url ? <a href={url} target="_blank" rel="noreferrer" className="block" aria-label={`Open ${label}`}>{preview}</a> : preview}<div className="flex items-start justify-between gap-2 p-3"><div className="min-w-0"><p className="truncate text-sm font-medium" title={label}>{label}</p><p className="mt-0.5 text-xs text-muted-foreground">{missing ? "File not available in this browser" : longDate(d.addedAt)}</p></div>{!d.src && <Button variant="ghost" size="sm" aria-label={`Remove ${label}`} onClick={onRemove}><Trash2 className="size-3.5" /></Button>}</div></li>;
+  return <li className="overflow-hidden rounded-lg border border-border bg-surface">{link ? <a href={link} target="_blank" rel="noreferrer" className="block" aria-label={`Open ${label}`}>{preview}</a> : preview}<div className="flex items-start justify-between gap-2 p-3"><div className="min-w-0"><p className="truncate text-sm font-medium" title={label}>{label}</p><p className="mt-0.5 text-xs text-muted-foreground">{missing ? "File not available in this browser" : d.href ? <span className="inline-flex items-center gap-1"><ExternalLink className="size-3" />{new URL(d.href).hostname.replace(/^www\./, "")}</span> : longDate(d.addedAt)}</p></div>{!d.src && <Button variant="ghost" size="sm" aria-label={`Remove ${label}`} onClick={onRemove}><Trash2 className="size-3.5" /></Button>}</div></li>;
 }
