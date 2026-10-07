@@ -28,7 +28,7 @@ function Shape({ category, r, ...p }: { category: AchievementCategory; r: number
 export function BadgeArt({ a, className }: { a: Pick<Achievement, "category" | "icon" | "badgeImageUrl" | "badgeName">; className?: string }) {
   const id = useId().replace(/:/g, "");
   const Icon = icons[a.icon as keyof typeof icons] ?? Award;
-  if (a.badgeImageUrl) return <img src={a.badgeImageUrl} alt={a.badgeName} className={cn("aspect-square object-contain", className)} />;
+  if (a.badgeImageUrl) return <img src={a.badgeImageUrl} alt={a.badgeName} width={768} height={768} loading="lazy" className={cn("aspect-square object-contain", className)} />;
   return (
     <div className={cn("relative aspect-square", className)}>
       <svg viewBox="0 0 100 100" className="absolute inset-0 size-full drop-shadow-[0_10px_18px_oklch(0.2_0.01_80/0.25)]">

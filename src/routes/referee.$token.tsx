@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/referee/$token")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Verify a commitment — Proof." },
       { name: "description", content: "You've been asked to review proof for a commitment." },
       { property: "og:title", content: "Verify a commitment — Proof." },

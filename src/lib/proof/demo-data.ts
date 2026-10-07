@@ -1,128 +1,33 @@
 import type { ActivityEvent, Commitment } from "./types";
 
-export const DEMO_USER = { name: "Alex Morgan", bio: "Building things, running long, learning languages.", email: "alex@proof.app", timezone: "America/Sao_Paulo", currency: "USD" };
+export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Data Engineer · Problem Solver", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
+function challenge(id: string, title: string, goal: string, rules: string[], evidence: string[], source: string, date: string, extra: Partial<Commitment> = {}): Commitment {
+  const status = extra.status ?? "passed";
+  const criteria = rules.map((description, i) => ({ id: `${id}-${i + 1}`, description, status: "met" as const }));
+  const c: Commitment = {
+    id, title, measurableGoal: goal, status, demo: true,
+    createdAt: `${date}T09:00:00Z`, lockedAt: `${date}T09:00:00Z`, deadline: `${date}T23:59:00Z`,
+    completedAt: status === "passed" ? `${date}T18:00:00Z` : undefined,
+    stake: 0, currency: "USD", failureDestination: "Not specified in the original example",
+    methods: ["referee"], providers: [], verificationSource: source, criteria,
+    evidence: evidence.map((value, i) => ({ id: `${id}-e${i}`, criterionId: criteria[Math.min(i, criteria.length - 1)]?.id ?? "", type: "text", value: `Demo placeholder — ${value}`, submittedAt: `${date}T17:00:00Z` })),
+    runs: [], ...extra,
+  };
+  c.runs = [{ id: `${id}-verification`, ranAt: `${date}T18:00:00Z`, verdicts: c.criteria.map((cr) => ({ criterionId: cr.id, status: cr.status === "met" ? "verified" : cr.status === "failed" ? "failed" : "insufficient_evidence", confidence: 1, reasoning: cr.status === "met" ? "Completed in the supplied demo scenario; supporting documents are placeholders." : cr.status === "failed" ? "Acceptance was not achieved in the supplied demo scenario." : "This milestone is not completed; no final verification yet.", evidenceUsed: c.evidence.filter((e) => e.criterionId === cr.id).map((e) => e.id) })) }];
+  return c;
+}
+
+// Dates illustrate a personal timeline; real historical dates and documents were not supplied.
 export const demoCommitments: Commitment[] = [
-  {
-    id: "run-100",
-    title: "Run 100 km in October",
-    measurableGoal: "Complete at least 100 km of running between Oct 1 and Oct 31, 2026.",
-    status: "active",
-    createdAt: "2026-10-01T09:00:00Z",
-    lockedAt: "2026-10-01T09:04:00Z",
-    deadline: "2026-10-31T23:59:00Z",
-    stake: 100,
-    currency: "USD",
-    failureDestination: "Donate to GiveDirectly",
-    methods: ["data", "referee"],
-    providers: ["strava"],
-    referee: { name: "Maya Chen", email: "maya@example.com", token: "rf_7Kq2mX9pLs", status: "pending" },
-    headline: { current: 72, target: 100, unit: "km" },
-    criteria: [
-      { id: "r1", description: "Run at least 100 km total during October", target: 100, current: 72, unit: "km", status: "progress" },
-      { id: "r2", description: "Activities recorded via Strava with GPS", status: "met" },
-    ],
-    evidence: [],
-    runs: [],
-  },
-  {
-    id: "portfolio",
-    title: "Ship my portfolio",
-    measurableGoal: "Publish a working portfolio website with its source on GitHub by October 31, 2026.",
-    status: "active",
-    createdAt: "2026-10-07T14:00:00Z",
-    lockedAt: "2026-10-07T14:12:00Z",
-    deadline: "2026-10-31T23:59:00Z",
-    stake: 150,
-    currency: "USD",
-    failureDestination: "Send to a friend — Jordan",
-    methods: ["ai", "data"],
-    providers: ["github"],
-    criteria: [
-      { id: "p1", description: "GitHub repository connected", status: "met" },
-      { id: "p2", description: "README explains the project", status: "met" },
-      { id: "p3", description: "At least 10 commits during the commitment", target: 10, current: 8, unit: "commits", status: "progress" },
-      { id: "p4", description: "Website is publicly accessible", status: "pending" },
-      { id: "p5", description: "Main functionality can be demonstrated", status: "pending" },
-    ],
-    evidence: [],
-    runs: [],
-  },
-  {
-    id: "spanish",
-    title: "Study Spanish for 20 hours",
-    measurableGoal: "Log at least 20 hours of Spanish study between Sep 1 and Sep 30, 2026.",
-    status: "passed",
-    completedAt: "2026-09-28T20:00:00Z",
-    createdAt: "2026-09-01T08:00:00Z",
-    lockedAt: "2026-09-01T08:03:00Z",
-    deadline: "2026-09-30T23:59:00Z",
-    stake: 50,
-    currency: "USD",
-    failureDestination: "Donate to Wikipedia",
-    methods: ["data"],
-    providers: ["google_calendar"],
-    headline: { current: 21.4, target: 20, unit: "hours" },
-    criteria: [
-      { id: "s1", description: "At least 20 hours of tracked study sessions", target: 20, current: 21.4, unit: "hours", status: "met" },
-    ],
-    evidence: [],
-    runs: [],
-  },
-  {
-    id: "early-bird",
-    title: "Wake up at 6:00 for 30 days",
-    measurableGoal: "Log a check-in before 6:15 every day for 30 consecutive days between Jul 1 and Jul 30, 2026.",
-    status: "passed",
-    completedAt: "2026-07-30T06:05:00Z",
-    createdAt: "2026-07-01T05:00:00Z",
-    lockedAt: "2026-07-01T05:02:00Z",
-    deadline: "2026-07-30T23:59:00Z",
-    stake: 80,
-    currency: "USD",
-    failureDestination: "Donate to Doctors Without Borders",
-    methods: ["referee"],
-    providers: [],
-    referee: { name: "Sam Rivera", email: "sam@example.com", token: "rf_eb30", status: "approved" },
-    headline: { current: 30, target: 30, unit: "days" },
-    criteria: [
-      { id: "e1", description: "Check in before 6:15 on 30 consecutive days", target: 30, current: 30, unit: "days", status: "met" },
-      { id: "e2", description: "Referee confirms the check-in log", status: "met" },
-    ],
-    evidence: [],
-    runs: [],
-  },
-  {
-    id: "articles",
-    title: "Publish 4 articles",
-    measurableGoal: "Publish 4 original articles of 800+ words between Aug 1 and Aug 31, 2026.",
-    status: "failed",
-    createdAt: "2026-08-01T10:00:00Z",
-    lockedAt: "2026-08-01T10:05:00Z",
-    deadline: "2026-08-31T23:59:00Z",
-    stake: 75,
-    currency: "USD",
-    failureDestination: "Donate to Electronic Frontier Foundation",
-    methods: ["ai"],
-    providers: [],
-    headline: { current: 3, target: 4, unit: "articles" },
-    criteria: [
-      { id: "a1", description: "Article 1 published (800+ words)", status: "met" },
-      { id: "a2", description: "Article 2 published (800+ words)", status: "met" },
-      { id: "a3", description: "Article 3 published (800+ words)", status: "met" },
-      { id: "a4", description: "Article 4 published (800+ words)", status: "failed" },
-    ],
-    evidence: [],
-    runs: [],
-  },
+  challenge("projeto-rondon", "Projeto Rondon", "Create and conduct workshops for young people focused on culture, citizenship and technology.", ["Create workshops that address culture, citizenship and technology for the participating young people.", "Conduct at least one workshop with more than 120 young participants."], ["Workshop plan", "Event attendance record", "Activity documentation", "Photos / event material"], "Third-party / Event Evidence", "2024-07-20", { reflection: "Seeing more than 120 young people participate made the work feel real." }),
+  challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2024-11-30"),
+  challenge("toninhathon", "ToninhaThon", "Create a viable project, compete successfully and advance it beyond the competition.", ["Create a viable project.", "Win the competition.", "Have the project selected for incubation by SEBRAE."], ["Project artifact", "Competition result", "SEBRAE incubation evidence"], "Competition result + incubation evidence", "2025-03-22"),
+  challenge("pratham-books", "Pratham Books", "Be selected to participate, build a useful data engineering project with potential relevance for a platform serving 10 million users, and present the case.", ["Be selected.", "Build a useful data engineering project designed around a context serving approximately 10 million users.", "Present the case."], ["Selection evidence", "Project artifact", "Presentation evidence"], "Selection, project and presentation evidence", "2025-08-16", { contextMetric: { value: "10M", label: "potential users in the project context" } }),
+  challenge("detectivesql", "detectiveSQL", "Create a SQL project that I personally find interesting enough to solve and make it available to other people.", ["Create something that I personally feel compelled to explore and solve.", "Publish and share it with other people."], ["Public project URL (not supplied)", "Repository / project evidence", "Public release / share evidence"], "Public project + release evidence", "2026-02-14", { reflection: "Built something I wanted to exist." }),
+  challenge("torneio-empreendedor", "Torneio Empreendedor", "Develop and validate a technology project for healthcare, turn it into a real application and win the entrepreneurship competition.", ["Develop a project focused on healthcare.", "Validate the idea with a specialist.", "Win the competition.", "Develop the application with AGES.", "Win the final tournament."], ["Healthcare project artifact", "Expert validation", "Competition evidence", "AGES application evidence", "Final tournament result"], "Expert validation + competition + application evidence", "2026-06-20", { progression: ["Idea", "Expert validation", "Competition", "Product development", "Final tournament"] }),
+  challenge("techfellow", "TechFellow", "Successfully complete the TechFellow application process and be accepted.", ["Apply.", "Prepare the application.", "Be accepted."], ["Application submission", "Prepared application", "Application outcome"], "Application process evidence", "2026-08-31", { status: "failed", criteria: [{ id: "techfellow-1", description: "Apply.", status: "met" }, { id: "techfellow-2", description: "Prepare the application.", status: "met" }, { id: "techfellow-3", description: "Be accepted.", status: "failed" }], reflection: "I completed the application, but didn't reach the final outcome." }),
+  challenge("behring-founders", "Behring Founders", "Become a Behring Founder while taking the process seriously enough to deeply understand the organization and contribute value back to future applicants and founders.", [], ["Application submission", "Organization study notes", "Conversation with Bibi"], "Application + personal process evidence", "2026-10-01", { status: "active", completedAt: undefined, deadline: "2026-12-31T23:59:00Z", criteria: ["Submit the application.", "Study the organization, its philosophy, people and program in depth.", "Speak with Bibi.", "Advance to the in-person stage.", "Become a Behring Founder.", "Create something that returns value to future people going through the same path."].map((description, i) => ({ id: `behring-founders-${i + 1}`, description, status: i < 3 ? "met" : "pending" })) }),
 ];
 
-export const demoActivity: ActivityEvent[] = [
-  { id: "e1", commitmentId: "portfolio", type: "progress", description: "GitHub detected commit #8 on alex/portfolio", at: "2026-10-07T01:20:00Z" },
-  { id: "e2", commitmentId: "portfolio", type: "locked", description: "Commitment locked — “Ship my portfolio”", at: "2026-10-06T14:12:00Z" },
-  { id: "e3", commitmentId: "portfolio", type: "rules_created", description: "5 success criteria defined for “Ship my portfolio”", at: "2026-10-06T14:10:00Z" },
-  { id: "e4", commitmentId: "run-100", type: "progress", description: "72 km reached for “Run 100 km in October”", at: "2026-10-05T19:00:00Z" },
-  { id: "e5", commitmentId: "spanish", type: "result", description: "Passed — $50 returned for “Study Spanish for 20 hours”", at: "2026-10-01T00:10:00Z" },
-  { id: "e6", commitmentId: "run-100", type: "locked", description: "Commitment locked — “Run 100 km in October”", at: "2026-10-01T09:04:00Z" },
-  { id: "e7", commitmentId: "articles", type: "result", description: "Failed — 3 / 4 verified, $75 consequence triggered", at: "2026-09-01T00:10:00Z" },
-];
+export const demoActivity: ActivityEvent[] = demoCommitments.map((c): ActivityEvent => ({ id: `${c.id}-activity`, commitmentId: c.id, type: c.status === "active" ? "progress" : "result", description: `${c.title} — ${c.status === "passed" ? "completed (demo)" : c.status === "failed" ? "not completed · 2 / 3 criteria (demo)" : "3 / 6 milestones completed (demo)"}`, at: c.completedAt ?? c.createdAt })).sort((a, b) => b.at.localeCompare(a.at));

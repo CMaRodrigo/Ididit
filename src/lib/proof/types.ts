@@ -83,6 +83,11 @@ export interface Commitment {
   runs: VerificationRun[];
   headline?: { current: number; target: number; unit: string };
   completedAt?: string | undefined;
+  demo?: boolean;
+  verificationSource?: string;
+  reflection?: string;
+  contextMetric?: { value: string; label: string };
+  progression?: string[];
 }
 
 export type AchievementCategory = "fitness" | "skills" | "career" | "creative" | "education" | "personal" | "other";

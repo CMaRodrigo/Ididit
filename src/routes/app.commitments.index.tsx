@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/app/commitments/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Commitments — Proof." },
       { name: "description", content: "Every commitment you've made, and how it ended." },
       { property: "og:title", content: "Commitments — Proof." },

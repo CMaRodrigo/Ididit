@@ -11,6 +11,8 @@ import { useProof } from "@/lib/proof/store";
 export const Route = createFileRoute("/app/commitments/$id/proof")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Prove it — Proof." },
       { name: "description", content: "Submit evidence for each locked requirement." },
       { property: "og:title", content: "Prove it — Proof." },

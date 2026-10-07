@@ -1,86 +1,50 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Check, Lock, ShieldCheck } from "lucide-react";
 import { Page } from "@/components/proof/Page";
 import { BadgeArt, MysteryBadge } from "@/components/proof/Badge";
+import { btn, ProgressBar } from "@/components/proof/primitives";
 import { useProof } from "@/lib/proof/store";
-import { money, shortDate } from "@/lib/proof/format";
 
 export const Route = createFileRoute("/app/profile")({
-  head: () => ({
-    meta: [
-      { title: "Profile & Trophy Room — Proof." },
-      { name: "description", content: "Your verified accomplishments, each one backed by rules, evidence and a stake." },
-      { property: "og:title", content: "Profile & Trophy Room — Proof." },
-      { property: "og:description", content: "Your verified accomplishments, each one backed by rules, evidence and a stake." },
-      { property: "og:type", content: "profile" },
-      { name: "twitter:card", content: "summary" },
-    ],
-  }),
-  component: Profile,
+  head: () => ({ meta: [
+    { title: "Rodrigo's Trophy Room — Proof." },
+    { name: "description", content: "A personal timeline of verified accomplishments, ongoing commitments and honest past attempts." },
+    { property: "og:title", content: "Rodrigo's Trophy Room — Proof." },
+    { property: "og:description", content: "The badge is the symbol. The proof is behind it." },
+    { property: "og:type", content: "profile" }, { name: "twitter:card", content: "summary" },
+  ] }), component: Profile,
 });
 
 function Profile() {
-  const { user, commitments, achievements } = useProof();
+  const { user, commitments, achievements, hydrated } = useProof();
   const passed = commitments.filter((c) => c.status === "passed");
-  const decided = commitments.filter((c) => c.status === "passed" || c.status === "failed").length;
-  const rate = decided ? Math.round((passed.length / decided) * 100) : 0;
-  const defended = passed.reduce((n, c) => n + c.stake, 0);
-  const trophies = [...achievements]
-    .filter((a) => commitments.some((c) => c.id === a.commitmentId && c.status === "passed"))
-    .sort((a, b) => b.earnedAt.localeCompare(a.earnedAt));
-  const stats = [
-    { v: String(passed.length), l: "commitments completed" },
-    { v: money(defended, user.currency), l: "successfully defended" },
-    { v: `${rate}%`, l: "success rate" },
-    { v: String(trophies.length), l: "trophies earned" },
-  ];
-
-  return (
-    <Page>
-      <div className="flex items-center gap-5">
-        <div className="grid size-20 shrink-0 place-items-center rounded-full bg-primary text-2xl font-semibold text-primary-foreground">
-          {user.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
-        </div>
-        <div>
-          <h1 className="display text-3xl sm:text-4xl">{user.name}</h1>
-          {user.bio && <p className="mt-1 text-muted-foreground">{user.bio}</p>}
-        </div>
+  const active = commitments.filter((c) => c.status === "active" || c.status === "awaiting_verification");
+  const failed = commitments.filter((c) => c.status === "failed");
+  const order = ["projeto-rondon", "liga-financeira", "toninhathon", "pratham-books", "detectivesql", "torneio-empreendedor"];
+  const trophies = achievements.filter((a) => passed.some((c) => c.id === a.commitmentId)).sort((a, b) => {
+    const ai = order.indexOf(a.commitmentId), bi = order.indexOf(b.commitmentId);
+    return ai >= 0 && bi >= 0 ? ai - bi : b.earnedAt.localeCompare(a.earnedAt);
+  });
+  return <Page>
+    <header className="border-b border-border pb-8">
+      <div className="flex items-center gap-4"><div className="grid size-14 shrink-0 place-items-center rounded-full bg-primary text-xl font-medium text-primary-foreground">{user.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}</div><div><h1 className="display text-4xl sm:text-5xl">{user.name}</h1><p className="mt-2 text-sm text-muted-foreground sm:text-base">{user.bio}</p></div></div>
+      <p className="mt-5 text-base text-muted-foreground">Things I said I would do — and the proof behind them.</p>
+      <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm"><span><strong className="tabular font-semibold">{passed.length}</strong> verified achievements</span><span><strong className="tabular font-semibold">{failed.length}</strong> failed {failed.length === 1 ? "challenge" : "challenges"}</span><span><strong className="tabular font-semibold">{active.length}</strong> active {active.length === 1 ? "commitment" : "commitments"}</span></div>
+    </header>
+    {active.map((c) => { const met = c.criteria.filter((cr) => cr.status === "met").length; return <section key={c.id} className="grid items-center gap-6 border-b border-border py-8 sm:grid-cols-[1fr_120px]">
+      <div><div className="eyebrow">Current commitment</div><div className="mt-3 flex flex-wrap items-center gap-3"><h2 className="text-2xl font-semibold">{c.title}</h2><span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"><span className="size-1.5 rounded-full bg-accent" />In progress</span></div><div className="mt-4 flex max-w-md items-center gap-4"><span className="tabular shrink-0 text-sm">{met} / {c.criteria.length} milestones</span><ProgressBar value={met} max={c.criteria.length} /></div><div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">{c.id === "behring-founders" && ["Apply", "Study deeply", "Speak with Bibi"].map((label) => <span key={label} className="flex items-center gap-1"><Check className="size-3 text-success" />{label}</span>)}</div><Link to="/app/commitments/$id" params={{ id: c.id }} className={btn({ variant: "outline", size: "sm", className: "mt-5" })}>View commitment <ArrowRight className="size-3.5" /></Link></div>
+      <div className="hidden text-center sm:block"><MysteryBadge className="mx-auto w-20" /><span className="mt-3 flex items-center justify-center gap-1 text-xs text-muted-foreground"><Lock className="size-3" />Trophy locked</span></div>
+    </section>; })}
+    <section className="pt-10">
+      <div className="flex flex-wrap items-end justify-between gap-3"><div><h2 className="eyebrow">Trophy Room</h2><p className="mt-2 text-3xl font-semibold sm:text-4xl">Proof of what you actually finished.</p></div><span className="flex items-center gap-1.5 text-xs text-muted-foreground"><ShieldCheck className="size-3.5 text-success" />Earned, not given</span></div>
+      <div className="mt-7 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:gap-x-8">
+        {trophies.map((a) => { const c = passed.find((c) => c.id === a.commitmentId); if (!c) return null; return <Link key={a.id} to="/app/trophies/$id" params={{ id: a.id }} className="group min-w-0 text-center" aria-label={`${a.badgeName} — ${c.title} — View proof`}>
+          <BadgeArt a={a} className="mx-auto w-full max-w-56 transition-transform duration-300 motion-reduce:transition-none group-hover:-translate-y-1" />
+          <div className="mt-4 text-sm font-semibold leading-snug">{a.badgeName}</div><div className="mt-1 text-sm text-muted-foreground">{c.title}</div><div className="mt-1 text-xs text-muted-foreground">{new Date(a.earnedAt).getFullYear()}{c.demo ? " · Demo" : ""}</div><div className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors group-hover:text-foreground">View proof <ArrowRight className="size-3" /></div>
+        </Link>; })}
       </div>
-
-      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.l} className="bg-surface p-5">
-            <dt className="tabular text-2xl font-semibold tracking-tight">{s.v}</dt>
-            <dd className="mt-1 text-sm text-muted-foreground">{s.l}</dd>
-          </div>
-        ))}
-      </dl>
-
-      <section className="mt-16">
-        <h2 className="eyebrow">Trophy Room</h2>
-        <p className="display mt-2 text-2xl sm:text-3xl">Proof of what you actually finished.</p>
-        <p className="mt-2 text-sm text-muted-foreground">The badge is the symbol. The proof is behind it — open any trophy to see the original contract.</p>
-
-        <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {trophies.map((a) => {
-            const c = commitments.find((c) => c.id === a.commitmentId)!;
-            return (
-              <Link key={a.id} to="/app/trophies/$id" params={{ id: a.id }} className="group text-center">
-                <BadgeArt a={a} className="mx-auto w-[78%] transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-[1.03]" />
-                <div className="mt-4 text-sm font-semibold tracking-[0.08em]">{a.badgeName}</div>
-                <div className="mt-1 line-clamp-1 text-sm text-muted-foreground">{c.title}</div>
-                <div className="mt-0.5 text-xs text-muted-foreground/80">Completed {shortDate(a.earnedAt)}, {new Date(a.earnedAt).getFullYear()}</div>
-              </Link>
-            );
-          })}
-          {Array.from({ length: Math.max(1, 2 - (trophies.length % 2)) }).map((_, i) => (
-            <Link key={i} to="/app/new" className="text-center opacity-70 transition hover:opacity-100">
-              <MysteryBadge className="mx-auto w-[64%]" />
-              <div className="mt-4 text-sm text-muted-foreground">Your next achievement</div>
-            </Link>
-          ))}
-        </div>
-        {trophies.length === 0 && <p className="mt-6 text-sm text-muted-foreground">Complete and verify a commitment to earn your first trophy.</p>}
-      </section>
-    </Page>
-  );
+      {hydrated && trophies.length === 0 && <p className="py-10 text-sm text-muted-foreground">Complete and verify a commitment to earn your first trophy.</p>}
+    </section>
+    <section className="mt-12 border-t border-border pt-8"><h2 className="eyebrow">Past Attempts</h2><p className="mt-2 text-sm text-muted-foreground">Not every commitment ends in a trophy. The record still stays.</p><div className="mt-4 divide-y divide-border">{failed.map((c) => <Link key={c.id} to="/app/commitments/$id" params={{ id: c.id }} className="flex items-center justify-between gap-4 py-5"><div><h3 className="text-lg font-semibold">{c.title}</h3><p className="mt-1 text-sm text-muted-foreground">{c.criteria.filter((cr) => cr.status === "met").length} / {c.criteria.length} criteria completed · No trophy earned</p></div><div className="flex shrink-0 items-center gap-3 text-xs text-muted-foreground"><span>Not completed</span><ArrowRight className="size-4" /></div></Link>)}</div></section>
+  </Page>;
 }
