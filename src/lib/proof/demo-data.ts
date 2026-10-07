@@ -13,6 +13,7 @@ import ligaTaylorRule from "@/assets/proof-liga-taylor-rule.png";
 import ligaFinanceWeek from "@/assets/proof-liga-finance-week.png";
 import ligaFinanceWeekTeam from "@/assets/proof-liga-finance-week-team.jpg";
 import prathamNotion from "@/assets/proof-pratham-notion-preview.png";
+import prathamTeamCall from "@/assets/proof-pratham-team-call.jpg";
 
 export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Data Engineer · Problem Solver", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
@@ -68,6 +69,7 @@ export const demoCommitments: Commitment[] = [
     meaning: "Pratham Books is a not-for-profit children's publisher in India whose open platform, StoryWeaver, offers more than 50,000 free stories in 330+ languages. Through Develop For Good's Summer '23 cycle, I joined a volunteer engineering team that built their Integrated Data Analytics Platform: an Apache Airflow pipeline that moves Google Analytics 4 data from BigQuery into a PostgreSQL warehouse, handling both historical and daily incremental loads, with more than 20 analytics queries rewritten as materialized views for their Metabase dashboards. It replaced manual reporting with automated analytics engineering on a low-cost stack.",
     documents: [
       { id: "pratham-books-doc-notion", name: "pratham-books-idap-notion", mimeType: "text/html", caption: "Project write-up: architecture, pipeline, demo videos and client testimonial", src: prathamNotion, href: "https://spangled-script-c1f.notion.site/d7edbce5b74182e1aeb08187ee30ed20", addedAt: "2023-08-22T12:00:00Z" },
+      { id: "pratham-books-doc-team-call", name: "develop-for-good-team-call.jpg", mimeType: "image/jpeg", caption: "Video call with the Develop For Good project team", src: prathamTeamCall, addedAt: "2023-08-22T12:00:00Z" },
     ],
   }),
   challenge("detectivesql", "detectiveSQL", "Create a SQL project that I personally find interesting enough to solve and make it available to other people.", ["Create something that I personally feel compelled to explore and solve.", "Publish and share it with other people."], ["Public project URL (not supplied)", "Repository / project evidence", "Public release / share evidence"], "Public project + release evidence", "2026-02-14", { reflection: "Built something I wanted to exist." }),
