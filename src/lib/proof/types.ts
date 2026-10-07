@@ -47,7 +47,7 @@ export interface Referee {
   email: string;
   token: string;
   status: "pending" | "approved" | "rejected";
-  reason?: string;
+  reason?: string | undefined;
 }
 
 export interface ActivityEvent {
@@ -77,7 +77,7 @@ export interface Commitment {
   failureDestination: string;
   methods: VerificationMethod[];
   providers: Provider[];
-  referee?: Referee;
+  referee?: Referee | undefined;
   criteria: Criterion[];
   evidence: Evidence[];
   runs: VerificationRun[];

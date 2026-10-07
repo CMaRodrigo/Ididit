@@ -59,9 +59,9 @@ function Settings() {
 
       <h2 className="eyebrow mb-1 mt-12">Connected accounts</h2>
       <div className="divide-y divide-border border-b border-border">
-        <IntegrationCard name="GitHub" desc="Verify commits and repositories" on={integrations.github} toggle={() => toggleIntegration("github")} />
-        <IntegrationCard name="Strava" desc="Verify runs, rides and workouts" on={integrations.strava} toggle={() => toggleIntegration("strava")} />
-        <IntegrationCard name="Google" desc="Verify calendar-tracked sessions" on={integrations.google_calendar} toggle={() => toggleIntegration("google_calendar")} />
+        <IntegrationCard name="GitHub" desc="Verify commits and repositories" on={!!integrations["github"]} toggle={() => toggleIntegration("github")} />
+        <IntegrationCard name="Strava" desc="Verify runs, rides and workouts" on={!!integrations["strava"]} toggle={() => toggleIntegration("strava")} />
+        <IntegrationCard name="Google" desc="Verify calendar-tracked sessions" on={!!integrations["google_calendar"]} toggle={() => toggleIntegration("google_calendar")} />
       </div>
       <p className="mt-3 text-xs text-muted-foreground">Connections are simulated in this preview.</p>
 

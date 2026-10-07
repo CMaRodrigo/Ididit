@@ -7,7 +7,7 @@ import type { Commitment, Evidence, VerificationMethod, Verdict, Provider } from
 
 export interface GoalArchitectResult {
   isVerifiable: boolean;
-  warning?: string;
+  warning?: string | undefined;
   measurableGoal: string;
   title: string;
   criteria: string[];
@@ -76,7 +76,7 @@ export async function goalArchitect(raw: string): Promise<GoalArchitectResult> {
   }
   if (/(study|learn|spanish|read|practice)/.test(g)) {
     const subject = g.match(/(spanish|french|guitar|piano|math|coding)/)?.[1];
-    const s = subject ? subject[0].toUpperCase() + subject.slice(1) : "focused study";
+    const s = subject ? subject.charAt(0).toUpperCase() + subject.slice(1) : "focused study";
     const hours = g.match(/(\d+)\s*h/)?.[1] ?? "20";
     return {
       isVerifiable: hasNumber,
