@@ -6,5 +6,5 @@
 - [x] Verify challenge records, trophy counts, imagery and layouts.
 - [x] Open directly into Rodrigo's account; remove all auth and logout surfaces.
 - [x] Update trophy subtitles and remove question-mark artwork.
-- [ ] Refine six trophy artworks into a collectible badge family — awaiting visual selection.
+- [x] Refine six trophy artworks into the selected enamel insignia family.
 - [x] Verify direct entry, six trophies and historical proof navigation.
