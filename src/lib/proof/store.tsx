@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { demoActivity, demoCommitments, DEMO_USER } from "./demo-data";
 import type { Achievement, ActivityEvent, Commitment, Evidence, Verdict } from "./types";
 import { badgeGenerator } from "./badges";
+import { demoTrophies } from "./demo-trophies";
 import { uid } from "./format";
 import { simulatedStakes } from "./payments";
 
@@ -55,8 +56,13 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
         const migrated = hasNewDemo ? saved.commitments : [...demoCommitments, ...(saved.commitments ?? []).filter((c) => !oldDemoIds.has(c.id))];
         setState({ ...initial, ...saved, commitments: migrated ?? demoCommitments,
           activity: hasNewDemo ? saved.activity ?? demoActivity : [...demoActivity, ...(saved.activity ?? []).filter((e) => !oldDemoIds.has(e.commitmentId))],
-          achievements: (saved.achievements ?? []).filter((a) => !oldDemoIds.has(a.commitmentId)),
-          user: { ...initial.user, ...saved.user, ...(!hasNewDemo && (!saved.user || saved.user.name === "Alex Morgan") ? DEMO_USER : {}) },
+          achievements: (saved.achievements ?? []).filter((a) => !oldDemoIds.has(a.commitmentId)).map((a) => {
+            const trophy = demoTrophies[a.commitmentId];
+            const isDemo = migrated?.some((c) => c.id === a.commitmentId && c.demo);
+            return trophy && isDemo ? { ...a, badgeName: trophy.badge_name, badgeSubtitle: trophy.badge_subtitle, badgeImageUrl: trophy.image } : a;
+          }),
+          user: { ...initial.user, ...saved.user, name: DEMO_USER.name, bio: DEMO_USER.bio },
+          signedIn: true,
         });
       }
     } catch {
