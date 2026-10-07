@@ -45,7 +45,7 @@ function AppShell() {
           ))}
         </nav>
         <div className="mt-auto space-y-0.5">
-          <NavItem to="/app/settings" label="Profile" icon={User} />
+          <NavItem to="/app/profile" label="Profile" icon={User} />
           <NavItem to="/app/settings" label="Settings" icon={Settings} />
           <div className="mt-4 flex items-center gap-3 border-t border-border px-3 pt-4">
             <div className="grid size-8 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">{user.name[0]}</div>
@@ -61,7 +61,7 @@ function AppShell() {
         <Link to="/app">
           <Logo />
         </Link>
-        <Link to="/app/settings" className="grid size-8 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+        <Link to="/app/profile" className="grid size-8 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
           {user.name[0]}
         </Link>
       </header>
