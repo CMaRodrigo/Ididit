@@ -67,8 +67,8 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
         const oldDemoIds = new Set(["run-100", "portfolio", "spanish", "early-bird", "articles"]);
         const hasNewDemo = saved.commitments?.some((c) => c.id === "projeto-rondon");
         const migrated = hasNewDemo ? saved.commitments : [...demoCommitments, ...(saved.commitments ?? []).filter((c) => !oldDemoIds.has(c.id))];
-        setState({ ...initial, ...saved, commitments: (migrated ?? demoCommitments).map(refreshDemo),
-          activity: hasNewDemo ? (saved.activity ?? demoActivity).map((e) => demoActivity.find((d) => d.id === e.id) ?? e) : [...demoActivity, ...(saved.activity ?? []).filter((e) => !oldDemoIds.has(e.commitmentId))],
+        setState({ ...initial, ...saved, commitments: [...(migrated ?? demoCommitments).map(refreshDemo), ...demoCommitments.filter((d) => !migrated?.some((c) => c.id === d.id))],
+          activity: hasNewDemo ? [...(saved.activity ?? demoActivity).map((e) => demoActivity.find((d) => d.id === e.id) ?? e), ...demoActivity.filter((d) => !saved.activity?.some((e) => e.id === d.id))].sort((a, b) => b.at.localeCompare(a.at)) : [...demoActivity, ...(saved.activity ?? []).filter((e) => !oldDemoIds.has(e.commitmentId))],
           achievements: (saved.achievements ?? []).filter((a) => !oldDemoIds.has(a.commitmentId)).map((a) => {
             const trophy = demoTrophies[a.commitmentId];
             const isDemo = migrated?.some((c) => c.id === a.commitmentId && c.demo);

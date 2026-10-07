@@ -22,7 +22,7 @@ Most portfolios list what someone *says* they did. **I Did It** turns each achie
 3. **Attach the proof.** Photos, PDFs, posts, repositories and live websites sit next to the record.
 4. **Earn the trophy.** A one-of-a-kind enamel pin is awarded only when every objective is met. Failed attempts stay on the record, without a trophy.
 
-This repository is Rodrigo da Rosa's working profile, with eight real projects from 2021 to today.
+This repository is Rodrigo da Rosa's working profile, with nine real commitments from 2021 to today, including this project itself.
 
 <table>
   <tr>
@@ -47,6 +47,7 @@ This repository is Rodrigo da Rosa's working profile, with eight real projects f
 | **From Problem to Product** | Meu Mundo Azul: an app for earlier autism diagnosis, built with AGES | Aug 2021 – Nov 2022 | 5 / 5 | R$ 500 |
 | — | TechFellow: applied and prepared, not accepted | 2026 | 2 / 3 | R$ 500 (R$ 300 lost) |
 | — | Behring Founders: in progress | 2026 | 3 / 6 | R$ 500 |
+| — | I Did It: this project, in progress ([source](https://github.com/CMaRodrigo/pixel-perfect-capture-7666)) | Oct 2026 – | 3 / 6 | R$ 500 |
 
 Where a record says *"Dates from the attached documents"*, its dates come from the proof itself: work plans, Instagram and LinkedIn posts, Canva and GitLab metadata. Records without that line use illustrative dates.
 
@@ -110,7 +111,7 @@ src/
 │   ├── TrophyRoom.tsx         Trophy grid shared by the profile and Trophy Room
 │   └── Badge.tsx              Trophy artwork
 ├── lib/proof/
-│   ├── demo-data.ts           The eight records: objectives, stakes, dates, proof
+│   ├── demo-data.ts           The nine records: objectives, stakes, dates, proof
 │   ├── demo-trophies.ts       Trophy names, subtitles and artwork
 │   ├── store.tsx              App state, persisted in the browser
 │   ├── ai.ts                  Goal Architect and AI Judge contracts

@@ -19,6 +19,7 @@ import detectiveLinkedIn from "@/assets/proof-detectivesql-linkedin.jpg";
 import mmaPitch from "@/assets/proof-mma-pitch.jpg";
 import mmaAges from "@/assets/proof-mma-ages.jpg";
 import mmaTeam from "@/assets/proof-mma-team.jpg";
+import ididitGithub from "@/assets/proof-ididit-github.jpg";
 
 export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Data Engineer · Problem Solver", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
@@ -116,6 +117,16 @@ export const demoCommitments: Commitment[] = [
   }),
   challenge("techfellow", "TechFellow", "Successfully complete the TechFellow application process and be accepted.", ["Apply.", "Prepare the application.", "Be accepted."], ["Application submission", "Prepared application", "Application outcome"], "Application process evidence", "2026-08-31", { stakes: [50, 150, 300], status: "failed", criteria: [{ id: "techfellow-1", description: "Apply.", status: "met" }, { id: "techfellow-2", description: "Prepare the application.", status: "met" }, { id: "techfellow-3", description: "Be accepted.", status: "failed" }], reflection: "I completed the application, but didn't reach the final outcome." }),
   challenge("behring-founders", "Behring Founders", "Become a Behring Founder while taking the process seriously enough to deeply understand the organization and contribute value back to future applicants and founders.", [], ["Application submission", "Organization study notes", "Conversation with Bibi"], "Application + personal process evidence", "2026-10-01", { meaning: "To me, Behring means having my voice amplified, gaining access to a strong network, and having the opportunity to keep building what I believe in, at scale.", stakes: [25, 50, 25, 100, 200, 100], status: "active", completedAt: undefined, deadline: "2026-12-31T23:59:00Z", criteria: ["Submit the application.", "Study the organization, its philosophy, people and program in depth.", "Speak with Bibi.", "Advance to the in-person stage.", "Become a Behring Founder.", "Create something that returns value to future people going through the same path."].map((description, i) => ({ id: `behring-founders-${i + 1}`, description, status: i < 3 ? "met" : "pending" })) }),
+  challenge("i-did-it", "I Did It", "Build and launch I Did It, a portfolio where every achievement is backed by locked objectives, a stake and real proof.", [], ["GitHub repository", "Live profile", "External feedback"], "GitHub repository + live profile", "2026-12-31", {
+    start: "2026-10-05",
+    meaning: "I Did It is this site. A list of things someone says they did is easy to write and hard to trust, so I wanted every achievement to work like a small contract: objectives locked before starting, something at stake on each one, and the proof attached for anyone to inspect. A trophy only appears when the work is actually done, and attempts that fell short stay on the record too.",
+    documents: [
+      { id: "i-did-it-doc-github", name: "github-repository", mimeType: "text/html", caption: "Source code and README on GitHub", src: ididitGithub, href: "https://github.com/CMaRodrigo/pixel-perfect-capture-7666", addedAt: "2026-10-07T12:00:00Z" },
+    ],
+    stakes: [50, 75, 75, 100, 100, 100],
+    status: "active", completedAt: undefined,
+    criteria: ["Turn my portfolio into commitment records with locked objectives, a stake on each one and real proof.", "Attach real proof to every project I have completed.", "Give every verified commitment its own hand-made trophy.", "Publish the profile and share it publicly.", "Get feedback from at least five people on whether the proof convinces them.", "Replace the simulated parts with real services: accounts, file storage and stakes."].map((description, i) => ({ id: `i-did-it-${i + 1}`, description, status: (["met", "met", "met", "pending", "pending", "pending"] as const)[i] ?? "pending" })),
+  }),
 ];
 
-export const demoActivity: ActivityEvent[] = demoCommitments.map((c): ActivityEvent => ({ id: `${c.id}-activity`, commitmentId: c.id, type: c.status === "active" ? "progress" : "result", description: `${c.title} — ${c.status === "passed" ? "completed (demo)" : c.status === "failed" ? "not completed · 2 / 3 objectives (demo)" : "3 / 6 milestones completed (demo)"}`, at: c.completedAt ?? c.createdAt })).sort((a, b) => b.at.localeCompare(a.at));
+export const demoActivity: ActivityEvent[] = demoCommitments.map((c): ActivityEvent => ({ id: `${c.id}-activity`, commitmentId: c.id, type: c.status === "active" ? "progress" : "result", description: `${c.title} — ${c.status === "passed" ? "completed (demo)" : `${c.status === "failed" ? "not completed · " : ""}${c.criteria.filter((cr) => cr.status === "met").length} / ${c.criteria.length} objectives${c.status === "active" ? " completed" : ""} (demo)`}`, at: c.completedAt ?? c.createdAt })).sort((a, b) => b.at.localeCompare(a.at));
