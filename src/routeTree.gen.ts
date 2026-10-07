@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppActivityRouteImport } from './routes/app.activity'
 import { Route as AppNewRouteImport } from './routes/app.new'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as RefereeTokenRouteImport } from './routes/referee.$token'
 import { Route as AppCommitmentsIndexRouteImport } from './routes/app.commitments.index'
@@ -50,6 +51,11 @@ const AppActivityRoute = AppActivityRouteImport.update({
 const AppNewRoute = AppNewRouteImport.update({
   id: '/new',
   path: '/new',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/app/activity': typeof AppActivityRoute
   '/app/new': typeof AppNewRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
   '/referee/$token': typeof RefereeTokenRoute
   '/app/': typeof AppIndexRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/app/activity': typeof AppActivityRoute
   '/app/new': typeof AppNewRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
   '/referee/$token': typeof RefereeTokenRoute
   '/app': typeof AppIndexRoute
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/app/activity': typeof AppActivityRoute
   '/app/new': typeof AppNewRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
   '/referee/$token': typeof RefereeTokenRoute
   '/app/': typeof AppIndexRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/app/activity'
     | '/app/new'
+    | '/app/profile'
     | '/app/settings'
     | '/referee/$token'
     | '/app/'
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/app/activity'
     | '/app/new'
+    | '/app/profile'
     | '/app/settings'
     | '/referee/$token'
     | '/app'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/app/activity'
     | '/app/new'
+    | '/app/profile'
     | '/app/settings'
     | '/referee/$token'
     | '/app/'
@@ -220,6 +232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppNewRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/settings': {
       id: '/app/settings'
       path: '/settings'
@@ -268,6 +287,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppActivityRoute: typeof AppActivityRoute
   AppNewRoute: typeof AppNewRoute
+  AppProfileRoute: typeof AppProfileRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
   AppCommitmentsIndexRoute: typeof AppCommitmentsIndexRoute
@@ -279,6 +299,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppActivityRoute: AppActivityRoute,
   AppNewRoute: AppNewRoute,
+  AppProfileRoute: AppProfileRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
   AppCommitmentsIndexRoute: AppCommitmentsIndexRoute,
