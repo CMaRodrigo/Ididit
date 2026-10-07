@@ -19,6 +19,7 @@ import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as RefereeTokenRouteImport } from './routes/referee.$token'
 import { Route as AppCommitmentsIndexRouteImport } from './routes/app.commitments.index'
+import { Route as AppTrophiesIdRouteImport } from './routes/app.trophies.$id'
 import { Route as AppCommitmentsIdIndexRouteImport } from './routes/app.commitments.$id.index'
 import { Route as AppCommitmentsIdProofRouteImport } from './routes/app.commitments.$id.proof'
 import { Route as AppCommitmentsIdResultRouteImport } from './routes/app.commitments.$id.result'
@@ -73,6 +74,11 @@ const AppCommitmentsIndexRoute = AppCommitmentsIndexRouteImport.update({
   path: '/commitments/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppTrophiesIdRoute = AppTrophiesIdRouteImport.update({
+  id: '/trophies/$id',
+  path: '/trophies/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCommitmentsIdIndexRoute = AppCommitmentsIdIndexRouteImport.update({
   id: '/commitments/$id/',
   path: '/commitments/$id/',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/app/settings': typeof AppSettingsRoute
   '/referee/$token': typeof RefereeTokenRoute
   '/app/': typeof AppIndexRoute
+  '/app/trophies/$id': typeof AppTrophiesIdRoute
   '/app/commitments/': typeof AppCommitmentsIndexRoute
   '/app/commitments/$id/proof': typeof AppCommitmentsIdProofRoute
   '/app/commitments/$id/result': typeof AppCommitmentsIdResultRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/app/settings': typeof AppSettingsRoute
   '/referee/$token': typeof RefereeTokenRoute
   '/app': typeof AppIndexRoute
+  '/app/trophies/$id': typeof AppTrophiesIdRoute
   '/app/commitments': typeof AppCommitmentsIndexRoute
   '/app/commitments/$id/proof': typeof AppCommitmentsIdProofRoute
   '/app/commitments/$id/result': typeof AppCommitmentsIdResultRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/app/settings': typeof AppSettingsRoute
   '/referee/$token': typeof RefereeTokenRoute
   '/app/': typeof AppIndexRoute
+  '/app/trophies/$id': typeof AppTrophiesIdRoute
   '/app/commitments/': typeof AppCommitmentsIndexRoute
   '/app/commitments/$id/proof': typeof AppCommitmentsIdProofRoute
   '/app/commitments/$id/result': typeof AppCommitmentsIdResultRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/referee/$token'
     | '/app/'
+    | '/app/trophies/$id'
     | '/app/commitments/'
     | '/app/commitments/$id/proof'
     | '/app/commitments/$id/result'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/referee/$token'
     | '/app'
+    | '/app/trophies/$id'
     | '/app/commitments'
     | '/app/commitments/$id/proof'
     | '/app/commitments/$id/result'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/referee/$token'
     | '/app/'
+    | '/app/trophies/$id'
     | '/app/commitments/'
     | '/app/commitments/$id/proof'
     | '/app/commitments/$id/result'
@@ -260,6 +272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCommitmentsIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/trophies/$id': {
+      id: '/app/trophies/$id'
+      path: '/trophies/$id'
+      fullPath: '/app/trophies/$id'
+      preLoaderRoute: typeof AppTrophiesIdRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/commitments/$id/': {
       id: '/app/commitments/$id/'
       path: '/commitments/$id'
@@ -290,6 +309,7 @@ interface AppRouteChildren {
   AppProfileRoute: typeof AppProfileRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppTrophiesIdRoute: typeof AppTrophiesIdRoute
   AppCommitmentsIndexRoute: typeof AppCommitmentsIndexRoute
   AppCommitmentsIdProofRoute: typeof AppCommitmentsIdProofRoute
   AppCommitmentsIdResultRoute: typeof AppCommitmentsIdResultRoute
@@ -302,6 +322,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfileRoute: AppProfileRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
+  AppTrophiesIdRoute: AppTrophiesIdRoute,
   AppCommitmentsIndexRoute: AppCommitmentsIndexRoute,
   AppCommitmentsIdProofRoute: AppCommitmentsIdProofRoute,
   AppCommitmentsIdResultRoute: AppCommitmentsIdResultRoute,
