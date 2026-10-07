@@ -60,10 +60,10 @@ export const demoCommitments: Commitment[] = [
       { id: "projeto-rondon-doc-children", name: "rondon-children.jpg", mimeType: "image/jpeg", caption: "With children from Vitória do Jari", src: rondonChildren, addedAt: "2022-07-22T12:00:00Z" },
     ],
   }),
-  challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2023-08-10", {
+  challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content.", "Co-create and help organize PUCRS’s first Financial Markets Week."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2023-08-10", {
     start: "2023-03-13",
     datesFromDocuments: true,
-    stakes: [75, 100, 125],
+    stakes: [75, 100, 125, 150],
     meaning: "PUCRS Finance is the financial market league at PUCRS, a student group that studies markets together and shares what it learns with the wider university. As a member, I wrote educational posts for the league's Instagram, explaining concepts such as the Trend Following strategy and the Taylor rule in plain language, and helped organise and promote the league's 2023 Financial Market Week, a four-day event bringing founders, fund managers and chief economists to campus.",
     documents: [
       { id: "liga-financeira-doc-trend", name: "pucrs-finance-trend-following.png", mimeType: "image/png", caption: "\"What is Trend Following?\" — PUCRS Finance post written by me", src: ligaTrendFollowing, addedAt: "2023-03-13T12:00:00Z" },
