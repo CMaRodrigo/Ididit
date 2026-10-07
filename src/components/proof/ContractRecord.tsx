@@ -76,7 +76,7 @@ function ProofDocuments({ c }: { c: Commitment }) {
     setBusy(false);
     if (input.current) input.current.value = "";
   }
-  return <div><div className="flex items-center justify-between gap-3"><h3 className="eyebrow">Proof documents</h3><label className={btn({ variant: "outline", size: "sm", className: `cursor-pointer ${busy ? "pointer-events-none opacity-40" : ""}` })}><Upload className="size-3.5" />{busy ? "Saving…" : "Add documents"}<input ref={input} type="file" multiple accept="image/*,application/pdf,.doc,.docx" className="sr-only" disabled={busy} onChange={(e) => upload(e.target.files)} /></label></div>{error && <p role="alert" className="mt-2 text-sm text-danger">{error}</p>}{docs.length > 0 ? <ul className="mt-3 grid gap-3 sm:grid-cols-2">{docs.map((d) => <DocumentItem key={d.id} d={d} onRemove={() => { deleteFile(d.id).catch(() => {}); removeDocument(c.id, d.id); }} />)}</ul> : <p className="mt-3 text-sm text-muted-foreground">No documents yet. Add certificates, screenshots, photos or PDFs that prove this record.</p>}<p className="mt-3 text-xs text-muted-foreground">Added by you as supporting proof · stored in this browser · not independently verified.</p></div>;
+  return <div><div className="flex items-center justify-between gap-3"><h3 className="eyebrow">Proof documents</h3><label className={btn({ variant: "outline", size: "sm", className: `cursor-pointer ${busy ? "pointer-events-none opacity-40" : ""}` })}><Upload className="size-3.5" />{busy ? "Saving…" : "Add documents"}<input ref={input} type="file" multiple accept="image/*,application/pdf,.doc,.docx" className="sr-only" disabled={busy} onChange={(e) => upload(e.target.files)} /></label></div>{error && <p role="alert" className="mt-2 text-sm text-danger">{error}</p>}{docs.length > 0 ? <ul className="mt-3 grid gap-3 sm:grid-cols-2">{docs.map((d) => <DocumentItem key={d.id} d={d} onRemove={() => { deleteFile(d.id).catch(() => {}); removeDocument(c.id, d.id); }} />)}</ul> : <p className="mt-3 text-sm text-muted-foreground">No documents yet. Add certificates, screenshots, photos or PDFs that prove this record.</p>}<p className="mt-3 text-xs text-muted-foreground">Added by you as supporting proof{docs.some((d) => !d.src) ? " · uploads are stored in this browser" : ""} · not independently verified.</p></div>;
 }
 
 function DocumentItem({ d, onRemove }: { d: ProofDocument; onRemove: () => void }) {
@@ -96,6 +96,22 @@ function DocumentItem({ d, onRemove }: { d: ProofDocument; onRemove: () => void 
   }, [d.id, d.src]);
   const label = d.caption ?? d.name;
   const link = d.href ?? url;
-  const preview = d.mimeType.startsWith("image/") && url ? <img src={url} alt={label} className="aspect-[4/3] w-full object-cover object-top" /> : <div className="grid aspect-[4/3] place-items-center bg-secondary text-muted-foreground"><FileText className="size-8" /></div>;
+  const image = d.mimeType.startsWith("image/") || d.href ? url : undefined;
+  const preview = d.embed ? <LivePreview src={d.embed} width={d.embedWidth ?? 1280} fallback={image} label={label} /> : image ? <img src={image} alt={label} className="aspect-[4/3] w-full object-cover object-top" /> : <div className="grid aspect-[4/3] place-items-center bg-secondary text-muted-foreground"><FileText className="size-8" /></div>;
   return <li className="overflow-hidden rounded-lg border border-border bg-surface">{link ? <a href={link} target="_blank" rel="noreferrer" className="block" aria-label={`Open ${label}`}>{preview}</a> : preview}<div className="flex items-start justify-between gap-2 p-3"><div className="min-w-0"><p className="truncate text-sm font-medium" title={label}>{label}</p><p className="mt-0.5 text-xs text-muted-foreground">{missing ? "File not available in this browser" : d.href ? <span className="inline-flex items-center gap-1"><ExternalLink className="size-3" />{new URL(d.href).hostname.replace(/^www\./, "")}</span> : longDate(d.addedAt)}</p></div>{!d.src && <Button variant="ghost" size="sm" aria-label={`Remove ${label}`} onClick={onRemove}><Trash2 className="size-3.5" /></Button>}</div></li>;
+}
+
+// Renders the page at its natural width, scaled down to the card; the screenshot shows until the frame loads.
+function LivePreview({ src, width, fallback, label }: { src: string; width: number; fallback?: string | undefined; label: string }) {
+  const box = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => entry && setScale(entry.contentRect.width / width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [width]);
+  return <div ref={box} className="relative aspect-[4/3] overflow-hidden bg-secondary">{fallback && <img src={fallback} alt={label} className="absolute inset-0 size-full object-cover object-top" />}{scale > 0 && <iframe src={src} title={label} loading="lazy" tabIndex={-1} aria-hidden="true" scrolling="no" onLoad={() => setLoaded(true)} className={`pointer-events-none absolute left-0 top-0 origin-top-left border-0 transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} style={{ width, height: width * 0.75, transform: `scale(${scale})` }} />}<span className="absolute left-2 top-2 rounded-full bg-background/85 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-foreground">Live</span></div>;
 }
