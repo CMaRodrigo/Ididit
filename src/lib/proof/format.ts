@@ -1,7 +1,7 @@
 import type { Commitment, Provider, VerificationMethod } from "./types";
 
 export function money(amount: number, currency = "USD") {
-  return new Intl.NumberFormat(currency === "BRL" ? "pt-BR" : "en-US", {
+  return new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency,
     maximumFractionDigits: amount % 1 === 0 ? 0 : 2,
@@ -9,11 +9,11 @@ export function money(amount: number, currency = "USD") {
 }
 
 export function shortDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return new Date(iso).toLocaleDateString("pt-BR", { month: "short", day: "numeric" });
 }
 
 export function longDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
+  return new Date(iso).toLocaleDateString("pt-BR", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -21,7 +21,7 @@ export function longDate(iso: string) {
 }
 
 export function time(iso: string) {
-  return new Date(iso).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  return new Date(iso).toLocaleTimeString("pt-BR", { hour: "numeric", minute: "2-digit" });
 }
 
 export function daysLeft(iso: string, now = Date.now()) {
@@ -32,11 +32,11 @@ export type Urgency = "calm" | "soon" | "urgent" | "past";
 
 export function deadlineLabel(iso: string): { text: string; urgency: Urgency } {
   const d = daysLeft(iso);
-  if (d < 0) return { text: "Deadline passed", urgency: "past" };
-  if (d === 0) return { text: "Proof due today", urgency: "urgent" };
-  if (d === 1) return { text: "Due tomorrow", urgency: "urgent" };
-  if (d <= 3) return { text: `${d} days remaining`, urgency: "soon" };
-  return { text: `${d} days remaining`, urgency: "calm" };
+  if (d < 0) return { text: "Prazo encerrado", urgency: "past" };
+  if (d === 0) return { text: "Prova vence hoje", urgency: "urgent" };
+  if (d === 1) return { text: "Vence amanhã", urgency: "urgent" };
+  if (d <= 3) return { text: `${d} dias restantes`, urgency: "soon" };
+  return { text: `${d} dias restantes`, urgency: "calm" };
 }
 
 const providerNames: Record<Provider, string> = {
@@ -50,9 +50,9 @@ export function providerName(p: Provider) {
 }
 
 const methodNames: Record<VerificationMethod, string> = {
-  ai: "AI Judge",
-  data: "Automatic data",
-  referee: "Referee",
+  ai: "Juiz de IA",
+  data: "Dados automáticos",
+  referee: "Árbitro",
 };
 
 export function methodName(m: VerificationMethod) {
@@ -61,10 +61,10 @@ export function methodName(m: VerificationMethod) {
 
 export function verificationLabel(c: Pick<Commitment, "methods" | "providers">) {
   const parts: string[] = [];
-  if (c.methods.includes("ai")) parts.push("AI Judge");
+  if (c.methods.includes("ai")) parts.push("Juiz de IA");
   c.providers.forEach((p) => parts.push(providerName(p)));
-  if (c.methods.includes("referee")) parts.push("Referee");
-  if (parts.length === 0) parts.push("Automatic data");
+  if (c.methods.includes("referee")) parts.push("Árbitro");
+  if (parts.length === 0) parts.push("Dados automáticos");
   return parts.join(" + ");
 }
 

@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 type Kind = "url" | "github" | "file" | "text";
 
 const KINDS: { id: Kind; label: string; icon: typeof Link2; ph: string }[] = [
-  { id: "url", label: "URL", icon: Link2, ph: "https://myportfolio.com" },
+  { id: "url", label: "URL", icon: Link2, ph: "https://meuportfolio.com" },
   { id: "github", label: "GitHub", icon: Github, ph: "github.com/alex/portfolio" },
-  { id: "file", label: "File", icon: FileUp, ph: "" },
-  { id: "text", label: "Note", icon: Type, ph: "Briefly explain what this shows" },
+  { id: "file", label: "Arquivo", icon: FileUp, ph: "" },
+  { id: "text", label: "Nota", icon: Type, ph: "Explique brevemente o que isto mostra" },
 ];
 
 /**
@@ -40,7 +40,7 @@ export function EvidenceUploader({ criterionId, items, onChange }: { criterionId
               <li key={e.id} className="flex items-center gap-2.5 rounded-md bg-secondary px-3 py-2 text-sm">
                 <Icon className="size-4 shrink-0 text-muted-foreground" />
                 <span className="min-w-0 flex-1 truncate">{e.value}</span>
-                <button onClick={() => onChange(items.filter((x) => x.id !== e.id))} className="text-muted-foreground hover:text-foreground" aria-label="Remove"><X className="size-3.5" /></button>
+                <button onClick={() => onChange(items.filter((x) => x.id !== e.id))} className="text-muted-foreground hover:text-foreground" aria-label="Remover"><X className="size-3.5" /></button>
               </li>
             );
           })}
@@ -61,7 +61,7 @@ export function EvidenceUploader({ criterionId, items, onChange }: { criterionId
           placeholder={KINDS.find((k) => k.id === kind)!.ph}
           className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm focus:outline-none"
         />
-        <button onClick={() => add(kind, val)} disabled={!val.trim()} className="px-3.5 text-sm font-medium disabled:text-muted-foreground/50">Add</button>
+        <button onClick={() => add(kind, val)} disabled={!val.trim()} className="px-3.5 text-sm font-medium disabled:text-muted-foreground/50">Adicionar</button>
         <input ref={fileRef} type="file" accept="image/*,video/*,.pdf,.doc,.docx" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) add("file", f.name); e.target.value = ""; }} />
       </div>
     </div>

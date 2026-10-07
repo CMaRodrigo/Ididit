@@ -42,10 +42,10 @@ export function Logo({ className }: { className?: string }) {
 }
 
 const statusMap: Record<CommitmentStatus, { label: string; cls: string }> = {
-  active: { label: "In progress", cls: "bg-secondary text-foreground" },
-  awaiting_verification: { label: "Awaiting verification", cls: "bg-warning-soft text-warning" },
-  passed: { label: "Passed", cls: "bg-success-soft text-success" },
-  failed: { label: "Failed", cls: "bg-danger-soft text-danger" },
+  active: { label: "Em andamento", cls: "bg-secondary text-foreground" },
+  awaiting_verification: { label: "Aguardando verificação", cls: "bg-warning-soft text-warning" },
+  passed: { label: "Concluído", cls: "bg-success-soft text-success" },
+  failed: { label: "Não concluído", cls: "bg-danger-soft text-danger" },
 };
 
 export function StatusBadge({ status, className }: { status: CommitmentStatus; className?: string }) {
@@ -152,10 +152,10 @@ export function Field({ label, children }: { label: string; children: ReactNode 
 }
 
 export const verdictMeta: Record<VerdictStatus, { label: string; icon: ReactNode; cls: string }> = {
-  verified: { label: "Verified", icon: <Check className="size-4" strokeWidth={2.5} />, cls: "bg-success-soft text-success" },
-  failed: { label: "Not met", icon: <X className="size-4" strokeWidth={2.5} />, cls: "bg-danger-soft text-danger" },
-  insufficient_evidence: { label: "Insufficient evidence", icon: <X className="size-4" strokeWidth={2.5} />, cls: "bg-danger-soft text-danger" },
-  needs_review: { label: "Needs review", icon: <AlertCircle className="size-4" />, cls: "bg-warning-soft text-warning" },
+  verified: { label: "Verificado", icon: <Check className="size-4" strokeWidth={2.5} />, cls: "bg-success-soft text-success" },
+  failed: { label: "Não atingido", icon: <X className="size-4" strokeWidth={2.5} />, cls: "bg-danger-soft text-danger" },
+  insufficient_evidence: { label: "Evidência insuficiente", icon: <X className="size-4" strokeWidth={2.5} />, cls: "bg-danger-soft text-danger" },
+  needs_review: { label: "Requer revisão", icon: <AlertCircle className="size-4" />, cls: "bg-warning-soft text-warning" },
 };
 
 export function Skeleton({ className }: { className?: string }) {

@@ -11,10 +11,10 @@ export const Route = createFileRoute("/app/")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "Home — I Did It." },
-      { name: "description", content: "Your active commitments at a glance." },
-      { property: "og:title", content: "Home — I Did It." },
-      { property: "og:description", content: "Your active commitments at a glance." },
+      { title: "Início — I Did It." },
+      { name: "description", content: "Seus compromissos ativos num relance." },
+      { property: "og:title", content: "Início — I Did It." },
+      { property: "og:description", content: "Seus compromissos ativos num relance." },
     ],
   }),
   component: Dashboard,
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/app/")({
 
 function greeting() {
   const h = new Date().getHours();
-  return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+  return h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite";
 }
 
 function Dashboard() {
@@ -37,14 +37,14 @@ function Dashboard() {
         {greeting()}, {user.name}.
       </h1>
       <div className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[15px]">
-        <span><span className="tabular font-semibold">{active.length}</span> <span className="text-muted-foreground">active</span></span>
-        <span><span className="tabular font-semibold">{money(atStake, active[0]?.currency ?? user.currency)}</span> <span className="text-muted-foreground">at stake</span></span>
-        <span><span className="tabular font-semibold">{awaiting}</span> <span className="text-muted-foreground">awaiting proof</span></span>
+        <span><span className="tabular font-semibold">{active.length}</span> <span className="text-muted-foreground">ativos</span></span>
+        <span><span className="tabular font-semibold">{money(atStake, active[0]?.currency ?? user.currency)}</span> <span className="text-muted-foreground">em jogo</span></span>
+        <span><span className="tabular font-semibold">{awaiting}</span> <span className="text-muted-foreground">aguardando prova</span></span>
       </div>
 
       <div className="mb-4 mt-14 flex items-center justify-between">
-        <h2 className="eyebrow">Active commitments</h2>
-        <Link to="/app/commitments" className="text-sm text-muted-foreground hover:text-foreground">View all</Link>
+        <h2 className="eyebrow">Compromissos ativos</h2>
+        <Link to="/app/commitments" className="text-sm text-muted-foreground hover:text-foreground">Ver todos</Link>
       </div>
 
       {!hydrated ? (
@@ -54,10 +54,10 @@ function Dashboard() {
         </div>
       ) : active.length === 0 ? (
         <div className="panel px-8 py-16 text-center">
-          <h3 className="text-2xl font-semibold tracking-tight">No commitments yet.</h3>
-          <p className="mx-auto mt-2 max-w-sm text-muted-foreground">Make a promise your future self can't quietly ignore.</p>
+          <h3 className="text-2xl font-semibold tracking-tight">Nenhum compromisso ainda.</h3>
+          <p className="mx-auto mt-2 max-w-sm text-muted-foreground">Faça uma promessa que seu eu do futuro não possa simplesmente ignorar.</p>
           <Link to="/app/new" className={btn({ size: "lg", className: "mt-8" })}>
-            <Plus className="size-4" /> Create your first commitment
+            <Plus className="size-4" /> Crie seu primeiro compromisso
           </Link>
         </div>
       ) : (

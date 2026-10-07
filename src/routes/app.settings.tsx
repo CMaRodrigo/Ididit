@@ -10,10 +10,10 @@ export const Route = createFileRoute("/app/settings")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "Settings — I Did It." },
-      { name: "description", content: "Profile, connected accounts and notifications." },
-      { property: "og:title", content: "Settings — I Did It." },
-      { property: "og:description", content: "Profile, connected accounts and notifications." },
+      { title: "Configurações — I Did It." },
+      { name: "description", content: "Perfil, contas conectadas e notificações." },
+      { property: "og:title", content: "Configurações — I Did It." },
+      { property: "og:description", content: "Perfil, contas conectadas e notificações." },
     ],
   }),
   component: Settings,
@@ -25,9 +25,9 @@ function IntegrationCard({ name, desc, on, toggle }: { name: string; desc: strin
       <div className="grid size-10 place-items-center rounded-lg border border-border bg-surface text-sm font-semibold">{name[0]}</div>
       <div className="flex-1">
         <div className="font-medium">{name}</div>
-        <div className={cn("text-sm", on ? "text-success" : "text-muted-foreground")}>{on ? "Connected" : desc}</div>
+        <div className={cn("text-sm", on ? "text-success" : "text-muted-foreground")}>{on ? "Conectado" : desc}</div>
       </div>
-      <Button variant={on ? "ghost" : "outline"} size="sm" onClick={toggle}>{on ? "Disconnect" : "Connect"}</Button>
+      <Button variant={on ? "ghost" : "outline"} size="sm" onClick={toggle}>{on ? "Desconectar" : "Conectar"}</Button>
     </div>
   );
 }
@@ -48,33 +48,33 @@ function Settings() {
   const { user, integrations, toggleIntegration, reset } = useProof();
   return (
     <Page narrow>
-      <h1 className="display text-4xl sm:text-5xl">Settings</h1>
+      <h1 className="display text-4xl sm:text-5xl">Configurações</h1>
 
-      <h2 className="eyebrow mb-4 mt-12">Profile</h2>
+      <h2 className="eyebrow mb-4 mt-12">Perfil</h2>
       <div className="grid grid-cols-2 gap-6 border-y border-border py-6">
-        <Field label="Name">{user.name}</Field>
-        <Field label="Email">{user.email}</Field>
-        <Field label="Timezone">{user.timezone}</Field>
-        <Field label="Default currency">{user.currency}</Field>
+        <Field label="Nome">{user.name}</Field>
+        <Field label="E-mail">{user.email}</Field>
+        <Field label="Fuso horário">{user.timezone}</Field>
+        <Field label="Moeda padrão">{user.currency}</Field>
       </div>
 
-      <h2 className="eyebrow mb-1 mt-12">Connected accounts</h2>
+      <h2 className="eyebrow mb-1 mt-12">Contas conectadas</h2>
       <div className="divide-y divide-border border-b border-border">
-        <IntegrationCard name="GitHub" desc="Verify commits and repositories" on={!!integrations["github"]} toggle={() => toggleIntegration("github")} />
-        <IntegrationCard name="Strava" desc="Verify runs, rides and workouts" on={!!integrations["strava"]} toggle={() => toggleIntegration("strava")} />
-        <IntegrationCard name="Google" desc="Verify calendar-tracked sessions" on={!!integrations["google_calendar"]} toggle={() => toggleIntegration("google_calendar")} />
+        <IntegrationCard name="GitHub" desc="Verifique commits e repositórios" on={!!integrations["github"]} toggle={() => toggleIntegration("github")} />
+        <IntegrationCard name="Strava" desc="Verifique corridas, pedaladas e treinos" on={!!integrations["strava"]} toggle={() => toggleIntegration("strava")} />
+        <IntegrationCard name="Google" desc="Verifique sessões registradas na agenda" on={!!integrations["google_calendar"]} toggle={() => toggleIntegration("google_calendar")} />
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">Connections are simulated in this preview.</p>
+      <p className="mt-3 text-xs text-muted-foreground">As conexões são simuladas nesta prévia.</p>
 
-      <h2 className="eyebrow mb-1 mt-12">Notifications</h2>
+      <h2 className="eyebrow mb-1 mt-12">Notificações</h2>
       <div className="divide-y divide-border border-b border-border">
-        <Toggle label="Deadline reminders" />
-        <Toggle label="Progress warnings" />
-        <Toggle label="Verification results" />
+        <Toggle label="Lembretes de prazo" />
+        <Toggle label="Alertas de progresso" />
+        <Toggle label="Resultados de verificação" />
       </div>
 
       <div className="mt-12 flex flex-wrap gap-2">
-        <Button variant="outline" onClick={reset}>Reset demo data</Button>
+        <Button variant="outline" onClick={reset}>Redefinir dados demo</Button>
       </div>
     </Page>
   );

@@ -2,79 +2,79 @@
 
 # I Did It.
 
-**Don't just say it. Prove it.**
+**Não basta dizer. Prove.**
 
-A personal record of commitments: objectives locked up front, a stake on each one,<br>
-real proof attached, and a trophy only when the work is actually done.
+Um registro pessoal de compromissos: objetivos travados desde o início, um valor em jogo em cada um,<br>
+provas reais anexadas e um troféu só quando o trabalho está de fato concluído.
 
-![Six enamel-pin trophies: Projeto Rondon, PUCRS Finance, SalvaTon, StoryWeaver, Case Closed and Meu Mundo Azul](docs/trophies.png)
+![Seis troféus em forma de pin esmaltado: Projeto Rondon, PUCRS Finance, SalvaTon, StoryWeaver, Case Closed e Meu Mundo Azul](docs/trophies.png)
 
 </div>
 
 ---
 
-## What it is
+## O que é
 
-Most portfolios list what someone *says* they did. **I Did It** turns each achievement into a small contract you can inspect:
+A maioria dos portfólios lista o que alguém *diz* ter feito. O **I Did It** transforma cada conquista em um pequeno contrato que qualquer pessoa pode conferir:
 
-1. **Lock the objectives.** Before starting, you write down what "done" means. Once locked, objectives can't be edited.
-2. **Put something at stake.** Each objective carries part of the stake; the commitment's total is their sum.
-3. **Attach the proof.** Photos, PDFs, posts, repositories and live websites sit next to the record.
-4. **Earn the trophy.** A one-of-a-kind enamel pin is awarded only when every objective is met. Failed attempts stay on the record, without a trophy.
+1. **Trave os objetivos.** Antes de começar, você define o que significa "concluído". Depois de travados, os objetivos não podem ser editados.
+2. **Coloque algo em jogo.** Cada objetivo carrega uma parte do valor em jogo; o total do compromisso é a soma deles.
+3. **Anexe a prova.** Fotos, PDFs, posts, repositórios e sites no ar ficam ao lado do registro.
+4. **Conquiste o troféu.** Um pin esmaltado único é concedido só quando todos os objetivos são cumpridos. Tentativas que falharam continuam no registro, sem troféu.
 
-This repository is Rodrigo da Rosa's working profile, with nine real commitments from 2021 to today, including this project itself.
+Este repositório é o perfil em uso de Rodrigo da Rosa, com nove compromissos reais de 2021 até hoje, incluindo este próprio projeto.
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/trophy-room.jpg" alt="Trophy Room with six enamel pin trophies"><br><sub><b>Trophy Room</b>: every verified commitment as a collectible pin</sub></td>
-    <td width="50%"><img src="docs/goal.jpg" alt="Goal tab with Meaning to me and the list of objectives"><br><sub><b>Goal</b>: what the project is, why it matters, and the locked objectives</sub></td>
+    <td width="50%"><img src="docs/trophy-room.jpg" alt="Sala de Troféus com seis troféus em forma de pin esmaltado"><br><sub><b>Sala de Troféus</b>: cada compromisso verificado como um pin colecionável</sub></td>
+    <td width="50%"><img src="docs/goal.jpg" alt="Aba Meta com O que significa para mim e a lista de objetivos"><br><sub><b>Meta</b>: o que é o projeto, por que ele importa e os objetivos travados</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/proof.jpg" alt="Verification tab with live previews of detectivesql.com and a LinkedIn post"><br><sub><b>Verification</b>: proof documents, including live previews of real pages</sub></td>
-    <td width="50%"><img src="docs/stakes.jpg" alt="Stakes tab showing R$500 total, R$200 secured and R$300 lost"><br><sub><b>Stakes</b>: each objective's share, secured or lost</sub></td>
+    <td width="50%"><img src="docs/proof.jpg" alt="Aba Verificação com prévias ao vivo de detectivesql.com e de um post no LinkedIn"><br><sub><b>Verificação</b>: documentos de prova, incluindo prévias ao vivo de páginas reais</sub></td>
+    <td width="50%"><img src="docs/stakes.jpg" alt="Aba Em jogo mostrando R$500 no total, R$200 garantidos e R$300 perdidos"><br><sub><b>Em jogo</b>: a parte de cada objetivo, garantida ou perdida</sub></td>
   </tr>
 </table>
 
-## The records
+## Os registros
 
-| Trophy | Project | Period | Objectives | Stake |
+| Troféu | Projeto | Período | Objetivos | Em jogo |
 |---|---|---|:---:|---:|
-| **Impact in Action** | Projeto Rondon: workshops for 120+ young people in Vitória do Jari, Amapá | Nov 2021 – Jul 2022 | 5 / 5 | R$ 500 |
-| **Market Mind** | Liga Financeira PUCRS: educational content and the first Financial Markets Week | Mar – Aug 2023 | 4 / 4 | R$ 450 |
-| **Built to Win** | ToninhaThon: SalvaTon, 1st place, incubated by SEBRAE | 2025 | 3 / 3 | R$ 500 |
-| **Data for Millions** | Pratham Books: Airflow → PostgreSQL analytics platform for StoryWeaver (Develop For Good) | May – Aug 2023 | 3 / 3 | R$ 500 |
-| **Case Closed** | detectiveSQL: a browser-based SQL mystery game, live at [detectivesql.com](https://detectivesql.com/) | 2026 | 2 / 2 | R$ 300 |
-| **From Problem to Product** | Meu Mundo Azul: an app for earlier autism diagnosis, built with AGES | Aug 2021 – Nov 2022 | 5 / 5 | R$ 500 |
-| — | TechFellow: applied and prepared, not accepted | 2026 | 2 / 3 | R$ 500 (R$ 300 lost) |
-| — | Behring Founders: in progress | 2026 | 3 / 6 | R$ 500 |
-| — | I Did It: this project, in progress ([source](https://github.com/CMaRodrigo/pixel-perfect-capture-7666)) | Oct 2026 – | 3 / 6 | R$ 500 |
+| **Impact in Action** | Projeto Rondon: oficinas para mais de 120 jovens em Vitória do Jari, Amapá | nov 2021 – jul 2022 | 5 / 5 | R$ 500 |
+| **Market Mind** | Liga Financeira PUCRS: conteúdo educativo e a primeira Semana do Mercado Financeiro | mar – ago 2023 | 4 / 4 | R$ 450 |
+| **Built to Win** | ToninhaThon: SalvaTon, 1º lugar, incubado pelo SEBRAE | 2025 | 3 / 3 | R$ 500 |
+| **Data for Millions** | Pratham Books: plataforma de analytics Airflow → PostgreSQL para a StoryWeaver (Develop For Good) | mai – ago 2023 | 3 / 3 | R$ 500 |
+| **Case Closed** | detectiveSQL: um jogo de mistério em SQL para o navegador, no ar em [detectivesql.com](https://detectivesql.com/) | 2026 | 2 / 2 | R$ 300 |
+| **From Problem to Product** | Meu Mundo Azul: um app para o diagnóstico precoce do autismo, construído com a AGES | ago 2021 – nov 2022 | 5 / 5 | R$ 500 |
+| — | TechFellow: inscrição feita e candidatura preparada, não aceito | 2026 | 2 / 3 | R$ 500 (R$ 300 perdidos) |
+| — | Behring Founders: em andamento | 2026 | 3 / 6 | R$ 500 |
+| — | I Did It: este projeto, em andamento ([código-fonte](https://github.com/CMaRodrigo/pixel-perfect-capture-7666)) | out 2026 – | 3 / 6 | R$ 500 |
 
-Where a record says *"Dates from the attached documents"*, its dates come from the proof itself: work plans, Instagram and LinkedIn posts, Canva and GitLab metadata. Records without that line use illustrative dates.
+Quando um registro mostra *"Datas tiradas dos documentos anexados"*, as datas vêm da própria prova: planos de trabalho, posts no Instagram e no LinkedIn, metadados do Canva e do GitLab. Registros sem essa linha usam datas ilustrativas.
 
-## What's real and what's simulated
+## O que é real e o que é simulado
 
-This is a working prototype, and it is explicit about where the edges are:
+Este é um protótipo funcional, e ele deixa claro onde estão os limites:
 
-| | Status |
+| | Situação |
 |---|---|
-| Projects, objectives, proof documents | **Real.** Supplied by the owner and bundled with the app. |
-| Stakes | **Simulated.** Shown in BRL, but no money is ever held or moved. |
-| AI Goal Architect and AI Judge | **Local mocks** behind stable contracts in `src/lib/proof/ai.ts`. |
-| Trophy artwork | **Hand-drawn SVG enamel pins**, rendered to PNG. Not AI-generated. |
-| Accounts | **None.** The prototype opens straight into Rodrigo's profile. |
-| Uploaded files | Stored **only in the visitor's browser** (IndexedDB). Bundled proof is visible to everyone. |
+| Projetos, objetivos, documentos de prova | **Reais.** Fornecidos pelo dono e empacotados com o app. |
+| Valores em jogo | **Simulados.** Exibidos em BRL, mas nenhum dinheiro é retido ou movimentado. |
+| AI Goal Architect e AI Judge | **Mocks locais** por trás de contratos estáveis em `src/lib/proof/ai.ts`. |
+| Arte dos troféus | **Pins esmaltados desenhados à mão em SVG**, renderizados em PNG. Não foram gerados por IA. |
+| Contas | **Nenhuma.** O protótipo abre direto no perfil do Rodrigo. |
+| Arquivos enviados | Armazenados **só no navegador do visitante** (IndexedDB). As provas empacotadas ficam visíveis para todos. |
 
-## Tech stack
+## Stack
 
-- **[TanStack Start](https://tanstack.com/start)** with file-based routing, on **React 19** and **Vite**
-- **Tailwind CSS v4**, with Radix primitives and lucide icons
-- **TypeScript** in strict mode, including `exactOptionalPropertyTypes`
-- **Vitest** with Testing Library
-- Built for **Cloudflare** through Nitro, and kept in sync with **[Lovable](https://lovable.dev/projects/ce678b21-7673-4402-a639-fc041cc58292)**
+- **[TanStack Start](https://tanstack.com/start)** com roteamento baseado em arquivos, sobre **React 19** e **Vite**
+- **Tailwind CSS v4**, com primitivos Radix e ícones lucide
+- **TypeScript** em modo strict, incluindo `exactOptionalPropertyTypes`
+- **Vitest** com Testing Library
+- Build para **Cloudflare** via Nitro, sincronizado com o **[Lovable](https://lovable.dev/projects/ce678b21-7673-4402-a639-fc041cc58292)**
 
-## Getting started
+## Como rodar
 
-The project uses [Bun](https://bun.sh). npm works too: swap `bun` for `npm`.
+O projeto usa [Bun](https://bun.sh). O npm também funciona: troque `bun` por `npm`.
 
 ```sh
 git clone https://github.com/CMaRodrigo/pixel-perfect-capture-7666.git
@@ -83,92 +83,92 @@ bun install
 bun run dev
 ```
 
-Then open the URL printed in the terminal.
+Depois, abra a URL exibida no terminal.
 
-| Command | What it does |
+| Comando | O que faz |
 |---|---|
-| `bun run dev` | Start the dev server with hot reload |
-| `bun run build` | Production build (also regenerates `src/routeTree.gen.ts`) |
-| `bun run preview` | Serve the production build locally |
-| `bun run test` | Run the test suite once |
-| `bun run lint` | Lint with ESLint and Prettier |
-| `bun run format` | Format everything with Prettier |
+| `bun run dev` | Inicia o servidor de desenvolvimento com hot reload |
+| `bun run build` | Build de produção (também regenera `src/routeTree.gen.ts`) |
+| `bun run preview` | Serve o build de produção localmente |
+| `bun run test` | Roda a suíte de testes uma vez |
+| `bun run lint` | Lint com ESLint e Prettier |
+| `bun run format` | Formata tudo com Prettier |
 
-## Project structure
+## Estrutura do projeto
 
 ```
 src/
-├── routes/                    File-based routes (TanStack Start)
-│   ├── app.tsx                App shell: sidebar and mobile tab bar
-│   ├── app.index.tsx          Home
-│   ├── app.commitments.*      Commitment list, record, proof and result pages
-│   ├── app.trophies.*         Trophy Room and a single trophy's record
-│   ├── app.activity.tsx       Timeline of everything that happened
-│   ├── app.profile.tsx        Public-facing profile
-│   └── app.new.tsx            New commitment wizard
+├── routes/                    Rotas baseadas em arquivos (TanStack Start)
+│   ├── app.tsx                Estrutura do app: barra lateral e barra de abas no celular
+│   ├── app.index.tsx          Início
+│   ├── app.commitments.*      Lista de compromissos e páginas de registro, prova e resultado
+│   ├── app.trophies.*         Sala de Troféus e o registro de cada troféu
+│   ├── app.activity.tsx       Linha do tempo de tudo o que aconteceu
+│   ├── app.profile.tsx        Perfil público
+│   └── app.new.tsx            Assistente de novo compromisso
 ├── components/proof/
-│   ├── ContractRecord.tsx     The Goal / Verification / Stakes / Review tabs
-│   ├── TrophyRoom.tsx         Trophy grid shared by the profile and Trophy Room
-│   └── Badge.tsx              Trophy artwork
+│   ├── ContractRecord.tsx     As abas Meta / Verificação / Em jogo / Revisão
+│   ├── TrophyRoom.tsx         Grade de troféus compartilhada pelo perfil e pela Sala de Troféus
+│   └── Badge.tsx              Arte dos troféus
 ├── lib/proof/
-│   ├── demo-data.ts           The nine records: objectives, stakes, dates, proof
-│   ├── demo-trophies.ts       Trophy names, subtitles and artwork
-│   ├── store.tsx              App state, persisted in the browser
-│   ├── ai.ts                  Goal Architect and AI Judge contracts
-│   ├── payments.ts            StakeProvider contract (simulated)
-│   ├── badges.ts              Trophy generator contract
-│   └── documents.ts           Browser storage for uploaded proof files
-└── assets/                    Enamel pins and proof files (images, PDFs, previews)
+│   ├── demo-data.ts           Os nove registros: objetivos, valores em jogo, datas, provas
+│   ├── demo-trophies.ts       Nomes, subtítulos e arte dos troféus
+│   ├── store.tsx              Estado do app, persistido no navegador
+│   ├── ai.ts                  Contratos do Goal Architect e do AI Judge
+│   ├── payments.ts            Contrato do StakeProvider (simulado)
+│   ├── badges.ts              Contrato do gerador de troféus
+│   └── documents.ts           Armazenamento no navegador para arquivos de prova enviados
+└── assets/                    Pins esmaltados e arquivos de prova (imagens, PDFs, prévias)
 ```
 
-## Architecture
+## Arquitetura
 
-A few boundaries keep the prototype honest and make each piece easy to swap for a real service later:
+Algumas fronteiras mantêm o protótipo honesto e facilitam trocar cada peça por um serviço real no futuro:
 
-- **State** lives behind `useProof()` in `store.tsx`. Pages never touch storage directly, so the internals can move to a backend without changing them.
-- **AI roles** sit behind the contracts in `ai.ts`. The Judge only evaluates evidence against locked objectives and never rewrites them.
-- **Money** only moves through the `StakeProvider` interface in `payments.ts`. Today that is a simulation, and the UI says so.
-- **Trophies** come only from `badgeGenerator`: one per passed commitment, never for a failed one.
-- **Supplied records refresh themselves.** When a record changes in `demo-data.ts`, browsers that saved an older copy pick up the new title, dates, objectives, stakes, meaning and documents, while keeping the owner's own edits and uploads.
+- **Estado** fica por trás de `useProof()` em `store.tsx`. As páginas nunca acessam o armazenamento diretamente, então a parte interna pode migrar para um backend sem mudar as páginas.
+- **Papéis de IA** ficam por trás dos contratos em `ai.ts`. O Judge só avalia as evidências em relação aos objetivos travados e nunca os reescreve.
+- **Dinheiro** só se movimenta pela interface `StakeProvider` em `payments.ts`. Hoje isso é uma simulação, e a interface deixa isso claro.
+- **Troféus** só saem do `badgeGenerator`: um por compromisso cumprido, nunca para um que falhou.
+- **Os registros fornecidos se atualizam sozinhos.** Quando um registro muda em `demo-data.ts`, navegadores que salvaram uma cópia antiga recebem o novo título, datas, objetivos, valores em jogo, significado e documentos, mantendo as edições e os envios do próprio dono.
 
-`AGENTS.md` holds the full list of conventions for anyone, human or AI, working in the codebase.
+O `AGENTS.md` reúne a lista completa de convenções para quem, humano ou IA, trabalha no código.
 
-## Adding proof to a record
+## Como adicionar provas a um registro
 
-Records are defined in `src/lib/proof/demo-data.ts`. A record's options look like this:
+Os registros são definidos em `src/lib/proof/demo-data.ts`. As opções de um registro ficam assim:
 
 ```ts
-challenge("detectivesql", "detectiveSQL", "Create a SQL project…",
-  ["Create something…", "Publish and share it…"],   // objectives
-  [/* evidence labels */], "Public project + release evidence",
-  "2026-09-24",                                      // completion date
+challenge("detectivesql", "detectiveSQL", "Criar um projeto de SQL…",
+  ["Criar algo…", "Publicar e compartilhar…"],      // objetivos
+  [/* rótulos das evidências */], "Projeto público + evidência de lançamento",
+  "2026-09-24",                                      // data de conclusão
   {
     start: "2026-02-14",
-    stakes: [200, 100],                              // BRL per objective; the total is the sum
-    meaning: "What the project is and why it matters…",
+    stakes: [200, 100],                              // BRL por objetivo; o total é a soma
+    meaning: "O que é o projeto e por que ele importa…",
     documents: [
-      // A file bundled with the app; PDFs get a first-page `preview` image for their card
+      // Um arquivo empacotado com o app; PDFs ganham uma imagem `preview` da primeira página para o card
       { id: "…", name: "pitch.pdf", mimeType: "application/pdf", src: pitchPdf, preview: pitchCover, addedAt: "…" },
-      // An external page: screenshot card that opens the link
+      // Uma página externa: card com captura de tela que abre o link
       { id: "…", name: "notion", mimeType: "text/html", src: screenshot, href: "https://…", addedAt: "…" },
-      // A frameable page: live preview, with the screenshot shown while it loads
+      // Uma página que aceita iframe: prévia ao vivo, com a captura de tela exibida enquanto carrega
       { id: "…", name: "site", mimeType: "text/html", src: screenshot, href: "https://…",
         embed: "https://…", embedWidth: 1280, addedAt: "…" },
     ],
   });
 ```
 
-Put files in `src/assets/` and import them at the top of the file. Keep each file well under Cloudflare's 25 MiB per-asset limit; large PDFs exported from Canva can be re-rendered to a few MB without visible loss. Use `embed` only for pages that allow framing. Notion, GitLab and the regular Canva view block it, so give them a screenshot with `href` instead. LinkedIn posts (`/embed/feed/update/…`) and Canva's `?embed` links can be framed.
+Coloque os arquivos em `src/assets/` e importe-os no topo do arquivo. Mantenha cada arquivo bem abaixo do limite de 25 MiB por asset do Cloudflare; PDFs grandes exportados do Canva podem ser re-renderizados para poucos MB sem perda visível. Use `embed` só para páginas que permitem iframe. Notion, GitLab e a visualização comum do Canva bloqueiam isso, então use uma captura de tela com `href` no lugar. Posts do LinkedIn (`/embed/feed/update/…`) e links `?embed` do Canva podem ser incorporados.
 
-## Working with Lovable
+## Trabalhando com o Lovable
 
-This repository syncs both ways with the Lovable editor. Commits pushed to `main` appear in Lovable, and changes made in Lovable land here.
+Este repositório sincroniza nos dois sentidos com o editor do Lovable. Commits enviados para a `main` aparecem no Lovable, e as mudanças feitas no Lovable chegam aqui.
 
 > [!IMPORTANT]
-> Never force-push or rewrite history that is already on `main`, or the project history on Lovable's side will be lost. Keep `main` in a working state.
+> Nunca faça force-push nem reescreva o histórico que já está na `main`, ou o histórico do projeto no Lovable será perdido. Mantenha a `main` sempre funcionando.
 
-To update the live site after pushing, open the project in Lovable and click **Publish → Update**.
+Para atualizar o site no ar depois de um push, abra o projeto no Lovable e clique em **Publish → Update**.
 
 ---
 
-<div align="center"><sub>Built by Rodrigo da Rosa · The badge is the symbol. The proof is behind it.</sub></div>
+<div align="center"><sub>Criado por Rodrigo da Rosa · O troféu é o símbolo. A prova está por trás dele.</sub></div>

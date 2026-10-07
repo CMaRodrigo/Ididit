@@ -5,7 +5,7 @@ import { goalArchitect, type GoalArchitectResult } from "@/lib/proof/ai";
 import type { Provider, VerificationMethod } from "@/lib/proof/types";
 import { Button, inputCls, Skeleton } from "./primitives";
 
-export const STEPS = ["Goal", "Rules", "Verification", "Stakes", "Review"] as const;
+export const STEPS = ["Meta", "Objetivos", "Verificação", "Em jogo", "Revisão"] as const;
 
 export function StepHeader({ step }: { step: number }) {
   return (
@@ -24,7 +24,7 @@ export function StepHeader({ step }: { step: number }) {
   );
 }
 
-const SUGGESTIONS = ["Run 100 km this month", "Ship my portfolio by October 31", "Study Spanish for 20 hours", "Publish 4 articles this month"];
+const SUGGESTIONS = ["Correr 100 km este mês", "Lançar meu portfólio até 31 de outubro", "Estudar espanhol por 20 horas", "Publicar 4 artigos este mês"];
 
 export function GoalArchitect({
   raw,
@@ -52,12 +52,12 @@ export function GoalArchitect({
   };
   return (
     <div>
-      <h1 className="display text-4xl sm:text-5xl">What are you committing to?</h1>
+      <h1 className="display text-4xl sm:text-5xl">Com o que você vai se comprometer?</h1>
       <textarea
         autoFocus
         value={raw}
         onChange={(e) => { setRaw(e.target.value); setResult(null); }}
-        placeholder="I want to..."
+        placeholder="Eu quero..."
         rows={2}
         className="mt-10 w-full resize-none border-0 border-b border-border-strong bg-transparent pb-4 text-2xl font-medium tracking-tight placeholder:text-muted-foreground/50 focus:border-foreground focus:outline-none sm:text-3xl"
       />
@@ -67,20 +67,20 @@ export function GoalArchitect({
             {s}
           </button>
         ))}
-        <button onClick={() => { setRaw("I want to study more"); setResult(null); }} className="rounded-full border border-dashed border-border px-3.5 py-1.5 text-sm text-muted-foreground transition hover:text-foreground">
-          Try a vague one
+        <button onClick={() => { setRaw("Quero estudar mais"); setResult(null); }} className="rounded-full border border-dashed border-border px-3.5 py-1.5 text-sm text-muted-foreground transition hover:text-foreground">
+          Teste uma meta vaga
         </button>
       </div>
 
       {!result && (
         <Button className="mt-10" size="lg" disabled={raw.trim().length < 4 || loading} onClick={run}>
-          <Sparkles className="size-4" /> {loading ? "Analyzing…" : "Make it measurable"}
+          <Sparkles className="size-4" /> {loading ? "Analisando…" : "Torne mensurável"}
         </Button>
       )}
 
       {loading && (
         <div className="panel mt-10 space-y-3 p-6">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground"><Sparkles className="size-4 animate-pulse text-accent" /> Goal Architect is checking whether this can be verified…</div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground"><Sparkles className="size-4 animate-pulse text-accent" /> O Arquiteto de Metas está conferindo se isso pode ser verificado…</div>
           <Skeleton className="h-5 w-3/4" />
           <Skeleton className="h-5 w-1/2" />
         </div>
@@ -94,12 +94,12 @@ export function GoalArchitect({
             </div>
           ) : (
             <div className="mb-5 flex items-center gap-2 text-[15px] text-success">
-              <Check className="size-4" /> This can be verified. Here's a sharper version.
+              <Check className="size-4" /> Isso pode ser verificado. Aqui está uma versão mais precisa.
             </div>
           )}
-          <div className="eyebrow mb-2">Suggested commitment</div>
+          <div className="eyebrow mb-2">Compromisso sugerido</div>
           <textarea value={goal} onChange={(e) => setGoal(e.target.value)} rows={2} className={cn(inputCls, "resize-none text-lg font-medium")} />
-          <p className="mt-4 text-sm text-muted-foreground">A strong commitment has a measurable outcome, a deadline and evidence that can be checked.</p>
+          <p className="mt-4 text-sm text-muted-foreground">Um compromisso forte tem um resultado mensurável, um prazo e evidências que podem ser conferidas.</p>
         </div>
       )}
     </div>
@@ -113,22 +113,22 @@ export function CriteriaEditor({ items, setItems }: { items: string[]; setItems:
         <div key={i} className="group flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-1.5 focus-within:border-foreground/40">
           <span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" strokeWidth={3} /></span>
           <input value={c} onChange={(e) => setItems(items.map((x, j) => (j === i ? e.target.value : x)))} className="flex-1 bg-transparent py-1.5 text-[15px] focus:outline-none" />
-          <button onClick={() => setItems(items.filter((_, j) => j !== i))} className="text-muted-foreground opacity-60 transition hover:text-danger group-hover:opacity-100" aria-label="Remove criterion">
+          <button onClick={() => setItems(items.filter((_, j) => j !== i))} className="text-muted-foreground opacity-60 transition hover:text-danger group-hover:opacity-100" aria-label="Remover objetivo">
             <Trash2 className="size-4" />
           </button>
         </div>
       ))}
       <button onClick={() => setItems([...items, ""])} className="flex w-full items-center gap-2 rounded-lg border border-dashed border-border px-3 py-3 text-sm text-muted-foreground transition hover:border-border-strong hover:text-foreground">
-        <Plus className="size-4" /> Add criterion
+        <Plus className="size-4" /> Adicionar objetivo
       </button>
     </div>
   );
 }
 
 const METHODS: { id: VerificationMethod; icon: typeof Database; title: string; desc: string; extra: string }[] = [
-  { id: "ai", icon: ScanSearch, title: "AI Judge", desc: "Submit evidence. AI checks it against the rules you defined.", extra: "Screenshots · videos · documents · URLs · GitHub repositories" },
-  { id: "data", icon: Database, title: "Automatic data", desc: "Connect an external service and verify progress automatically.", extra: "GitHub · Strava · Google Calendar" },
-  { id: "referee", icon: UserCheck, title: "Referee", desc: "Choose someone you trust to review your evidence.", extra: "They'll receive a secure link to approve or reject your proof." },
+  { id: "ai", icon: ScanSearch, title: "Juiz de IA", desc: "Envie evidências. A IA confere tudo com os objetivos que você definiu.", extra: "Capturas de tela · vídeos · documentos · URLs · repositórios do GitHub" },
+  { id: "data", icon: Database, title: "Dados automáticos", desc: "Conecte um serviço externo e verifique o progresso automaticamente.", extra: "GitHub · Strava · Google Calendar" },
+  { id: "referee", icon: UserCheck, title: "Árbitro", desc: "Escolha alguém de confiança para revisar suas evidências.", extra: "A pessoa vai receber um link seguro para aprovar ou rejeitar sua prova." },
 ];
 
 const PROVIDERS: { id: Provider; label: string }[] = [
@@ -176,8 +176,8 @@ export function VerificationMethodSelector({
             )}
             {on && m.id === "referee" && (
               <div className="grid gap-2 border-t border-border px-5 py-4 sm:grid-cols-2">
-                <input className={inputCls} placeholder="Referee name" value={referee.name} onChange={(e) => setReferee({ ...referee, name: e.target.value })} />
-                <input className={inputCls} type="email" placeholder="Referee email" value={referee.email} onChange={(e) => setReferee({ ...referee, email: e.target.value })} />
+                <input className={inputCls} placeholder="Nome do árbitro" value={referee.name} onChange={(e) => setReferee({ ...referee, name: e.target.value })} />
+                <input className={inputCls} type="email" placeholder="E-mail do árbitro" value={referee.email} onChange={(e) => setReferee({ ...referee, email: e.target.value })} />
               </div>
             )}
           </div>
@@ -185,7 +185,7 @@ export function VerificationMethodSelector({
       })}
       {methods.length > 1 && (
         <p className="pt-1 text-sm text-muted-foreground">
-          Hybrid verification: {methods.includes("referee") && methods.includes("ai") ? "your referee reviews when AI confidence is low." : "all selected methods must agree."}
+          Verificação híbrida: {methods.includes("referee") && methods.includes("ai") ? "seu árbitro revisa quando a confiança da IA é baixa." : "todos os métodos selecionados precisam concordar."}
         </p>
       )}
     </div>
@@ -193,7 +193,7 @@ export function VerificationMethodSelector({
 }
 
 const PRESETS = [25, 50, 100, 250];
-const DESTS = ["Donate it", "Send it to a friend", "Choose another destination"];
+const DESTS = ["Doar", "Enviar para um amigo", "Escolher outro destino"];
 
 export function StakeSelector({
   amount, setAmount, dest, setDest, destDetail, setDestDetail,
@@ -218,7 +218,7 @@ export function StakeSelector({
         ))}
       </div>
 
-      <h2 className="mt-14 text-xl font-semibold tracking-tight">What happens if you fail?</h2>
+      <h2 className="mt-14 text-xl font-semibold tracking-tight">O que acontece se você falhar?</h2>
       <div className="mt-4 grid gap-2 sm:grid-cols-3">
         {DESTS.map((d) => (
           <button key={d} onClick={() => setDest(d)} className={cn("rounded-lg border px-4 py-3.5 text-left text-[15px] transition", dest === d ? "border-foreground bg-surface font-medium shadow-[var(--shadow-soft)]" : "border-border text-muted-foreground hover:border-border-strong")}>
@@ -228,12 +228,12 @@ export function StakeSelector({
       </div>
       <input
         className={cn(inputCls, "mt-3")}
-        placeholder={dest === "Donate it" ? "Charity (e.g. GiveDirectly)" : dest === "Send it to a friend" ? "Friend's name or email" : "Describe the destination"}
+        placeholder={dest === "Doar" ? "Instituição (ex.: GiveDirectly)" : dest === "Enviar para um amigo" ? "Nome ou e-mail do amigo" : "Descreva o destino"}
         value={destDetail}
         onChange={(e) => setDestDetail(e.target.value)}
       />
-      <p className="mt-8 border-l-2 border-accent pl-4 text-[15px] text-muted-foreground">The point isn't to lose money. The point is to make quitting expensive.</p>
-      <p className="mt-4 text-xs text-muted-foreground">Payments are simulated in this preview. No money is charged or held.</p>
+      <p className="mt-8 border-l-2 border-accent pl-4 text-[15px] text-muted-foreground">A ideia não é perder dinheiro. A ideia é tornar a desistência cara.</p>
+      <p className="mt-4 text-xs text-muted-foreground">Os pagamentos são simulados nesta prévia. Nenhum valor é cobrado ou retido.</p>
     </div>
   );
 }

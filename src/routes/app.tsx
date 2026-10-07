@@ -9,10 +9,10 @@ export const Route = createFileRoute("/app")({
 });
 
 const main = [
-  { to: "/app", label: "Home", icon: Home, exact: true },
-  { to: "/app/commitments", label: "Commitments", icon: Layers, exact: false },
-  { to: "/app/activity", label: "Activity", icon: Activity, exact: false },
-  { to: "/app/trophies", label: "Trophy Room", icon: Trophy, exact: false },
+  { to: "/app", label: "Início", icon: Home, exact: true },
+  { to: "/app/commitments", label: "Compromissos", icon: Layers, exact: false },
+  { to: "/app/activity", label: "Atividade", icon: Activity, exact: false },
+  { to: "/app/trophies", label: "Sala de Troféus", icon: Trophy, exact: false },
 ] as const;
 
 function NavItem({ to, label, icon: Icon, exact }: { to: string; label: string; icon: typeof Home; exact?: boolean }) {
@@ -34,11 +34,11 @@ function AppShell() {
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[240px_1fr]">
       <aside className="sticky top-0 hidden h-screen flex-col border-r border-border px-4 py-6 lg:flex">
-        <Link to="/app" className="px-3" aria-label="Home">
+        <Link to="/app" className="px-3" aria-label="Início">
           <Logo />
         </Link>
         <Link to="/app/new" className={cn(btn({ variant: "primary", size: "md" }), "mt-8 w-full justify-start")}>
-          <Plus className="size-4" /> New commitment
+          <Plus className="size-4" /> Novo compromisso
         </Link>
         <nav className="mt-6 space-y-0.5">
           {main.map((m) => (
@@ -46,8 +46,8 @@ function AppShell() {
           ))}
         </nav>
         <div className="mt-auto space-y-0.5">
-          <NavItem to="/app/profile" label="Profile" icon={User} />
-          <NavItem to="/app/settings" label="Settings" icon={Settings} />
+          <NavItem to="/app/profile" label="Perfil" icon={User} />
+          <NavItem to="/app/settings" label="Configurações" icon={Settings} />
           <div className="mt-4 flex items-center gap-3 border-t border-border px-3 pt-4">
             <div className="grid size-8 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">{user.name[0]}</div>
             <div className="min-w-0 text-sm">
@@ -80,7 +80,7 @@ function AppShell() {
         ))}
         <Link to="/app/new" className="flex flex-col items-center gap-1 py-2.5 text-[11px] text-accent">
           <Plus className="size-5" strokeWidth={2} />
-          New
+          Novo
         </Link>
       </nav>
     </div>

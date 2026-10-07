@@ -43,14 +43,15 @@ interface Ctx extends State {
   removeDocument: (id: string, documentId: string) => void;
 }
 
-// Supplied records refresh their bundled title, dates, objectives, stakes, meaning and documents while keeping the owner's edits and uploads.
+// Supplied records refresh their bundled text, dates, objectives, stakes, meaning, reflection and documents while keeping the owner's edits and uploads.
 function refreshDemo(c: Commitment): Commitment {
   const seed = c.demo ? demoCommitments.find((d) => d.id === c.id) : undefined;
   if (!seed) return c;
   const bundled = seed.documents ?? [];
   const uploaded = (c.documents ?? []).filter((d) => !bundled.some((b) => b.id === d.id));
   const meaning = c.meaningEdited ? c.meaning : seed.meaning;
-  return { ...c, title: seed.title, createdAt: seed.createdAt, lockedAt: seed.lockedAt, deadline: seed.deadline, completedAt: seed.completedAt, datesFromDocuments: seed.datesFromDocuments, stake: seed.stake, currency: seed.currency, criteria: seed.criteria, runs: seed.runs, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
+  const reflection = c.reflectionEdited ? c.reflection : seed.reflection;
+  return { ...c, title: seed.title, measurableGoal: seed.measurableGoal, failureDestination: seed.failureDestination, evidence: seed.evidence, ...(seed.verificationSource !== undefined && { verificationSource: seed.verificationSource }), ...(seed.progression !== undefined && { progression: seed.progression }), ...(seed.contextMetric !== undefined && { contextMetric: seed.contextMetric }), ...(reflection !== undefined && { reflection }), createdAt: seed.createdAt, lockedAt: seed.lockedAt, deadline: seed.deadline, completedAt: seed.completedAt, datesFromDocuments: seed.datesFromDocuments, stake: seed.stake, currency: seed.currency, criteria: seed.criteria, runs: seed.runs, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
 }
 
 const StoreCtx = createContext<Ctx | null>(null);
@@ -117,8 +118,8 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
     setState((s) => {
       const c: Commitment = { ...draft, id, createdAt: now, lockedAt: now, status: "active", evidence: [], runs: [] };
       let n = { ...s, commitments: [c, ...s.commitments] };
-      n = log(n, { commitmentId: id, type: "rules_created", description: `${c.criteria.length} success criteria defined for “${c.title}”` });
-      n = log(n, { commitmentId: id, type: "locked", description: `Commitment locked — “${c.title}”` });
+      n = log(n, { commitmentId: id, type: "rules_created", description: `${c.criteria.length} ${c.criteria.length === 1 ? "objetivo definido" : "objetivos definidos"} para “${c.title}”` });
+      n = log(n, { commitmentId: id, type: "locked", description: `Compromisso travado — “${c.title}”` });
       return n;
     });
     return id;
@@ -133,7 +134,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
     setState((s) => {
       const c = s.commitments.find((x) => x.id === id);
       let n = update(s, id, (c) => ({ ...c, evidence: [...c.evidence, ...evidence], status: "awaiting_verification" }));
-      n = log(n, { commitmentId: id, type: "evidence_submitted", description: `Proof submitted for “${c?.title}” (${evidence.length} item${evidence.length === 1 ? "" : "s"})` });
+      n = log(n, { commitmentId: id, type: "evidence_submitted", description: `Prova enviada para “${c?.title}” (${evidence.length} ${evidence.length === 1 ? "item" : "itens"})` });
       return n;
     });
   }, []);
@@ -156,9 +157,9 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
           return v?.status === "verified" ? { ...cr, status: "met" } : cr;
         }),
       }));
-      n = log(n, { commitmentId: id, type: "verification", description: `AI Judge verified ${ok} / ${verdicts.length} criteria for “${c.title}”` });
+      n = log(n, { commitmentId: id, type: "verification", description: `Juiz de IA verificou ${ok} / ${verdicts.length} objetivos de “${c.title}”` });
       if (status !== "active")
-        n = log(n, { commitmentId: id, type: "result", description: status === "passed" ? `Passed — stake returned for “${c.title}” (simulated)` : `Failed — consequence triggered for “${c.title}” (simulated)` });
+        n = log(n, { commitmentId: id, type: "result", description: status === "passed" ? `Concluído — valor em jogo devolvido em “${c.title}” (simulado)` : `Não concluído — consequência acionada em “${c.title}” (simulado)` });
       return n;
     });
   }, []);
@@ -169,7 +170,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
       if (!c?.referee) return s;
       const referee = c.referee;
       let n = update(s, c.id, (c) => ({ ...c, referee: { ...referee, status: approved ? "approved" : "rejected", reason } }));
-      n = log(n, { commitmentId: c.id, type: "verification", description: `${referee.name} ${approved ? "approved" : "rejected"} proof for “${c.title}”${reason ? ` — “${reason}”` : ""}` });
+      n = log(n, { commitmentId: c.id, type: "verification", description: `${referee.name} ${approved ? "aprovou" : "rejeitou"} a prova de “${c.title}”${reason ? ` — “${reason}”` : ""}` });
       return n;
     });
   }, []);
@@ -191,10 +192,10 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
       addDocuments: (id, documents) => setState((s) => {
         const c = s.commitments.find((x) => x.id === id);
         const n = update(s, id, (c) => ({ ...c, documents: [...(c.documents ?? []), ...documents] }));
-        return log(n, { commitmentId: id, type: "evidence_submitted", description: `${documents.length} proof document${documents.length === 1 ? "" : "s"} added to “${c?.title}”` });
+        return log(n, { commitmentId: id, type: "evidence_submitted", description: `${documents.length} ${documents.length === 1 ? "documento de prova adicionado" : "documentos de prova adicionados"} a “${c?.title}”` });
       }),
       removeDocument: (id, documentId) => setState((s) => update(s, id, (c) => ({ ...c, documents: (c.documents ?? []).filter((d) => d.id !== documentId || d.src) }))),
-      saveReflection: (id, reflection) => setState((s) => update(s, id, (c) => c.status === "passed" || c.status === "failed" ? { ...c, reflection: reflection.trim() } : c)),
+      saveReflection: (id, reflection) => setState((s) => update(s, id, (c) => c.status === "passed" || c.status === "failed" ? { ...c, reflection: reflection.trim(), reflectionEdited: true } : c)),
     }),
     [state, hydrated, get, lock, submitEvidence, recordVerdicts, refereeDecision],
   );

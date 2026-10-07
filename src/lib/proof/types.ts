@@ -106,6 +106,7 @@ export interface Commitment {
   datesFromDocuments?: boolean | undefined;
   verificationSource?: string;
   reflection?: string;
+  reflectionEdited?: boolean;
   meaning?: string;
   meaningEdited?: boolean;
   documents?: ProofDocument[];

@@ -13,20 +13,20 @@ export const Route = createFileRoute("/app/commitments/")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "Commitments — I Did It." },
-      { name: "description", content: "Every commitment you've made, and how it ended." },
-      { property: "og:title", content: "Commitments — I Did It." },
-      { property: "og:description", content: "Every commitment you've made, and how it ended." },
+      { title: "Compromissos — I Did It." },
+      { name: "description", content: "Todos os compromissos que você assumiu, e como terminaram." },
+      { property: "og:title", content: "Compromissos — I Did It." },
+      { property: "og:description", content: "Todos os compromissos que você assumiu, e como terminaram." },
     ],
   }),
   component: Commitments,
 });
 
 const TABS: { id: CommitmentStatus; label: string }[] = [
-  { id: "active", label: "Active" },
-  { id: "awaiting_verification", label: "Awaiting verification" },
-  { id: "passed", label: "Completed" },
-  { id: "failed", label: "Failed" },
+  { id: "active", label: "Ativos" },
+  { id: "awaiting_verification", label: "Aguardando verificação" },
+  { id: "passed", label: "Concluídos" },
+  { id: "failed", label: "Não concluídos" },
 ];
 
 function Commitments() {
@@ -36,8 +36,8 @@ function Commitments() {
   return (
     <Page>
       <div className="flex items-end justify-between">
-        <h1 className="display text-4xl sm:text-5xl">Commitments</h1>
-        <Link to="/app/new" className={btn({ size: "sm", className: "hidden sm:inline-flex" })}><Plus className="size-4" /> New</Link>
+        <h1 className="display text-4xl sm:text-5xl">Compromissos</h1>
+        <Link to="/app/new" className={btn({ size: "sm", className: "hidden sm:inline-flex" })}><Plus className="size-4" /> Novo</Link>
       </div>
       <div className="mt-10 flex gap-6 overflow-x-auto border-b border-border">
         {TABS.map((t) => {
@@ -51,7 +51,7 @@ function Commitments() {
       </div>
       <div className="mt-6 space-y-3">
         {list.length === 0 ? (
-          <p className="py-16 text-center text-muted-foreground">Nothing here.</p>
+          <p className="py-16 text-center text-muted-foreground">Nada por aqui.</p>
         ) : (
           list.map((c) => <CommitmentCard key={c.id} c={c} />)
         )}

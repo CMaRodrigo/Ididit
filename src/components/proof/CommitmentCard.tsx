@@ -19,7 +19,7 @@ export function CommitmentCard({ c }: { c: Commitment }) {
           <div className="mb-2 flex items-center gap-3">
             <StatusBadge status={c.status} />
             {!done && <DeadlineLabel iso={c.deadline} />}
-            {done && <span className="text-sm text-muted-foreground">Ended {shortDate(c.deadline)}</span>}
+            {done && <span className="text-sm text-muted-foreground">Encerrado em {shortDate(c.deadline)}</span>}
           </div>
           <h3 className="truncate text-lg font-semibold tracking-tight sm:text-xl">{c.title}</h3>
           <div className="mt-3 max-w-md">
@@ -39,7 +39,7 @@ export function CommitmentCard({ c }: { c: Commitment }) {
                   <span className="tabular font-medium">
                     {met} / {c.criteria.length}
                   </span>{" "}
-                  <span className="text-muted-foreground">objectives verified</span>
+                  <span className="text-muted-foreground">objetivos verificados</span>
                 </div>
                 <ProgressBar value={met} max={c.criteria.length} tone={c.status === "failed" ? "danger" : c.status === "passed" ? "success" : "accent"} />
               </>
@@ -49,7 +49,7 @@ export function CommitmentCard({ c }: { c: Commitment }) {
         <div className="flex items-end justify-between gap-8 border-t border-border pt-4 sm:block sm:border-0 sm:pt-0 sm:text-right">
           <div>
             <div className="eyebrow">
-              {c.status === "passed" ? (c.demo ? "Secured" : "Returned") : c.status === "failed" ? (c.demo ? "Total stake" : "Consequence") : "At stake"}
+              {c.status === "passed" ? (c.demo ? "Garantido" : "Devolvido") : c.status === "failed" ? (c.demo ? "Valor total" : "Consequência") : "Em jogo"}
             </div>
             <div className={`tabular text-xl font-semibold tracking-tight ${c.status === "failed" ? "text-danger" : c.status === "passed" ? "text-success" : ""}`}>
               {money(c.stake, c.currency)}

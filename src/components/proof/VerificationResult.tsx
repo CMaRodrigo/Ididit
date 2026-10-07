@@ -18,11 +18,11 @@ export function VerificationResult({ criteria, verdicts }: { criteria: Criterion
               </div>
               {v.evidenceUsed.length > 0 && (
                 <div className="mt-2 text-sm text-muted-foreground">
-                  Evidence reviewed: <span className="text-foreground">{v.evidenceUsed.join(", ")}</span>
+                  Evidências analisadas: <span className="text-foreground">{v.evidenceUsed.join(", ")}</span>
                 </div>
               )}
               <p className="mt-1.5 text-sm text-muted-foreground">{v.reasoning}</p>
-              <div className="tabular mt-2 text-xs text-muted-foreground/80">Confidence {Math.round(v.confidence * 100)}%</div>
+              <div className="tabular mt-2 text-xs text-muted-foreground/80">Confiança {Math.round(v.confidence * 100)}%</div>
             </div>
           </li>
         );
