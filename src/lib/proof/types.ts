@@ -82,4 +82,22 @@ export interface Commitment {
   evidence: Evidence[];
   runs: VerificationRun[];
   headline?: { current: number; target: number; unit: string };
+  completedAt?: string | undefined;
+}
+
+export type AchievementCategory = "fitness" | "skills" | "career" | "creative" | "education" | "personal" | "other";
+
+/** One per verified commitment. Mirrors the future `achievements` table. */
+export interface Achievement {
+  id: string;
+  commitmentId: string;
+  badgeName: string;
+  badgeSubtitle: string;
+  badgeDescription: string;
+  badgeImageUrl?: string | undefined; // filled once AI image generation is wired
+  category: AchievementCategory;
+  visualPrompt: string;
+  icon: string; // fallback artwork key
+  earnedAt: string;
+  createdAt: string;
 }
