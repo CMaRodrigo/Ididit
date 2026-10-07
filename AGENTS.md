@@ -17,3 +17,6 @@
 - Supplied demo challenges carry an explicit demo flag; dates and evidence are illustrative, with no invented money movement — distinguishes portfolio examples from real verified records.
 - Shared contract tabs live in `src/components/proof/ContractRecord.tsx`; reflections are separate retrospective state, not locked criteria — keeps all challenge outcomes inspectable consistently.
 - Demo trophy artwork is a static generated asset catalog consumed only by `badgeGenerator`; runtime badge generation remains the existing local contract — avoids implying a live AI integration.
+
+- Public entry and legacy auth URLs redirect to the populated profile; the prototype has no authentication gate or logout surface — keeps account-only access explicit without implying real authentication.
+- Persisted demo achievements refresh presentation from the trophy catalog while preserving record IDs — artwork and copy updates must not break existing proof links.

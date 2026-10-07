@@ -4,7 +4,7 @@
 - [x] Build identity, active commitment, Trophy Room and neutral Past Attempts.
 - [x] Share locked five-tab records; add reflections and project-specific context.
 - [x] Verify challenge records, trophy counts, imagery and layouts.
-- [ ] Open directly into Rodrigo's account; remove all auth and logout surfaces.
-- [ ] Update trophy subtitles and remove question-mark artwork.
+- [x] Open directly into Rodrigo's account; remove all auth and logout surfaces.
+- [x] Update trophy subtitles and remove question-mark artwork.
 - [ ] Refine six trophy artworks into a collectible badge family after visual selection.
 - [ ] Verify direct entry, six trophies and historical proof navigation.

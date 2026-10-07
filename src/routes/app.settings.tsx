@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Page } from "@/components/proof/Page";
 import { Button, Field } from "@/components/proof/primitives";
@@ -45,8 +45,7 @@ function Toggle({ label, defaultOn = true }: { label: string; defaultOn?: boolea
 }
 
 function Settings() {
-  const { user, integrations, toggleIntegration, reset, signOut } = useProof();
-  const nav = useNavigate();
+  const { user, integrations, toggleIntegration, reset } = useProof();
   return (
     <Page narrow>
       <h1 className="display text-4xl sm:text-5xl">Settings</h1>
@@ -76,7 +75,6 @@ function Settings() {
 
       <div className="mt-12 flex flex-wrap gap-2">
         <Button variant="outline" onClick={reset}>Reset demo data</Button>
-        <Button variant="ghost" onClick={() => { signOut(); nav({ to: "/" }); }}>Log out</Button>
       </div>
     </Page>
   );

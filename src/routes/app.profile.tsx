@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Lock, ShieldCheck } from "lucide-react";
 import { Page } from "@/components/proof/Page";
-import { BadgeArt, MysteryBadge } from "@/components/proof/Badge";
+import { BadgeArt } from "@/components/proof/Badge";
 import { btn, ProgressBar } from "@/components/proof/primitives";
 import { useProof } from "@/lib/proof/store";
 
@@ -33,14 +33,14 @@ function Profile() {
     </header>
     {active.map((c) => { const met = c.criteria.filter((cr) => cr.status === "met").length; return <section key={c.id} className="grid items-center gap-6 border-b border-border py-8 sm:grid-cols-[1fr_120px]">
       <div><div className="eyebrow">Current commitment</div><div className="mt-3 flex flex-wrap items-center gap-3"><h2 className="text-2xl font-semibold">{c.title}</h2><span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"><span className="size-1.5 rounded-full bg-accent" />In progress</span></div><div className="mt-4 flex max-w-md items-center gap-4"><span className="tabular shrink-0 text-sm">{met} / {c.criteria.length} milestones</span><ProgressBar value={met} max={c.criteria.length} /></div><div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">{c.id === "behring-founders" && ["Apply", "Study deeply", "Speak with Bibi"].map((label) => <span key={label} className="flex items-center gap-1"><Check className="size-3 text-success" />{label}</span>)}</div><Link to="/app/commitments/$id" params={{ id: c.id }} className={btn({ variant: "outline", size: "sm", className: "mt-5" })}>View commitment <ArrowRight className="size-3.5" /></Link></div>
-      <div className="hidden text-center sm:block"><MysteryBadge className="mx-auto w-20" /><span className="mt-3 flex items-center justify-center gap-1 text-xs text-muted-foreground"><Lock className="size-3" />Trophy locked</span></div>
+      <div className="hidden text-center sm:block"><div className="mx-auto grid size-20 place-items-center text-muted-foreground"><Lock className="size-8" strokeWidth={1.25} /></div><span className="mt-3 flex items-center justify-center gap-1 text-xs text-muted-foreground"><Lock className="size-3" />Trophy locked</span></div>
     </section>; })}
     <section className="pt-10">
       <div className="flex flex-wrap items-end justify-between gap-3"><div><h2 className="eyebrow">Trophy Room</h2><p className="mt-2 text-3xl font-semibold sm:text-4xl">Proof of what you actually finished.</p></div><span className="flex items-center gap-1.5 text-xs text-muted-foreground"><ShieldCheck className="size-3.5 text-success" />Earned, not given</span></div>
       <div className="mt-7 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:gap-x-8">
         {trophies.map((a) => { const c = passed.find((c) => c.id === a.commitmentId); if (!c) return null; return <Link key={a.id} to="/app/trophies/$id" params={{ id: a.id }} className="group min-w-0 text-center" aria-label={`${a.badgeName} — ${c.title} — View proof`}>
           <BadgeArt a={a} className="mx-auto w-full max-w-56 transition-transform duration-300 motion-reduce:transition-none group-hover:-translate-y-1" />
-          <div className="mt-4 text-sm font-semibold leading-snug">{a.badgeName}</div><div className="mt-1 text-sm text-muted-foreground">{c.title}</div><div className="mt-1 text-xs text-muted-foreground">{new Date(a.earnedAt).getFullYear()}{c.demo ? " · Demo" : ""}</div><div className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors group-hover:text-foreground">View proof <ArrowRight className="size-3" /></div>
+          <div className="mt-4 text-sm font-semibold leading-snug">{a.badgeName}</div><div className="mt-1 text-sm text-muted-foreground">{c.title}</div><div className="mt-2 text-xs leading-relaxed text-muted-foreground">{a.badgeSubtitle}</div><div className="mt-1 text-xs text-muted-foreground">{new Date(a.earnedAt).getFullYear()}{c.demo ? " · Demo" : ""}</div><div className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors group-hover:text-foreground">View proof <ArrowRight className="size-3" /></div>
         </Link>; })}
       </div>
       {hydrated && trophies.length === 0 && <p className="py-10 text-sm text-muted-foreground">Complete and verify a commitment to earn your first trophy.</p>}
