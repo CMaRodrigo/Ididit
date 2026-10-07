@@ -34,7 +34,7 @@ function AppShell() {
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[240px_1fr]">
       <aside className="sticky top-0 hidden h-screen flex-col border-r border-border px-4 py-6 lg:flex">
-        <Link to="/" className="px-3">
+        <Link to="/app" className="px-3" aria-label="Home">
           <Logo />
         </Link>
         <Link to="/app/new" className={cn(btn({ variant: "primary", size: "md" }), "mt-8 w-full justify-start")}>
