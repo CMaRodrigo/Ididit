@@ -10,9 +10,9 @@ export const Route = createFileRoute("/app/settings")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "Settings — Proof." },
+      { title: "Settings — I Did It." },
       { name: "description", content: "Profile, connected accounts and notifications." },
-      { property: "og:title", content: "Settings — Proof." },
+      { property: "og:title", content: "Settings — I Did It." },
       { property: "og:description", content: "Profile, connected accounts and notifications." },
     ],
   }),

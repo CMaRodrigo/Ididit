@@ -12,9 +12,9 @@ import { ContractRecord } from "@/components/proof/ContractRecord";
 export const Route = createFileRoute("/app/trophies/$id")({
   head: () => ({
     meta: [
-      { title: "Achievement record — Proof." },
+      { title: "Achievement record — I Did It." },
       { name: "description", content: "The permanent, read-only record behind a verified achievement." },
-      { property: "og:title", content: "Achievement record — Proof." },
+      { property: "og:title", content: "Achievement record — I Did It." },
       { property: "og:description", content: "The permanent, read-only record behind a verified achievement." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },

@@ -13,9 +13,9 @@ export const Route = createFileRoute("/app/commitments/$id/proof")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "Prove it — Proof." },
+      { title: "Prove it — I Did It." },
       { name: "description", content: "Submit evidence for each locked requirement." },
-      { property: "og:title", content: "Prove it — Proof." },
+      { property: "og:title", content: "Prove it — I Did It." },
       { property: "og:description", content: "Submit evidence for each locked requirement." },
     ],
   }),

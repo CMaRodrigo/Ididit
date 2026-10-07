@@ -7,9 +7,9 @@ import { useProof } from "@/lib/proof/store";
 
 export const Route = createFileRoute("/app/profile")({
   head: () => ({ meta: [
-    { title: "Rodrigo's Trophy Room — Proof." },
+    { title: "Rodrigo's Trophy Room — I Did It." },
     { name: "description", content: "A personal timeline of verified accomplishments, ongoing commitments and honest past attempts." },
-    { property: "og:title", content: "Rodrigo's Trophy Room — Proof." },
+    { property: "og:title", content: "Rodrigo's Trophy Room — I Did It." },
     { property: "og:description", content: "The badge is the symbol. The proof is behind it." },
     { property: "og:type", content: "profile" }, { name: "twitter:card", content: "summary" },
   ] }), component: Profile,

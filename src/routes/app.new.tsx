@@ -15,9 +15,9 @@ export const Route = createFileRoute("/app/new")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "New commitment — Proof." },
+      { title: "New commitment — I Did It." },
       { name: "description", content: "Define a goal, set the rules, put something on the line." },
-      { property: "og:title", content: "New commitment — Proof." },
+      { property: "og:title", content: "New commitment — I Did It." },
       { property: "og:description", content: "Define a goal, set the rules, put something on the line." },
     ],
   }),

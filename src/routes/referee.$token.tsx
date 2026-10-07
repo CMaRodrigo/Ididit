@@ -11,9 +11,9 @@ export const Route = createFileRoute("/referee/$token")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "Verify a commitment — Proof." },
+      { title: "Verify a commitment — I Did It." },
       { name: "description", content: "You've been asked to review proof for a commitment." },
-      { property: "og:title", content: "Verify a commitment — Proof." },
+      { property: "og:title", content: "Verify a commitment — I Did It." },
       { property: "og:description", content: "You've been asked to review proof for a commitment." },
       { name: "robots", content: "noindex" },
     ],

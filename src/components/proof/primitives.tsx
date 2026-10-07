@@ -36,7 +36,7 @@ Button.displayName = "Button";
 export function Logo({ className }: { className?: string }) {
   return (
     <span className={cn("text-xl font-semibold tracking-[-0.04em]", className)}>
-      Proof<span className="text-accent">.</span>
+      I Did It<span className="text-accent">.</span>
     </span>
   );
 }

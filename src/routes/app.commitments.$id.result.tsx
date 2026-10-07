@@ -12,9 +12,9 @@ export const Route = createFileRoute("/app/commitments/$id/result")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "Verification result — Proof." },
+      { title: "Verification result — I Did It." },
       { name: "description", content: "How your evidence measured up against the locked rules." },
-      { property: "og:title", content: "Verification result — Proof." },
+      { property: "og:title", content: "Verification result — I Did It." },
       { property: "og:description", content: "How your evidence measured up against the locked rules." },
     ],
   }),
