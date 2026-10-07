@@ -10,8 +10,8 @@ export const Route = createFileRoute("/app")({
 
 const main = [
   { to: "/app", label: "Home", icon: Home, exact: true },
-  { to: "/app/commitments", label: "Commitments", icon: Layers },
-  { to: "/app/activity", label: "Activity", icon: Activity },
+  { to: "/app/commitments", label: "Commitments", icon: Layers, exact: false },
+  { to: "/app/activity", label: "Activity", icon: Activity, exact: false },
 ] as const;
 
 function NavItem({ to, label, icon: Icon, exact }: { to: string; label: string; icon: typeof Home; exact?: boolean }) {
