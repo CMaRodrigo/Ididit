@@ -1,6 +1,6 @@
 import type { ActivityEvent, Commitment } from "./types";
 
-export const DEMO_USER = { name: "Alex", email: "alex@proof.app", timezone: "America/Sao_Paulo", currency: "USD" };
+export const DEMO_USER = { name: "Alex Morgan", bio: "Building things, running long, learning languages.", email: "alex@proof.app", timezone: "America/Sao_Paulo", currency: "USD" };
 
 export const demoCommitments: Commitment[] = [
   {
@@ -53,6 +53,7 @@ export const demoCommitments: Commitment[] = [
     title: "Study Spanish for 20 hours",
     measurableGoal: "Log at least 20 hours of Spanish study between Sep 1 and Sep 30, 2026.",
     status: "passed",
+    completedAt: "2026-09-28T20:00:00Z",
     createdAt: "2026-09-01T08:00:00Z",
     lockedAt: "2026-09-01T08:03:00Z",
     deadline: "2026-09-30T23:59:00Z",
@@ -64,6 +65,29 @@ export const demoCommitments: Commitment[] = [
     headline: { current: 21.4, target: 20, unit: "hours" },
     criteria: [
       { id: "s1", description: "At least 20 hours of tracked study sessions", target: 20, current: 21.4, unit: "hours", status: "met" },
+    ],
+    evidence: [],
+    runs: [],
+  },
+  {
+    id: "early-bird",
+    title: "Wake up at 6:00 for 30 days",
+    measurableGoal: "Log a check-in before 6:15 every day for 30 consecutive days between Jul 1 and Jul 30, 2026.",
+    status: "passed",
+    completedAt: "2026-07-30T06:05:00Z",
+    createdAt: "2026-07-01T05:00:00Z",
+    lockedAt: "2026-07-01T05:02:00Z",
+    deadline: "2026-07-30T23:59:00Z",
+    stake: 80,
+    currency: "USD",
+    failureDestination: "Donate to Doctors Without Borders",
+    methods: ["referee"],
+    providers: [],
+    referee: { name: "Sam Rivera", email: "sam@example.com", token: "rf_eb30", status: "approved" },
+    headline: { current: 30, target: 30, unit: "days" },
+    criteria: [
+      { id: "e1", description: "Check in before 6:15 on 30 consecutive days", target: 30, current: 30, unit: "days", status: "met" },
+      { id: "e2", description: "Referee confirms the check-in log", status: "met" },
     ],
     evidence: [],
     runs: [],

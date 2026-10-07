@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { demoActivity, demoCommitments, DEMO_USER } from "./demo-data";
-import type { ActivityEvent, Commitment, Evidence, Verdict } from "./types";
+import type { Achievement, ActivityEvent, Commitment, Evidence, Verdict } from "./types";
+import { badgeGenerator } from "./badges";
 import { uid } from "./format";
 import { simulatedStakes } from "./payments";
 
@@ -9,6 +10,7 @@ interface State {
   signedIn: boolean;
   commitments: Commitment[];
   activity: ActivityEvent[];
+  achievements: Achievement[];
   integrations: Record<string, boolean>;
 }
 
@@ -17,10 +19,11 @@ const initial: State = {
   signedIn: true,
   commitments: demoCommitments,
   activity: demoActivity,
+  achievements: [],
   integrations: { github: true, strava: true, google_calendar: false },
 };
 
-const KEY = "proof.state.v1";
+const KEY = "proof.state.v2";
 
 interface Ctx extends State {
   hydrated: boolean;
@@ -44,7 +47,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) setState({ ...initial, ...JSON.parse(raw) });
+      if (raw) setState({ ...initial, ...JSON.parse(raw), user: { ...initial.user, ...JSON.parse(raw).user } });
     } catch {
       /* ignore */
     }
@@ -54,6 +57,20 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (hydrated) localStorage.setItem(KEY, JSON.stringify(state));
   }, [state, hydrated]);
+
+  // Every verified commitment earns exactly one achievement. Failed ones never do.
+  useEffect(() => {
+    if (!hydrated) return;
+    const missing = state.commitments.filter((c) => c.status === "passed" && !state.achievements.some((a) => a.commitmentId === c.id));
+    if (missing.length === 0) return;
+    setState((s) => ({
+      ...s,
+      achievements: [
+        ...missing.filter((c) => !s.achievements.some((a) => a.commitmentId === c.id)).map((c) => badgeGenerator(c)),
+        ...s.achievements,
+      ],
+    }));
+  }, [hydrated, state.commitments, state.achievements]);
 
   const log = (s: State, e: Omit<ActivityEvent, "id" | "at">): State => ({
     ...s,
@@ -100,6 +117,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
       let n = update(s, id, (c) => ({
         ...c,
         status,
+        completedAt: status === "passed" ? new Date().toISOString() : c.completedAt,
         runs: [...c.runs, { id: uid("run"), ranAt: new Date().toISOString(), verdicts }],
         criteria: c.criteria.map((cr) => {
           const v = verdicts.find((v) => v.criterionId === cr.id);
