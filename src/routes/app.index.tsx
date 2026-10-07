@@ -38,7 +38,7 @@ function Dashboard() {
       </h1>
       <div className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[15px]">
         <span><span className="tabular font-semibold">{active.length}</span> <span className="text-muted-foreground">active</span></span>
-        <span><span className="tabular font-semibold">{money(atStake)}</span> <span className="text-muted-foreground">at stake</span></span>
+        <span><span className="tabular font-semibold">{money(atStake, active[0]?.currency ?? user.currency)}</span> <span className="text-muted-foreground">at stake</span></span>
         <span><span className="tabular font-semibold">{awaiting}</span> <span className="text-muted-foreground">awaiting proof</span></span>
       </div>
 

@@ -14,7 +14,7 @@
 - AI roles (Goal Architect, AI Judge) live behind the contracts in `src/lib/proof/ai.ts`; the Judge only evaluates against locked criteria and never rewrites them.
 - Money movement goes only through the `StakeProvider` interface in `src/lib/proof/payments.ts`; the UI never pretends funds moved.
 - Trophies are generated only through `badgeGenerator` in `src/lib/proof/badges.ts` (one per passed commitment, never for failed ones) — keeps the AI badge contract swappable.
-- Supplied demo challenges carry an explicit demo flag; dates and evidence are illustrative, with no invented money movement — distinguishes portfolio examples from real verified records.
+- Supplied demo challenges carry an explicit demo flag; dates are illustrative unless `datesFromDocuments` marks them as taken from attached proof, and per-objective stakes are simulated (no money ever moves) — distinguishes portfolio examples from real verified records.
 - Shared contract tabs live in `src/components/proof/ContractRecord.tsx`; reflections are separate retrospective state, not locked criteria — keeps all challenge outcomes inspectable consistently.
 - Demo trophy artwork is a static generated asset catalog consumed only by `badgeGenerator`; runtime badge generation remains the existing local contract — avoids implying a live AI integration.
 

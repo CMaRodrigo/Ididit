@@ -1,7 +1,7 @@
 import type { Commitment, Provider, VerificationMethod } from "./types";
 
 export function money(amount: number, currency = "USD") {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat(currency === "BRL" ? "pt-BR" : "en-US", {
     style: "currency",
     currency,
     maximumFractionDigits: amount % 1 === 0 ? 0 : 2,

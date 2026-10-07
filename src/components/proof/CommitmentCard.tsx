@@ -39,7 +39,7 @@ export function CommitmentCard({ c }: { c: Commitment }) {
                   <span className="tabular font-medium">
                     {met} / {c.criteria.length}
                   </span>{" "}
-                  <span className="text-muted-foreground">criteria verified</span>
+                  <span className="text-muted-foreground">objectives verified</span>
                 </div>
                 <ProgressBar value={met} max={c.criteria.length} tone={c.status === "failed" ? "danger" : c.status === "passed" ? "success" : "accent"} />
               </>
@@ -49,7 +49,7 @@ export function CommitmentCard({ c }: { c: Commitment }) {
         <div className="flex items-end justify-between gap-8 border-t border-border pt-4 sm:block sm:border-0 sm:pt-0 sm:text-right">
           <div>
             <div className="eyebrow">
-              {c.status === "passed" ? "Returned" : c.status === "failed" ? "Consequence" : "At stake"}
+              {c.status === "passed" ? (c.demo ? "Secured" : "Returned") : c.status === "failed" ? (c.demo ? "Total stake" : "Consequence") : "At stake"}
             </div>
             <div className={`tabular text-xl font-semibold tracking-tight ${c.status === "failed" ? "text-danger" : c.status === "passed" ? "text-success" : ""}`}>
               {money(c.stake, c.currency)}

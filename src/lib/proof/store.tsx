@@ -43,14 +43,15 @@ interface Ctx extends State {
   removeDocument: (id: string, documentId: string) => void;
 }
 
-// Supplied records refresh their bundled title, meaning and documents while keeping the owner's edits and uploads.
+// Supplied records refresh their bundled title, dates, stakes, meaning and documents while keeping the owner's edits and uploads.
 function refreshDemo(c: Commitment): Commitment {
   const seed = c.demo ? demoCommitments.find((d) => d.id === c.id) : undefined;
   if (!seed) return c;
   const bundled = seed.documents ?? [];
   const uploaded = (c.documents ?? []).filter((d) => !bundled.some((b) => b.id === d.id));
   const meaning = c.meaningEdited ? c.meaning : seed.meaning;
-  return { ...c, title: seed.title, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
+  const criteria = c.criteria.map((cr) => { const stake = seed.criteria.find((s) => s.id === cr.id)?.stake; return stake === undefined ? cr : { ...cr, stake }; });
+  return { ...c, title: seed.title, createdAt: seed.createdAt, lockedAt: seed.lockedAt, deadline: seed.deadline, completedAt: seed.completedAt, datesFromDocuments: seed.datesFromDocuments, stake: seed.stake, currency: seed.currency, criteria, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
 }
 
 const StoreCtx = createContext<Ctx | null>(null);
@@ -68,11 +69,12 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
         const hasNewDemo = saved.commitments?.some((c) => c.id === "projeto-rondon");
         const migrated = hasNewDemo ? saved.commitments : [...demoCommitments, ...(saved.commitments ?? []).filter((c) => !oldDemoIds.has(c.id))];
         setState({ ...initial, ...saved, commitments: (migrated ?? demoCommitments).map(refreshDemo),
-          activity: hasNewDemo ? saved.activity ?? demoActivity : [...demoActivity, ...(saved.activity ?? []).filter((e) => !oldDemoIds.has(e.commitmentId))],
+          activity: hasNewDemo ? (saved.activity ?? demoActivity).map((e) => demoActivity.find((d) => d.id === e.id) ?? e) : [...demoActivity, ...(saved.activity ?? []).filter((e) => !oldDemoIds.has(e.commitmentId))],
           achievements: (saved.achievements ?? []).filter((a) => !oldDemoIds.has(a.commitmentId)).map((a) => {
             const trophy = demoTrophies[a.commitmentId];
             const isDemo = migrated?.some((c) => c.id === a.commitmentId && c.demo);
-            return trophy && isDemo ? { ...a, badgeName: trophy.badge_name, badgeSubtitle: trophy.badge_subtitle, badgeImageUrl: trophy.image } : a;
+            const seed = demoCommitments.find((c) => c.id === a.commitmentId);
+            return trophy && isDemo ? { ...a, badgeName: trophy.badge_name, badgeSubtitle: trophy.badge_subtitle, badgeImageUrl: trophy.image, earnedAt: seed?.completedAt ?? a.earnedAt } : a;
           }),
           user: { ...initial.user, ...saved.user, name: DEMO_USER.name, bio: DEMO_USER.bio },
           signedIn: true,

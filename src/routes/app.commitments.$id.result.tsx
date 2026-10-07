@@ -39,7 +39,7 @@ function Result() {
       </Link>
       <div className="eyebrow">Verification complete</div>
       <h1 className="display mt-3 text-5xl sm:text-6xl">
-        <span className="tabular">{ok} / {run.verdicts.length}</span> <span className="text-muted-foreground">criteria verified</span>
+        <span className="tabular">{ok} / {run.verdicts.length}</span> <span className="text-muted-foreground">objectives verified</span>
       </h1>
 
       <div className="mt-12">

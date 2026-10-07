@@ -15,6 +15,8 @@ export interface Criterion {
   target?: number;
   current?: number;
   unit?: string;
+  /** Share of the commitment stake riding on this objective; the commitment stake is their sum. */
+  stake?: number;
   status: CriterionStatus;
 }
 
@@ -98,6 +100,8 @@ export interface Commitment {
   headline?: { current: number; target: number; unit: string };
   completedAt?: string | undefined;
   demo?: boolean;
+  /** Supplied record whose dates come from its attached documents rather than illustration. */
+  datesFromDocuments?: boolean | undefined;
   verificationSource?: string;
   reflection?: string;
   meaning?: string;
