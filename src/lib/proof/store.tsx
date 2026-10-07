@@ -1,0 +1,150 @@
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { demoActivity, demoCommitments, DEMO_USER } from "./demo-data";
+import type { ActivityEvent, Commitment, Evidence, Verdict } from "./types";
+import { uid } from "./format";
+import { simulatedStakes } from "./payments";
+
+interface State {
+  user: typeof DEMO_USER;
+  signedIn: boolean;
+  commitments: Commitment[];
+  activity: ActivityEvent[];
+  integrations: Record<string, boolean>;
+}
+
+const initial: State = {
+  user: DEMO_USER,
+  signedIn: true,
+  commitments: demoCommitments,
+  activity: demoActivity,
+  integrations: { github: true, strava: true, google_calendar: false },
+};
+
+const KEY = "proof.state.v1";
+
+interface Ctx extends State {
+  hydrated: boolean;
+  get: (id: string) => Commitment | undefined;
+  lock: (c: Omit<Commitment, "id" | "createdAt" | "lockedAt" | "status" | "evidence" | "runs">) => Promise<string>;
+  submitEvidence: (id: string, evidence: Evidence[]) => void;
+  recordVerdicts: (id: string, verdicts: Verdict[]) => void;
+  refereeDecision: (token: string, approved: boolean, reason?: string) => void;
+  toggleIntegration: (p: string) => void;
+  signIn: (name?: string, email?: string) => void;
+  signOut: () => void;
+  reset: () => void;
+}
+
+const StoreCtx = createContext<Ctx | null>(null);
+
+export function ProofStoreProvider({ children }: { children: ReactNode }) {
+  const [state, setState] = useState<State>(initial);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) setState({ ...initial, ...JSON.parse(raw) });
+    } catch {
+      /* ignore */
+    }
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (hydrated) localStorage.setItem(KEY, JSON.stringify(state));
+  }, [state, hydrated]);
+
+  const log = (s: State, e: Omit<ActivityEvent, "id" | "at">): State => ({
+    ...s,
+    activity: [{ ...e, id: uid("ev"), at: new Date().toISOString() }, ...s.activity],
+  });
+
+  const get = useCallback((id: string) => state.commitments.find((c) => c.id === id), [state.commitments]);
+
+  const lock: Ctx["lock"] = useCallback(async (draft) => {
+    const id = uid("c");
+    await simulatedStakes.authorize({ commitmentId: id, amount: draft.stake, currency: draft.currency });
+    const now = new Date().toISOString();
+    setState((s) => {
+      const c: Commitment = { ...draft, id, createdAt: now, lockedAt: now, status: "active", evidence: [], runs: [] };
+      let n = { ...s, commitments: [c, ...s.commitments] };
+      n = log(n, { commitmentId: id, type: "rules_created", description: `${c.criteria.length} success criteria defined for “${c.title}”` });
+      n = log(n, { commitmentId: id, type: "locked", description: `Commitment locked — “${c.title}”` });
+      return n;
+    });
+    return id;
+  }, []);
+
+  const update = (s: State, id: string, fn: (c: Commitment) => Commitment): State => ({
+    ...s,
+    commitments: s.commitments.map((c) => (c.id === id ? fn(c) : c)),
+  });
+
+  const submitEvidence: Ctx["submitEvidence"] = useCallback((id, evidence) => {
+    setState((s) => {
+      const c = s.commitments.find((x) => x.id === id);
+      let n = update(s, id, (c) => ({ ...c, evidence: [...c.evidence, ...evidence], status: "awaiting_verification" }));
+      n = log(n, { commitmentId: id, type: "evidence_submitted", description: `Proof submitted for “${c?.title}” (${evidence.length} item${evidence.length === 1 ? "" : "s"})` });
+      return n;
+    });
+  }, []);
+
+  const recordVerdicts: Ctx["recordVerdicts"] = useCallback((id, verdicts) => {
+    setState((s) => {
+      const c = s.commitments.find((x) => x.id === id)!;
+      const ok = verdicts.filter((v) => v.status === "verified").length;
+      const allOk = ok === verdicts.length;
+      const past = new Date(c.deadline).getTime() < Date.now();
+      const status = allOk ? "passed" : past ? "failed" : "active";
+      let n = update(s, id, (c) => ({
+        ...c,
+        status,
+        runs: [...c.runs, { id: uid("run"), ranAt: new Date().toISOString(), verdicts }],
+        criteria: c.criteria.map((cr) => {
+          const v = verdicts.find((v) => v.criterionId === cr.id);
+          return v?.status === "verified" ? { ...cr, status: "met" } : cr;
+        }),
+      }));
+      n = log(n, { commitmentId: id, type: "verification", description: `AI Judge verified ${ok} / ${verdicts.length} criteria for “${c.title}”` });
+      if (status !== "active")
+        n = log(n, { commitmentId: id, type: "result", description: status === "passed" ? `Passed — stake returned for “${c.title}” (simulated)` : `Failed — consequence triggered for “${c.title}” (simulated)` });
+      return n;
+    });
+  }, []);
+
+  const refereeDecision: Ctx["refereeDecision"] = useCallback((token, approved, reason) => {
+    setState((s) => {
+      const c = s.commitments.find((x) => x.referee?.token === token);
+      if (!c) return s;
+      let n = update(s, c.id, (c) => ({ ...c, referee: { ...c.referee!, status: approved ? "approved" : "rejected", reason } }));
+      n = log(n, { commitmentId: c.id, type: "verification", description: `${c.referee!.name} ${approved ? "approved" : "rejected"} proof for “${c.title}”${reason ? ` — “${reason}”` : ""}` });
+      return n;
+    });
+  }, []);
+
+  const value = useMemo<Ctx>(
+    () => ({
+      ...state,
+      hydrated,
+      get,
+      lock,
+      submitEvidence,
+      recordVerdicts,
+      refereeDecision,
+      toggleIntegration: (p) => setState((s) => ({ ...s, integrations: { ...s.integrations, [p]: !s.integrations[p] } })),
+      signIn: (name, email) => setState((s) => ({ ...s, signedIn: true, user: { ...s.user, name: name || s.user.name, email: email || s.user.email } })),
+      signOut: () => setState((s) => ({ ...s, signedIn: false })),
+      reset: () => setState(initial),
+    }),
+    [state, hydrated, get, lock, submitEvidence, recordVerdicts, refereeDecision],
+  );
+
+  return <StoreCtx.Provider value={value}>{children}</StoreCtx.Provider>;
+}
+
+export function useProof() {
+  const c = useContext(StoreCtx);
+  if (!c) throw new Error("useProof outside provider");
+  return c;
+}
