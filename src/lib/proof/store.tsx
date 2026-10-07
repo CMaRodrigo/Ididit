@@ -36,6 +36,7 @@ interface Ctx extends State {
   signIn: (name?: string, email?: string) => void;
   signOut: () => void;
   reset: () => void;
+  saveReflection: (id: string, reflection: string) => void;
 }
 
 const StoreCtx = createContext<Ctx | null>(null);
@@ -47,7 +48,17 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) setState({ ...initial, ...JSON.parse(raw), user: { ...initial.user, ...JSON.parse(raw).user } });
+      if (raw) {
+        const saved = JSON.parse(raw) as Partial<State>;
+        const oldDemoIds = new Set(["run-100", "portfolio", "spanish", "early-bird", "articles"]);
+        const hasNewDemo = saved.commitments?.some((c) => c.id === "projeto-rondon");
+        const migrated = hasNewDemo ? saved.commitments : [...demoCommitments, ...(saved.commitments ?? []).filter((c) => !oldDemoIds.has(c.id))];
+        setState({ ...initial, ...saved, commitments: migrated ?? demoCommitments,
+          activity: hasNewDemo ? saved.activity ?? demoActivity : [...demoActivity, ...(saved.activity ?? []).filter((e) => !oldDemoIds.has(e.commitmentId))],
+          achievements: (saved.achievements ?? []).filter((a) => !oldDemoIds.has(a.commitmentId)),
+          user: { ...initial.user, ...saved.user, ...(!hasNewDemo && (!saved.user || saved.user.name === "Alex Morgan") ? DEMO_USER : {}) },
+        });
+      }
     } catch {
       /* ignore */
     }
@@ -61,7 +72,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
   // Every verified commitment earns exactly one achievement. Failed ones never do.
   useEffect(() => {
     if (!hydrated) return;
-    const missing = state.commitments.filter((c) => c.status === "passed" && !state.achievements.some((a) => a.commitmentId === c.id));
+    const missing = state.commitments.filter((c) => c.status === "passed" && c.criteria.length > 0 && c.criteria.every((cr) => cr.status === "met") && !state.achievements.some((a) => a.commitmentId === c.id));
     if (missing.length === 0) return;
     setState((s) => ({
       ...s,
@@ -109,7 +120,8 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
 
   const recordVerdicts: Ctx["recordVerdicts"] = useCallback((id, verdicts) => {
     setState((s) => {
-      const c = s.commitments.find((x) => x.id === id)!;
+      const c = s.commitments.find((x) => x.id === id);
+      if (!c) return s;
       const ok = verdicts.filter((v) => v.status === "verified").length;
       const allOk = ok === verdicts.length;
       const past = new Date(c.deadline).getTime() < Date.now();
@@ -134,9 +146,10 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
   const refereeDecision: Ctx["refereeDecision"] = useCallback((token, approved, reason) => {
     setState((s) => {
       const c = s.commitments.find((x) => x.referee?.token === token);
-      if (!c) return s;
-      let n = update(s, c.id, (c) => ({ ...c, referee: { ...c.referee!, status: approved ? "approved" : "rejected", reason } }));
-      n = log(n, { commitmentId: c.id, type: "verification", description: `${c.referee!.name} ${approved ? "approved" : "rejected"} proof for “${c.title}”${reason ? ` — “${reason}”` : ""}` });
+      if (!c?.referee) return s;
+      const referee = c.referee;
+      let n = update(s, c.id, (c) => ({ ...c, referee: { ...referee, status: approved ? "approved" : "rejected", reason } }));
+      n = log(n, { commitmentId: c.id, type: "verification", description: `${referee.name} ${approved ? "approved" : "rejected"} proof for “${c.title}”${reason ? ` — “${reason}”` : ""}` });
       return n;
     });
   }, []);
@@ -154,6 +167,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
       signIn: (name, email) => setState((s) => ({ ...s, signedIn: true, user: { ...s.user, name: name || s.user.name, email: email || s.user.email } })),
       signOut: () => setState((s) => ({ ...s, signedIn: false })),
       reset: () => setState(initial),
+      saveReflection: (id, reflection) => setState((s) => update(s, id, (c) => c.status === "passed" || c.status === "failed" ? { ...c, reflection: reflection.trim() } : c)),
     }),
     [state, hydrated, get, lock, submitEvidence, recordVerdicts, refereeDecision],
   );

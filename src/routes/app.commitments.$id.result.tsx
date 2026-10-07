@@ -5,10 +5,13 @@ import { btn } from "@/components/proof/primitives";
 import { VerificationResult } from "@/components/proof/VerificationResult";
 import { daysLeft, money } from "@/lib/proof/format";
 import { useProof } from "@/lib/proof/store";
+import { ContractRecord } from "@/components/proof/ContractRecord";
 
 export const Route = createFileRoute("/app/commitments/$id/result")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Verification result — Proof." },
       { name: "description", content: "How your evidence measured up against the locked rules." },
       { property: "og:title", content: "Verification result — Proof." },
@@ -23,6 +26,7 @@ function Result() {
   const { get } = useProof();
   const c = get(id);
   if (!c) return null;
+  if (c.demo) return <Page narrow><Link to="/app/commitments/$id" params={{ id: c.id }} className="text-sm text-muted-foreground">← {c.title}</Link><h1 className="mt-6 text-3xl font-semibold">{c.status === "failed" ? "Not completed" : c.status === "passed" ? "Verified" : "In progress"}</h1><ContractRecord c={c} /></Page>;
   const run = c.runs[c.runs.length - 1];
   if (!run) return <Page narrow><p className="text-muted-foreground">No verification yet.</p></Page>;
   const ok = run.verdicts.filter((v) => v.status === "verified").length;

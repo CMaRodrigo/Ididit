@@ -11,6 +11,8 @@ export const Route = createFileRoute("/auth")({
   validateSearch: search,
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Sign in — Proof." },
       { name: "description", content: "Sign in or create your Proof. account." },
       { property: "og:title", content: "Sign in — Proof." },

@@ -9,6 +9,8 @@ import { useProof } from "@/lib/proof/store";
 export const Route = createFileRoute("/app/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Home — Proof." },
       { name: "description", content: "Your active commitments at a glance." },
       { property: "og:title", content: "Home — Proof." },

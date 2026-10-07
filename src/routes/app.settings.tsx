@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/app/settings")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Settings — Proof." },
       { name: "description", content: "Profile, connected accounts and notifications." },
       { property: "og:title", content: "Settings — Proof." },

@@ -5,6 +5,7 @@
  */
 import type { Achievement, AchievementCategory, Commitment } from "./types";
 import { longDate, uid, verificationLabel } from "./format";
+import { demoTrophies } from "./demo-trophies";
 
 export interface BadgeGeneratorOutput {
   badge_name: string;
@@ -22,6 +23,8 @@ function month(iso: string) {
 }
 
 export function generateBadge(c: Commitment): BadgeGeneratorOutput {
+  const demo = c.demo && demoTrophies[c.id];
+  if (demo) return demo;
   const t = `${c.title} ${c.measurableGoal}`.toLowerCase();
   const n = c.headline?.target ?? Number((c.title.match(/\d+(\.\d+)?/) || [])[0]);
   const when = month(c.completedAt ?? c.deadline);
@@ -48,6 +51,9 @@ export function generateBadge(c: Commitment): BadgeGeneratorOutput {
 }
 
 export function badgeGenerator(c: Commitment): Achievement {
+  if (c.status !== "passed" || c.criteria.length === 0 || c.criteria.some((cr) => cr.status !== "met")) {
+    throw new Error("A trophy requires a successfully verified commitment.");
+  }
   const b = generateBadge(c);
   const now = new Date().toISOString();
   return {
@@ -56,6 +62,7 @@ export function badgeGenerator(c: Commitment): Achievement {
     badgeName: b.badge_name,
     badgeSubtitle: b.badge_subtitle,
     badgeDescription: b.badge_description,
+    badgeImageUrl: c.demo ? demoTrophies[c.id]?.image : undefined,
     category: b.achievement_category,
     visualPrompt: b.visual_prompt,
     icon: b.icon,

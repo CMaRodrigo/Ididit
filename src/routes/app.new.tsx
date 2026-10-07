@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/app/new")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "New commitment — Proof." },
       { name: "description", content: "Define a goal, set the rules, put something on the line." },
       { property: "og:title", content: "New commitment — Proof." },

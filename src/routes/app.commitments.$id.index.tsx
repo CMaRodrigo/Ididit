@@ -7,10 +7,13 @@ import { CommitmentTimeline } from "@/components/proof/CommitmentTimeline";
 import { longDate, shortDate, verificationLabel } from "@/lib/proof/format";
 import { useProof } from "@/lib/proof/store";
 import { cn } from "@/lib/utils";
+import { ContractRecord } from "@/components/proof/ContractRecord";
 
 export const Route = createFileRoute("/app/commitments/$id/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Commitment — Proof." },
       { name: "description", content: "Locked rules, live progress and proof for this commitment." },
       { property: "og:title", content: "Commitment — Proof." },
@@ -43,12 +46,13 @@ function Detail() {
         <ArrowLeft className="size-4" /> Commitments
       </Link>
       <div className="flex flex-wrap items-center gap-3">
-        <StatusBadge status={c.status} />
+        {c.demo && c.status === "failed" ? <span className="text-sm text-muted-foreground">Not completed</span> : <StatusBadge status={c.status} />}
         <span className="flex items-center gap-1 text-xs text-muted-foreground"><Lock className="size-3" /> Rules locked</span>
       </div>
       <h1 className="display mt-4 text-4xl uppercase sm:text-5xl">{c.title}</h1>
       <p className="mt-3 text-muted-foreground">{c.measurableGoal}</p>
 
+      {c.demo ? <ContractRecord c={c} /> : <>
       <div className="mt-10 grid grid-cols-2 gap-6 border-y border-border py-6 sm:grid-cols-3">
         <div>
           <div className="eyebrow mb-1.5">Deadline</div>
@@ -94,7 +98,7 @@ function Detail() {
           </div>
           <div className="flex gap-2">
             <button
-              onClick={() => { navigator.clipboard?.writeText(`${location.origin}/referee/${c.referee!.token}`); toast("Secure referee link copied"); }}
+              onClick={() => { navigator.clipboard?.writeText(`${location.origin}/referee/${c.referee?.token}`); toast("Secure referee link copied"); }}
               className={btn({ variant: "outline", size: "sm" })}
             >
               <Copy className="size-3.5" /> Copy link
@@ -121,6 +125,7 @@ function Detail() {
 
       <h2 className="eyebrow mb-4 mt-14">Audit trail</h2>
       <CommitmentTimeline events={activity.filter((e) => e.commitmentId === c.id)} />
+      </>}
     </Page>
   );
 }
