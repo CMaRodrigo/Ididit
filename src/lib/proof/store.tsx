@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { demoActivity, demoCommitments, DEMO_USER } from "./demo-data";
-import type { Achievement, ActivityEvent, Commitment, Evidence, Verdict } from "./types";
+import type { Achievement, ActivityEvent, Commitment, Evidence, ProofDocument, Verdict } from "./types";
 import { badgeGenerator } from "./badges";
 import { demoTrophies } from "./demo-trophies";
 import { uid } from "./format";
@@ -38,6 +38,19 @@ interface Ctx extends State {
   signOut: () => void;
   reset: () => void;
   saveReflection: (id: string, reflection: string) => void;
+  saveMeaning: (id: string, meaning: string) => void;
+  addDocuments: (id: string, documents: ProofDocument[]) => void;
+  removeDocument: (id: string, documentId: string) => void;
+}
+
+// Supplied records refresh their bundled meaning and documents while keeping the owner's edits and uploads.
+function refreshDemo(c: Commitment): Commitment {
+  const seed = c.demo ? demoCommitments.find((d) => d.id === c.id) : undefined;
+  if (!seed) return c;
+  const bundled = seed.documents ?? [];
+  const uploaded = (c.documents ?? []).filter((d) => !bundled.some((b) => b.id === d.id));
+  const meaning = c.meaning ?? seed.meaning;
+  return { ...c, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
 }
 
 const StoreCtx = createContext<Ctx | null>(null);
@@ -54,7 +67,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
         const oldDemoIds = new Set(["run-100", "portfolio", "spanish", "early-bird", "articles"]);
         const hasNewDemo = saved.commitments?.some((c) => c.id === "projeto-rondon");
         const migrated = hasNewDemo ? saved.commitments : [...demoCommitments, ...(saved.commitments ?? []).filter((c) => !oldDemoIds.has(c.id))];
-        setState({ ...initial, ...saved, commitments: migrated ?? demoCommitments,
+        setState({ ...initial, ...saved, commitments: (migrated ?? demoCommitments).map(refreshDemo),
           activity: hasNewDemo ? saved.activity ?? demoActivity : [...demoActivity, ...(saved.activity ?? []).filter((e) => !oldDemoIds.has(e.commitmentId))],
           achievements: (saved.achievements ?? []).filter((a) => !oldDemoIds.has(a.commitmentId)).map((a) => {
             const trophy = demoTrophies[a.commitmentId];
@@ -173,6 +186,13 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
       signIn: (name, email) => setState((s) => ({ ...s, signedIn: true, user: { ...s.user, name: name || s.user.name, email: email || s.user.email } })),
       signOut: () => setState((s) => ({ ...s, signedIn: false })),
       reset: () => setState(initial),
+      saveMeaning: (id, meaning) => setState((s) => update(s, id, (c) => ({ ...c, meaning: meaning.trim() }))),
+      addDocuments: (id, documents) => setState((s) => {
+        const c = s.commitments.find((x) => x.id === id);
+        const n = update(s, id, (c) => ({ ...c, documents: [...(c.documents ?? []), ...documents] }));
+        return log(n, { commitmentId: id, type: "evidence_submitted", description: `${documents.length} proof document${documents.length === 1 ? "" : "s"} added to “${c?.title}”` });
+      }),
+      removeDocument: (id, documentId) => setState((s) => update(s, id, (c) => ({ ...c, documents: (c.documents ?? []).filter((d) => d.id !== documentId || d.src) }))),
       saveReflection: (id, reflection) => setState((s) => update(s, id, (c) => c.status === "passed" || c.status === "failed" ? { ...c, reflection: reflection.trim() } : c)),
     }),
     [state, hydrated, get, lock, submitEvidence, recordVerdicts, refereeDecision],

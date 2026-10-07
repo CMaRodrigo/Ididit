@@ -20,3 +20,4 @@
 
 - Public entry and legacy auth URLs redirect to the populated profile; the prototype has no authentication gate or logout surface — keeps account-only access explicit without implying real authentication.
 - Persisted demo achievements refresh presentation from the trophy catalog while preserving record IDs — artwork and copy updates must not break existing proof links.
+- "Meaning to me" replaces the displayed original goal and, like reflections, is editable personal context outside the locked contract; proof documents are owner-attached files (bundled assets for supplied records, IndexedDB via `src/lib/proof/documents.ts` for uploads) and never change verification status — keeps proof honest and swappable for real storage later.

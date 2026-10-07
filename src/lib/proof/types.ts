@@ -26,6 +26,17 @@ export interface Evidence {
   submittedAt: string;
 }
 
+/** Owner-supplied proof file. Bundled records carry `src`; uploads keep their bytes in browser storage under `id`. */
+export interface ProofDocument {
+  id: string;
+  name: string;
+  mimeType: string;
+  size?: number;
+  caption?: string;
+  src?: string;
+  addedAt: string;
+}
+
 export type VerdictStatus = "verified" | "failed" | "insufficient_evidence" | "needs_review";
 
 export interface Verdict {
@@ -86,6 +97,8 @@ export interface Commitment {
   demo?: boolean;
   verificationSource?: string;
   reflection?: string;
+  meaning?: string;
+  documents?: ProofDocument[];
   contextMetric?: { value: string; label: string };
   progression?: string[];
 }
