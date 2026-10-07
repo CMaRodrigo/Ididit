@@ -48,7 +48,7 @@ export const demoCommitments: Commitment[] = [
   challenge("projeto-rondon", "Projeto Rondon", "Create and conduct workshops for young people focused on culture, citizenship and technology.", ["Create workshops that address culture, citizenship and technology for the participating young people.", "Conduct at least one workshop with more than 120 young participants."], ["Workshop plan", "Event attendance record", "Activity documentation", "Photos / event material"], "Third-party / Event Evidence", "2022-07-22", {
     start: "2021-11-01",
     datesFromDocuments: true,
-    stakes: [300, 500],
+    stakes: [150, 250],
     reflection: "Seeing more than 120 young people participate made the work feel real.",
     meaning: "Projeto Rondon is a Brazilian federal university-extension program, coordinated by the Ministry of Defence, that sends students to underserved municipalities. I was one of eight PUCRS students who, with two professors, spent 15 days in Vitória do Jari, Amapá, for Operação \"Amapá Mais Forte\" (July 2022). Our team designed and ran workshops on culture, human rights, education and health. I co-led most of them, including story-telling, a short film preserving local memories, design-thinking sessions for the community, teacher training and a programme preparing teenagers for life after school.",
     documents: [
@@ -63,7 +63,7 @@ export const demoCommitments: Commitment[] = [
   challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2023-08-10", {
     start: "2023-03-13",
     datesFromDocuments: true,
-    stakes: [200, 250, 300],
+    stakes: [75, 100, 125],
     meaning: "PUCRS Finance is the financial market league at PUCRS, a student group that studies markets together and shares what it learns with the wider university. As a member, I wrote educational posts for the league's Instagram, explaining concepts such as the Trend Following strategy and the Taylor rule in plain language, and helped organise and promote the league's 2023 Financial Market Week, a four-day event bringing founders, fund managers and chief economists to campus.",
     documents: [
       { id: "liga-financeira-doc-trend", name: "pucrs-finance-trend-following.png", mimeType: "image/png", caption: "\"What is Trend Following?\" — PUCRS Finance post written by me", src: ligaTrendFollowing, addedAt: "2023-03-13T12:00:00Z" },
@@ -73,7 +73,7 @@ export const demoCommitments: Commitment[] = [
     ],
   }),
   challenge("toninhathon", "ToninhaThon", "Create a viable project, compete successfully and advance it beyond the competition.", ["Create a viable project.", "Win the competition.", "Have the project selected for incubation by SEBRAE."], ["Project artifact", "Competition result", "SEBRAE incubation evidence"], "Competition result + incubation evidence", "2025-03-22", {
-    stakes: [300, 500, 700],
+    stakes: [100, 150, 250],
     meaning: "SalvaTon is the project I built for ToninhaThon, a hackathon to protect the toninha (franciscana dolphin), one of the most threatened dolphins in the South Atlantic: about 1,500 of the roughly 20,000 left die in fishing nets every year. SalvaTon is a nationally produced acoustic pinger that clips onto the net and emits frequencies the toninhas hear and avoid, with a self-recharging battery powered by the sea instead of the imported, expensive pingers whose batteries must be replaced every few months.",
     documents: [
       { id: "toninhathon-doc-winners", name: "toninhathon-winners.png", mimeType: "image/png", caption: "Official announcement of the three winning solutions", src: toninhathonWinners, addedAt: "2025-03-22T18:00:00Z" },
@@ -84,7 +84,7 @@ export const demoCommitments: Commitment[] = [
   challenge("pratham-books", "Pratham Books", "Be selected to participate, build a useful data engineering project with potential relevance for a platform serving 10 million users, and present the case.", ["Be selected.", "Build a useful data engineering project designed around a context serving approximately 10 million users.", "Present the case."], ["Selection evidence", "Project artifact", "Presentation evidence"], "Selection, project and presentation evidence", "2023-08-22", {
     start: "2023-05-08",
     datesFromDocuments: true,
-    stakes: [400, 800, 300],
+    stakes: [125, 250, 125],
     contextMetric: { value: "10M", label: "potential users in the project context" },
     meaning: "Pratham Books is a not-for-profit children's publisher in India whose open platform, StoryWeaver, offers more than 50,000 free stories in 330+ languages. Through Develop For Good's Summer '23 cycle, I joined a volunteer engineering team that built their Integrated Data Analytics Platform: an Apache Airflow pipeline that moves Google Analytics 4 data from BigQuery into a PostgreSQL warehouse, handling both historical and daily incremental loads, with more than 20 analytics queries rewritten as materialized views for their Metabase dashboards. It replaced manual reporting with automated analytics engineering on a low-cost stack.",
     documents: [
@@ -94,7 +94,7 @@ export const demoCommitments: Commitment[] = [
   }),
   challenge("detectivesql", "detectiveSQL", "Create a SQL project that I personally find interesting enough to solve and make it available to other people.", ["Create something that I personally feel compelled to explore and solve.", "Publish and share it with other people."], ["Public project URL (not supplied)", "Repository / project evidence", "Public release / share evidence"], "Public project + release evidence", "2026-09-24", {
     start: "2026-02-14",
-    stakes: [600, 300],
+    stakes: [200, 100],
     reflection: "Built something I wanted to exist.",
     meaning: "detectiveSQL is a browser-based SQL mystery game I designed and built. Years ago I got hooked on Knight Lab's SQL Murder Mystery and was disappointed when I couldn't find anything else like it, so I built the thing I wished existed: each case unfolds into a series of questions answered by querying a database, all leading to one answer — who is the culprit? It has several difficulty levels, runs entirely in the browser, and is now public at detectivesql.com.",
     documents: [
@@ -105,7 +105,7 @@ export const demoCommitments: Commitment[] = [
   challenge("torneio-empreendedor", "Meu Mundo Azul - Torneio do Empreendedor", "Develop and validate a technology project for healthcare, turn it into a real application and win the entrepreneurship competition.", ["Develop a project focused on healthcare.", "Validate the idea with a specialist.", "Win the competition.", "Develop the application with AGES.", "Win the final tournament."], ["Healthcare project artifact", "Expert validation", "Competition evidence", "AGES application evidence", "Final tournament result"], "Expert validation + competition + application evidence", "2022-11-25", {
     start: "2021-08-31",
     datesFromDocuments: true,
-    stakes: [300, 200, 500, 700, 800],
+    stakes: [50, 50, 100, 150, 150],
     progression: ["Idea", "Expert validation", "Competition", "Product development", "Final tournament"],
     meaning: "Meu Mundo Azul is a healthcare app for earlier autism diagnosis. About 1 in 4 children with autism goes undiagnosed, and in Brazil most diagnoses come after the golden window for intervention. The app runs a screening test, tells families the next step, points them to nearby doctors and clinics, gives the doctor access to the patient's data, and adds an awareness section and a patient diary, with algorithms that refine the prediction as results accumulate. We pitched it at the 2021 Innovation Marathon, validated it with a specialist, built the real application with AGES, the software agency of PUCRS, and took it through the entrepreneurship tournament.",
     documents: [
@@ -114,8 +114,8 @@ export const demoCommitments: Commitment[] = [
       { id: "torneio-empreendedor-doc-team", name: "meu-mundo-azul-team.jpg", mimeType: "image/jpeg", caption: "The Meu Mundo Azul team", src: mmaTeam, addedAt: "2026-10-07T12:00:00Z" },
     ],
   }),
-  challenge("techfellow", "TechFellow", "Successfully complete the TechFellow application process and be accepted.", ["Apply.", "Prepare the application.", "Be accepted."], ["Application submission", "Prepared application", "Application outcome"], "Application process evidence", "2026-08-31", { stakes: [100, 300, 600], status: "failed", criteria: [{ id: "techfellow-1", description: "Apply.", status: "met" }, { id: "techfellow-2", description: "Prepare the application.", status: "met" }, { id: "techfellow-3", description: "Be accepted.", status: "failed" }], reflection: "I completed the application, but didn't reach the final outcome." }),
-  challenge("behring-founders", "Behring Founders", "Become a Behring Founder while taking the process seriously enough to deeply understand the organization and contribute value back to future applicants and founders.", [], ["Application submission", "Organization study notes", "Conversation with Bibi"], "Application + personal process evidence", "2026-10-01", { stakes: [150, 250, 150, 400, 800, 500], status: "active", completedAt: undefined, deadline: "2026-12-31T23:59:00Z", criteria: ["Submit the application.", "Study the organization, its philosophy, people and program in depth.", "Speak with Bibi.", "Advance to the in-person stage.", "Become a Behring Founder.", "Create something that returns value to future people going through the same path."].map((description, i) => ({ id: `behring-founders-${i + 1}`, description, status: i < 3 ? "met" : "pending" })) }),
+  challenge("techfellow", "TechFellow", "Successfully complete the TechFellow application process and be accepted.", ["Apply.", "Prepare the application.", "Be accepted."], ["Application submission", "Prepared application", "Application outcome"], "Application process evidence", "2026-08-31", { stakes: [50, 150, 300], status: "failed", criteria: [{ id: "techfellow-1", description: "Apply.", status: "met" }, { id: "techfellow-2", description: "Prepare the application.", status: "met" }, { id: "techfellow-3", description: "Be accepted.", status: "failed" }], reflection: "I completed the application, but didn't reach the final outcome." }),
+  challenge("behring-founders", "Behring Founders", "Become a Behring Founder while taking the process seriously enough to deeply understand the organization and contribute value back to future applicants and founders.", [], ["Application submission", "Organization study notes", "Conversation with Bibi"], "Application + personal process evidence", "2026-10-01", { stakes: [25, 50, 25, 100, 200, 100], status: "active", completedAt: undefined, deadline: "2026-12-31T23:59:00Z", criteria: ["Submit the application.", "Study the organization, its philosophy, people and program in depth.", "Speak with Bibi.", "Advance to the in-person stage.", "Become a Behring Founder.", "Create something that returns value to future people going through the same path."].map((description, i) => ({ id: `behring-founders-${i + 1}`, description, status: i < 3 ? "met" : "pending" })) }),
 ];
 
 export const demoActivity: ActivityEvent[] = demoCommitments.map((c): ActivityEvent => ({ id: `${c.id}-activity`, commitmentId: c.id, type: c.status === "active" ? "progress" : "result", description: `${c.title} — ${c.status === "passed" ? "completed (demo)" : c.status === "failed" ? "not completed · 2 / 3 objectives (demo)" : "3 / 6 milestones completed (demo)"}`, at: c.completedAt ?? c.createdAt })).sort((a, b) => b.at.localeCompare(a.at));
