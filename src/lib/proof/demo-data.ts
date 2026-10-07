@@ -11,6 +11,7 @@ import rondonChildren from "@/assets/proof-rondon-children.jpg";
 import ligaTrendFollowing from "@/assets/proof-liga-trend-following.png";
 import ligaTaylorRule from "@/assets/proof-liga-taylor-rule.png";
 import ligaFinanceWeek from "@/assets/proof-liga-finance-week.png";
+import ligaFinanceWeekTeam from "@/assets/proof-liga-finance-week-team.jpg";
 
 export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Data Engineer · Problem Solver", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
@@ -45,11 +46,12 @@ export const demoCommitments: Commitment[] = [
     ],
   }),
   challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2024-11-30", {
-    meaning: "PUCRS Finance is the financial market league at PUCRS, a student group that studies markets together and shares what it learns with the wider university. As a member, I wrote educational posts for the league's Instagram, explaining concepts such as the Trend Following strategy and the Taylor rule in plain language, and took part in the league's activities, including the 2023 Financial Market Week.",
+    meaning: "PUCRS Finance is the financial market league at PUCRS, a student group that studies markets together and shares what it learns with the wider university. As a member, I wrote educational posts for the league's Instagram, explaining concepts such as the Trend Following strategy and the Taylor rule in plain language, and helped organise and promote the league's 2023 Financial Market Week, a four-day event bringing founders, fund managers and chief economists to campus.",
     documents: [
       { id: "liga-financeira-doc-trend", name: "pucrs-finance-trend-following.png", mimeType: "image/png", caption: "\"What is Trend Following?\" — PUCRS Finance post written by me", src: ligaTrendFollowing, addedAt: "2023-02-15T12:00:00Z" },
       { id: "liga-financeira-doc-taylor", name: "pucrs-finance-taylor-rule.png", mimeType: "image/png", caption: "\"What is the Taylor rule?\" — PUCRS Finance post written by me", src: ligaTaylorRule, addedAt: "2023-03-01T12:00:00Z" },
       { id: "liga-financeira-doc-week", name: "pucrs-finance-market-week-2023.png", mimeType: "image/png", caption: "Programme of the PUCRS Finance Financial Market Week 2023", src: ligaFinanceWeek, addedAt: "2023-08-07T12:00:00Z" },
+      { id: "liga-financeira-doc-week-team", name: "pucrs-finance-market-week-team.jpg", mimeType: "image/jpeg", caption: "Organising team at the Financial Market Week 2023", src: ligaFinanceWeekTeam, addedAt: "2023-08-10T12:00:00Z" },
     ],
   }),
   challenge("toninhathon", "ToninhaThon", "Create a viable project, compete successfully and advance it beyond the competition.", ["Create a viable project.", "Win the competition.", "Have the project selected for incubation by SEBRAE."], ["Project artifact", "Competition result", "SEBRAE incubation evidence"], "Competition result + incubation evidence", "2025-03-22", {
