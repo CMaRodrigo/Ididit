@@ -45,10 +45,10 @@ function challenge(id: string, title: string, goal: string, rules: string[], evi
 
 // Dates illustrate a personal timeline; real historical dates and documents were not supplied.
 export const demoCommitments: Commitment[] = [
-  challenge("projeto-rondon", "Projeto Rondon", "Create and conduct workshops for young people focused on culture, citizenship and technology.", ["Create workshops that address culture, citizenship and technology for the participating young people.", "Conduct at least one workshop with more than 120 young participants."], ["Workshop plan", "Event attendance record", "Activity documentation", "Photos / event material"], "Third-party / Event Evidence", "2022-07-22", {
+  challenge("projeto-rondon", "Projeto Rondon", "Create and conduct workshops for young people focused on culture, citizenship and technology.", ["Be selected through a competitive process involving more than 300 PUCRS students.", "Create workshops that address culture, citizenship and technology for the participating young people.", "Develop workshops that could continue in the community even after the project ended.", "Conduct at least one workshop with more than 120 young participants.", "Spend three weeks in Amapá with the genuine goal of exchanging experiences, learning from the community, and gaining a deeper understanding of Brazil’s diverse realities."], ["Workshop plan", "Event attendance record", "Activity documentation", "Photos / event material"], "Third-party / Event Evidence", "2022-07-22", {
     start: "2021-11-01",
     datesFromDocuments: true,
-    stakes: [150, 250],
+    stakes: [100, 75, 75, 150, 100],
     reflection: "Seeing more than 120 young people participate made the work feel real.",
     meaning: "Projeto Rondon is a Brazilian federal university-extension program, coordinated by the Ministry of Defence, that sends students to underserved municipalities. I was one of eight PUCRS students who, with two professors, spent 15 days in Vitória do Jari, Amapá, for Operação \"Amapá Mais Forte\" (July 2022). Our team designed and ran workshops on culture, human rights, education and health. I co-led most of them, including story-telling, a short film preserving local memories, design-thinking sessions for the community, teacher training and a programme preparing teenagers for life after school.",
     documents: [
