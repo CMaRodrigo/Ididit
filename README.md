@@ -147,8 +147,8 @@ challenge("detectivesql", "detectiveSQL", "Create a SQL project…",
     stakes: [200, 100],                              // BRL per objective; the total is the sum
     meaning: "What the project is and why it matters…",
     documents: [
-      // A file bundled with the app
-      { id: "…", name: "pitch.pdf", mimeType: "application/pdf", src: pitchPdf, addedAt: "…" },
+      // A file bundled with the app; PDFs get a first-page `preview` image for their card
+      { id: "…", name: "pitch.pdf", mimeType: "application/pdf", src: pitchPdf, preview: pitchCover, addedAt: "…" },
       // An external page: screenshot card that opens the link
       { id: "…", name: "notion", mimeType: "text/html", src: screenshot, href: "https://…", addedAt: "…" },
       // A frameable page: live preview, with the screenshot shown while it loads
@@ -158,7 +158,7 @@ challenge("detectivesql", "detectiveSQL", "Create a SQL project…",
   });
 ```
 
-Put files in `src/assets/` and import them at the top of the file. Use `embed` only for pages that allow framing. Notion, GitLab and the regular Canva view block it, so give them a screenshot with `href` instead. LinkedIn posts (`/embed/feed/update/…`) and Canva's `?embed` links can be framed.
+Put files in `src/assets/` and import them at the top of the file. Keep each file well under Cloudflare's 25 MiB per-asset limit; large PDFs exported from Canva can be re-rendered to a few MB without visible loss. Use `embed` only for pages that allow framing. Notion, GitLab and the regular Canva view block it, so give them a screenshot with `href` instead. LinkedIn posts (`/embed/feed/update/…`) and Canva's `?embed` links can be framed.
 
 ## Working with Lovable
 

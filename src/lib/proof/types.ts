@@ -36,6 +36,8 @@ export interface ProofDocument {
   size?: number;
   caption?: string;
   src?: string;
+  /** Card image for files that cannot preview themselves, such as a PDF's first page. */
+  preview?: string;
   href?: string;
   embed?: string;
   embedWidth?: number;

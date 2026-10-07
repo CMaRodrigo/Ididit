@@ -95,8 +95,9 @@ function DocumentItem({ d, onRemove }: { d: ProofDocument; onRemove: () => void 
   }, [d.id, d.src]);
   const label = d.caption ?? d.name;
   const link = d.href ?? url;
-  const image = d.mimeType.startsWith("image/") || d.href ? url : undefined;
-  const preview = d.embed ? <LivePreview src={d.embed} width={d.embedWidth ?? 1280} fallback={image} label={label} /> : image ? <img src={image} alt={label} className="aspect-[4/3] w-full object-cover object-top" /> : <div className="grid aspect-[4/3] place-items-center bg-secondary text-muted-foreground"><FileText className="size-8" /></div>;
+  const image = d.preview ?? (d.mimeType.startsWith("image/") || d.href ? url : undefined);
+  const kind = d.mimeType === "application/pdf" ? "PDF" : undefined;
+  const preview = d.embed ? <LivePreview src={d.embed} width={d.embedWidth ?? 1280} fallback={image} label={label} /> : image ? <div className="relative"><img src={image} alt={label} className="aspect-[4/3] w-full object-cover object-top" />{kind && <span className="absolute left-2 top-2 rounded-full bg-background/85 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-foreground">{kind}</span>}</div> : <div className="grid aspect-[4/3] place-items-center bg-secondary text-muted-foreground"><FileText className="size-8" /></div>;
   return <li className="overflow-hidden rounded-lg border border-border bg-surface">{link ? <a href={link} target="_blank" rel="noreferrer" className="block" aria-label={`Open ${label}`}>{preview}</a> : preview}<div className="flex items-start justify-between gap-2 p-3"><div className="min-w-0"><p className="truncate text-sm font-medium" title={label}>{label}</p><p className="mt-0.5 text-xs text-muted-foreground">{missing ? "File not available in this browser" : d.href ? <span className="inline-flex items-center gap-1"><ExternalLink className="size-3" />{new URL(d.href).hostname.replace(/^www\./, "")}</span> : longDate(d.addedAt)}</p></div>{!d.src && <Button variant="ghost" size="sm" aria-label={`Remove ${label}`} onClick={onRemove}><Trash2 className="size-3.5" /></Button>}</div></li>;
 }
 
