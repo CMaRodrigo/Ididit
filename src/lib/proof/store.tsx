@@ -49,7 +49,7 @@ function refreshDemo(c: Commitment): Commitment {
   if (!seed) return c;
   const bundled = seed.documents ?? [];
   const uploaded = (c.documents ?? []).filter((d) => !bundled.some((b) => b.id === d.id));
-  const meaning = c.meaning ?? seed.meaning;
+  const meaning = c.meaningEdited ? c.meaning : seed.meaning;
   return { ...c, ...(meaning !== undefined && { meaning }), documents: [...bundled, ...uploaded] };
 }
 
@@ -186,7 +186,7 @@ export function ProofStoreProvider({ children }: { children: ReactNode }) {
       signIn: (name, email) => setState((s) => ({ ...s, signedIn: true, user: { ...s.user, name: name || s.user.name, email: email || s.user.email } })),
       signOut: () => setState((s) => ({ ...s, signedIn: false })),
       reset: () => setState(initial),
-      saveMeaning: (id, meaning) => setState((s) => update(s, id, (c) => ({ ...c, meaning: meaning.trim() }))),
+      saveMeaning: (id, meaning) => setState((s) => update(s, id, (c) => ({ ...c, meaning: meaning.trim(), meaningEdited: true }))),
       addDocuments: (id, documents) => setState((s) => {
         const c = s.commitments.find((x) => x.id === id);
         const n = update(s, id, (c) => ({ ...c, documents: [...(c.documents ?? []), ...documents] }));

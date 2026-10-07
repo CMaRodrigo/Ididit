@@ -1,6 +1,7 @@
 import type { ActivityEvent, Commitment } from "./types";
 import toninhathonWinners from "@/assets/proof-toninhathon-winners.png";
 import toninhathonCall from "@/assets/proof-toninhathon-call.png";
+import toninhathonPitch from "@/assets/proof-toninhathon-saveton.pdf";
 
 export const DEMO_USER = { name: "Rodrigo", bio: "Builder · Data Engineer · Problem Solver", email: "", timezone: "America/Sao_Paulo", currency: "USD" };
 
@@ -25,9 +26,10 @@ export const demoCommitments: Commitment[] = [
   challenge("projeto-rondon", "Projeto Rondon", "Create and conduct workshops for young people focused on culture, citizenship and technology.", ["Create workshops that address culture, citizenship and technology for the participating young people.", "Conduct at least one workshop with more than 120 young participants."], ["Workshop plan", "Event attendance record", "Activity documentation", "Photos / event material"], "Third-party / Event Evidence", "2024-07-20", { reflection: "Seeing more than 120 young people participate made the work feel real." }),
   challenge("liga-financeira", "Liga Financeira PUCRS", "Join the PUCRS financial market league and actively contribute to its intellectual activities.", ["Be accepted into the PUCRS financial market league.", "Create study groups.", "Contribute to articles or educational content."], ["Acceptance confirmation", "Study group records", "Published articles / content"], "Third-party evidence", "2024-11-30"),
   challenge("toninhathon", "ToninhaThon", "Create a viable project, compete successfully and advance it beyond the competition.", ["Create a viable project.", "Win the competition.", "Have the project selected for incubation by SEBRAE."], ["Project artifact", "Competition result", "SEBRAE incubation evidence"], "Competition result + incubation evidence", "2025-03-22", {
-    meaning: "ToninhaThon was a hackathon dedicated to protecting the toninha (franciscana dolphin, Pontoporia blainvillei), one of the most threatened dolphins in the South Atlantic. Coordinated by MarBrasil and UFPR, it challenged teams to design solutions that help conserve the species and the coastal communities that share its waters.",
+    meaning: "SalvaTon is the project I built for ToninhaThon, a hackathon to protect the toninha (franciscana dolphin), one of the most threatened dolphins in the South Atlantic: about 1,500 of the roughly 20,000 left die in fishing nets every year. SalvaTon is a nationally produced acoustic pinger that clips onto the net and emits frequencies the toninhas hear and avoid, with a self-recharging battery powered by the sea instead of the imported, expensive pingers whose batteries must be replaced every few months.",
     documents: [
       { id: "toninhathon-doc-winners", name: "toninhathon-winners.png", mimeType: "image/png", caption: "Official announcement of the three winning solutions", src: toninhathonWinners, addedAt: "2025-03-22T18:00:00Z" },
+      { id: "toninhathon-doc-pitch", name: "SaveTon.pdf", mimeType: "application/pdf", caption: "SalvaTon pitch deck — problem, solution, validation and impact", src: toninhathonPitch, addedAt: "2025-03-22T18:00:00Z" },
       { id: "toninhathon-doc-call", name: "toninhathon-call.png", mimeType: "image/png", caption: "ToninhaThon video call with the organizers", src: toninhathonCall, addedAt: "2025-03-22T18:00:00Z" },
     ],
   }),

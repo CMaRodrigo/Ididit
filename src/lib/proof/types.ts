@@ -98,6 +98,7 @@ export interface Commitment {
   verificationSource?: string;
   reflection?: string;
   meaning?: string;
+  meaningEdited?: boolean;
   documents?: ProofDocument[];
   contextMetric?: { value: string; label: string };
   progression?: string[];
